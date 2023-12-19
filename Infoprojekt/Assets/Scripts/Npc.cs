@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public abstract class Npc : MonoBehaviour, IEntity
@@ -47,5 +48,23 @@ public abstract class Npc : MonoBehaviour, IEntity
     public void SetInventorySize(int size)
     {
         InventorySize = size;
+    }
+
+    // Moves NPC by x
+    public void MoveBy(float deltaX, float deltaZ)
+    {
+        transform.position = new Vector3(transform.position.x + deltaX * Time.deltaTime, transform.position.y, transform.position.z + deltaZ * Time.deltaTime);
+    }
+
+    // Moves NPC by x
+    public void MoveBy(float deltaX, float deltaY, float deltaZ)
+    {
+        transform.position = new Vector3(transform.position.x + deltaX * Time.deltaTime, transform.position.y + deltaY * Time.deltaTime, transform.position.z + deltaZ * Time.deltaTime);
+    }
+
+    // Moves NPC to x
+    public void MoveTo(float x, float y, float z)
+    {
+        transform.position = new Vector3(x, y, z);
     }
 }
