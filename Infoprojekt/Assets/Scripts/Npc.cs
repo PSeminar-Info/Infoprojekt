@@ -48,6 +48,7 @@ public abstract class Npc : MonoBehaviour, IEntity
     public void SetInventorySize(int size)
     {
         InventorySize = size;
+        if (_inventory.Count > size) _inventory.RemoveRange(size, _inventory.Count - size);
     }
 
     // Moves NPC by x

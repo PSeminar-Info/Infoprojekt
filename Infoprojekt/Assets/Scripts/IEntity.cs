@@ -22,5 +22,19 @@ public interface IEntity
         if (Health <= 0) Die();
     }
     
+    public void SetMaxHealth(float amount)
+    {
+        MaxHealth = amount;
+    }
+    
+    public void SetInvincible(bool invincible)
+    {
+        IsInvincible = invincible;
+    }
+    
+    private void SetHealth(float amount)
+    {
+        Health = amount;
+    }
     
 }
