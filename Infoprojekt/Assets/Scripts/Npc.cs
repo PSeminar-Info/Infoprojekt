@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class Npc : MonoBehaviour, IEntity
 {
@@ -50,22 +50,18 @@ public abstract class Npc : MonoBehaviour, IEntity
         InventorySize = size;
         if (_inventory.Count > size) _inventory.RemoveRange(size, _inventory.Count - size);
     }
-
-    // Moves NPC by x
-    public void MoveBy(float deltaX, float deltaZ)
-    {
-        transform.position = new Vector3(transform.position.x + deltaX * Time.deltaTime, transform.position.y, transform.position.z + deltaZ * Time.deltaTime);
-    }
-
-    // Moves NPC by x
-    public void MoveBy(float deltaX, float deltaY, float deltaZ)
-    {
-        transform.position = new Vector3(transform.position.x + deltaX * Time.deltaTime, transform.position.y + deltaY * Time.deltaTime, transform.position.z + deltaZ * Time.deltaTime);
-    }
-
-    // Moves NPC to x
-    public void MoveTo(float x, float y, float z)
-    {
-        transform.position = new Vector3(x, y, z);
+    
+    /// <summary>
+    /// get a random point on the navmesh within a radius of the current position
+    /// </summary>
+    public Vector3 RandomNavmeshLocation(float radius) {
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += transform.position;
+        NavMeshHit hit;
+        Vector3 finalPosition = Vector3.zero;
+        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1)) {
+            finalPosition = hit.position;            
+        }
+        return finalPosition;
     }
 }
