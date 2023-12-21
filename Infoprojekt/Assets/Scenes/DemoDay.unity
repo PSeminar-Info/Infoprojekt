@@ -15607,6 +15607,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sheep_white
       objectReference: {fileID: 0}
+    - target: {fileID: 4229878778699433787, guid: a9ec8e5001487a349b9ab55376dfbfd1, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 7c15ae6bbcc45654caaae2112b64a86a, type: 2}
+    - target: {fileID: 4229878778699433787, guid: a9ec8e5001487a349b9ab55376dfbfd1, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e7010c7942fa7dd4182302157e228a7c, type: 2}
     - target: {fileID: 7023807086616689974, guid: a9ec8e5001487a349b9ab55376dfbfd1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.2609515
@@ -15650,10 +15658,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1978368946958555840, guid: a9ec8e5001487a349b9ab55376dfbfd1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8185963723844892537}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9ec8e5001487a349b9ab55376dfbfd1, type: 3}
 --- !u!1001 &803019496632029159
 PrefabInstance:
@@ -15848,7 +15853,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1318085059070165028, guid: 98a3b87248cf1e5419061cbf56eaf5ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.5211158
+      value: -0.344
       objectReference: {fileID: 0}
     - target: {fileID: 1318085059070165028, guid: 98a3b87248cf1e5419061cbf56eaf5ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15856,11 +15861,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1318085059070165028, guid: 98a3b87248cf1e5419061cbf56eaf5ca, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -33.576473
+      value: -33.338
       objectReference: {fileID: 0}
     - target: {fileID: 1318085059070165028, guid: 98a3b87248cf1e5419061cbf56eaf5ca, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.2461533
       objectReference: {fileID: 0}
     - target: {fileID: 1318085059070165028, guid: 98a3b87248cf1e5419061cbf56eaf5ca, type: 3}
       propertyPath: m_LocalRotation.x
@@ -15868,7 +15873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1318085059070165028, guid: 98a3b87248cf1e5419061cbf56eaf5ca, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.96923095
       objectReference: {fileID: 0}
     - target: {fileID: 1318085059070165028, guid: 98a3b87248cf1e5419061cbf56eaf5ca, type: 3}
       propertyPath: m_LocalRotation.z
@@ -15880,7 +15885,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1318085059070165028, guid: 98a3b87248cf1e5419061cbf56eaf5ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -151.5
       objectReference: {fileID: 0}
     - target: {fileID: 1318085059070165028, guid: 98a3b87248cf1e5419061cbf56eaf5ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -15890,6 +15895,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sheep_dark
       objectReference: {fileID: 0}
+    - target: {fileID: 7820402562290230595, guid: 98a3b87248cf1e5419061cbf56eaf5ca, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 7c15ae6bbcc45654caaae2112b64a86a, type: 2}
+    - target: {fileID: 7820402562290230595, guid: 98a3b87248cf1e5419061cbf56eaf5ca, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e7010c7942fa7dd4182302157e228a7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16007,6 +16020,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5000884156591654926, guid: 57214450e4e19f049ab5e8f06440c47b, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 7c15ae6bbcc45654caaae2112b64a86a, type: 2}
+    - target: {fileID: 5000884156591654926, guid: 57214450e4e19f049ab5e8f06440c47b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e7010c7942fa7dd4182302157e228a7c, type: 2}
     - target: {fileID: 6158298361729633363, guid: 57214450e4e19f049ab5e8f06440c47b, type: 3}
       propertyPath: m_Name
       value: Sheep_cream
@@ -16016,38 +16037,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57214450e4e19f049ab5e8f06440c47b, type: 3}
---- !u!1 &8185963723844892520 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1978368946958555840, guid: a9ec8e5001487a349b9ab55376dfbfd1, type: 3}
-  m_PrefabInstance: {fileID: 523831969180650047}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &8185963723844892537
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8185963723844892520}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &8730119247996590798
 PrefabInstance:
   m_ObjectHideFlags: 0

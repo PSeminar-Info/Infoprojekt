@@ -585,6 +585,7 @@ GameObject:
   - component: {fileID: 4229878778699433787}
   - component: {fileID: 6564497233552570855}
   - component: {fileID: 42942872447086951}
+  - component: {fileID: 3137767708803971540}
   m_Layer: 0
   m_Name: Sheep_white
   m_TagString: Untagged
@@ -631,8 +632,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978368946958555840}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 37ab5ee15ddf4eb4d85c2d2b26fc8276, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1215e98cc02a91340b3a9af5af091f14, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 7c15ae6bbcc45654caaae2112b64a86a, type: 2}
+  m_Controller: {fileID: 9100000, guid: e7010c7942fa7dd4182302157e228a7c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -686,6 +687,34 @@ MonoBehaviour:
   trotAnimation: trot_forward
   sittostandAnimation: sit_to_stand
   standtositAnimation: stand_to_sit
+  idleAnimation: idle
+--- !u!54 &3137767708803971540
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978368946958555840}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2017622834259693535
 GameObject:
   m_ObjectHideFlags: 0

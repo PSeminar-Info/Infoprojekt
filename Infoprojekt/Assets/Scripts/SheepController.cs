@@ -11,8 +11,8 @@ public class Sheep : Npc
         _agent = GetComponent<NavMeshAgent>();
         InvokeRepeating("WalkToRandomLocation", 0, 5);
     }
-    
-    void WalkToRandomLocation()
+
+    private void WalkToRandomLocation()
     {
         _agent.SetDestination(RandomNavmeshLocation(maxTargetDistance));
     }
