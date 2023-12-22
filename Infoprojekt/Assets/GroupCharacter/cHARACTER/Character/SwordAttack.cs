@@ -22,7 +22,6 @@ public class SwordAttack : MonoBehaviour
         {
             if (GetCurrentAnimationTime() < 0.5f)
             {
-                Attack();
                 canattack = true;
             }
             if ( GetCurrentAnimationTime() > 0.5f && canattack)

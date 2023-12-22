@@ -16,7 +16,7 @@ public class OpenInventory : MonoBehaviour
     void Update()
     {
         // Überprüfe, ob die Taste "E" gedrückt wurde
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.I))
         {
 
             // Öffne das Panel, falls es nicht bereits aktiv ist
