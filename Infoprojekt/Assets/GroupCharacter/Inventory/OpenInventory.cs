@@ -7,6 +7,8 @@ public class OpenInventory : MonoBehaviour
     public GameObject panel; // Referenz auf das zu öffnende Panel
     public GameObject Inventoryman;
     InventoryManager invman;
+    public Transform ItemContent;
+
     void Start()
     {
         invman = Inventoryman.GetComponent<InventoryManager>();
@@ -27,6 +29,10 @@ public class OpenInventory : MonoBehaviour
             else
             {
                 panel.SetActive(false);
+                foreach (Transform item in ItemContent)
+                {
+                    Destroy(item.gameObject);
+                }
             }
         }
         
