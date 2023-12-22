@@ -54,6 +54,8 @@ public abstract class Npc : MonoBehaviour, IEntity
     /// <summary>
     /// get a random point on the navmesh within a radius of the current position
     /// </summary>
+    /// <param name="radius">Maximum distance from object</param>
+    /// <returns>Vector3 position</returns>
     public Vector3 RandomNavmeshLocation(float radius) {
         Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += transform.position;
@@ -67,9 +69,9 @@ public abstract class Npc : MonoBehaviour, IEntity
     /// <summary>
     /// get a random point on the navmesh within a radius of the current position, but at least minDistance away
     /// </summary>
-    /// <param name="radius"></param>
-    /// <param name="minDistance"></param>
-    /// <returns></returns>
+    /// <param name="radius">Maximum distance from object</param>
+    /// <param name="minDistance">Minimum distance from object</param>
+    /// <returns>Vector3 position</returns>
     public Vector3 RandomNavmeshLocation(float radius, float minDistance) {
         var randomDirection = Random.insideUnitSphere * radius;
         randomDirection += transform.position;
