@@ -57,11 +57,25 @@ public abstract class Npc : MonoBehaviour, IEntity
     public Vector3 RandomNavmeshLocation(float radius) {
         Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += transform.position;
-        NavMeshHit hit;
         Vector3 finalPosition = Vector3.zero;
-        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1)) {
+        if (NavMesh.SamplePosition(randomDirection, out var hit, radius, 1)) {
             finalPosition = hit.position;            
         }
         return finalPosition;
     }
+    
+    public Vector3 RandomNavmeshLocation(float radius, float minDistance) {
+        var randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += transform.position;
+        var finalPosition = Vector3.zero;
+        if (NavMesh.SamplePosition(randomDirection, out var hit, radius, 1)) {
+            finalPosition = hit.position;            
+        }
+        if (Vector3.Distance(finalPosition, transform.position) < minDistance)
+        {
+            return RandomNavmeshLocation(radius, minDistance);
+        }
+        return finalPosition;
+    }
+    
 }

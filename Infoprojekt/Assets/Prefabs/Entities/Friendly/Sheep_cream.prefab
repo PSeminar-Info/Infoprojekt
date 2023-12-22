@@ -2390,7 +2390,6 @@ GameObject:
   - component: {fileID: 248431472504863192}
   - component: {fileID: 5000884156591654926}
   - component: {fileID: 3002128857065672521}
-  - component: {fileID: 5882379467446572024}
   - component: {fileID: 8888891460778038421}
   - component: {fileID: 7785233321836708255}
   m_Layer: 0
@@ -2456,32 +2455,10 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.3
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5882379467446572024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6158298361729633363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fff9036000dda844908ea2205a9522a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  walkForwardAnimation: walk_forward
-  walkBackwardAnimation: walk_backwards
-  runForwardAnimation: run_forward
-  turn90LAnimation: turn_90_L
-  turn90RAnimation: turn_90_R
-  trotAnimation: trot_forward
-  sittostandAnimation: sit_to_stand
-  standtositAnimation: stand_to_sit
-  idleAnimation: idle
 --- !u!114 &8888891460778038421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2494,7 +2471,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88666e5fc1640d84e903b6231ea1dff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTargetDistance: 5
+  maxTargetDistance: 7.5
+  minTargetDistance: 2
+  cooldown: 5
 --- !u!54 &7785233321836708255
 Rigidbody:
   m_ObjectHideFlags: 0
