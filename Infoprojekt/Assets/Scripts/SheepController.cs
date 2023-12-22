@@ -22,7 +22,7 @@ public class SheepController : Npc
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
-        InvokeRepeating("StartWalking", 0, 5);
+        InvokeRepeating(nameof(StartWalking), 0, 5);
     }
 
     private void Update()
