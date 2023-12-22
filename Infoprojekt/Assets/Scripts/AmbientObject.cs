@@ -16,7 +16,7 @@ public abstract class AmbientObject : MonoBehaviour, IEntity
 
     public void OnDespawn()
     {
-        // TODO: despawn behaviour
+        // TODO: despawn behaviour 
     }
 
     public void Die()
