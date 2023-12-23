@@ -1,13 +1,14 @@
+using ScriptableObjects.Inventory.Scripts;
 using UnityEngine;
 
 namespace Entities
 {
     public abstract class Entity : MonoBehaviour
     {
-        protected readonly Inventory Inventory = new();
-        private bool IsInvincible { get; }
-        private float Health { get; set; }
-        private float MaxHealth { get; }
+        public InventoryObject inventory;
+        public bool IsInvincible;
+        public float Health;
+        public float MaxHealth;
 
         private void Start()
         {

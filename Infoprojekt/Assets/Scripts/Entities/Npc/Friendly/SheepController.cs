@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 namespace Entities.Npc.Friendly
 {
@@ -25,20 +24,11 @@ namespace Entities.Npc.Friendly
         {
             _agent = GetComponent<NavMeshAgent>();
             _animator = GetComponent<Animator>();
-            Inventory.SetInventorySize(5);
-            InvokeRepeating(nameof(StartWalking), 0, 5);
-            Inventory.AddItem(Item.ID.Wool, Random.Range(1, 6));
-            Inventory.AddItem(Item.ID.Meat, Random.Range(1, 4));
+            InvokeRepeating(nameof(StartWalking), 0, cooldown);
         }
 
         private void Update()
         {
-            if (Time.time - _lastActionTime > cooldown)
-            {
-                StartWalking();
-                _lastActionTime = Time.time;
-            }
-
             if (_agent.destination == transform.position && _currentAnimation != "idle") SetAnimation("idle");
         }
 
@@ -46,7 +36,7 @@ namespace Entities.Npc.Friendly
         {
             // TODO: death animation, drop items
         }
-        
+
         // rotate to face the target location, then walk to it
         private void WalkToRandomLocation()
         {

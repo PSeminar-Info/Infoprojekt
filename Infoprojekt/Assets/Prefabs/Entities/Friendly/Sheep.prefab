@@ -586,7 +586,7 @@ GameObject:
   - component: {fileID: 6564497233552570855}
   - component: {fileID: 3137767708803971540}
   m_Layer: 0
-  m_Name: Sheep_white
+  m_Name: Sheep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -601,7 +601,7 @@ Transform:
   m_GameObject: {fileID: 1978368946958555840}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.2609515, y: 0.0020823479, z: -34.341225}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -621,6 +621,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88666e5fc1640d84e903b6231ea1dff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: 05ebe8c1817d0584a8d8ba773d43b967, type: 2}
+  IsInvincible: 0
+  Health: 5
+  MaxHealth: 5
   maxTargetDistance: 7.5
   minTargetDistance: 2
   cooldown: 5
