@@ -21,6 +21,20 @@ namespace ScriptableObjects.Inventory.Scripts
 
             items.Add(new InventorySlot(item, amount));
         }
+        
+        public void dropAllItems(Vector3 position)
+        {
+            foreach (var slot in items)
+            {
+                for (var i = 0; i < slot.amount; i++)
+                {
+                    // TODO: items need trigger colliders etc. to they can be interacted with
+                    Instantiate(slot.item.prefab, position, Quaternion.identity);
+                }
+            }
+            items.Clear();
+        }
+        
     }
 
     [Serializable]

@@ -1,100 +1,151 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace Entities.Npc.Friendly
 {
     public class SheepController : Npc
     {
-        // will use animations in animation import, not in animations folder. 
-        public float maxTargetDistance;
-        public float minTargetDistance;
+        private float _startTime;
 
-        public float cooldown;
+        public float despawnTime = 5f;
+
+        public float actionCooldown = 5f;
 
         // Movement
+        public float maxTargetDistance = 7.5f;
+        public float minTargetDistance = 3f;
+
+        // _maxDistance and _minDistance are used to increase distance when running/trotting, walking uses default values
+        private float _maxDistance;
+        private float _minDistance;
+
+        private Vector3 _destination;
+
+        // Animation: using hash instead of string for performance, setA
         private NavMeshAgent _agent;
         private Animator _animator;
 
-        // Animations: walk_forward, (walk_backwards), run_forward, turn_90_L, turn_90_R, trot_forward, sit_to_stand, stand_to_sit, idle
-        private string _currentAnimation;
-        private Vector3 _destination;
-        private float _lastActionTime;
+        private int _currentAnimation;
+        private static readonly int Death = Animator.StringToHash("death");
+        private static readonly int SitToStand = Animator.StringToHash("sit_to_stand");
+        private static readonly int StandToSit = Animator.StringToHash("stand_to_sit");
+        private static readonly int Idle = Animator.StringToHash("idle");
+        private static readonly int Eat = Animator.StringToHash("eat");
+        private static readonly int WalkForward = Animator.StringToHash("walk_forward");
+        private static readonly int RunForward = Animator.StringToHash("run_forward");
+        private static readonly int Turn90L = Animator.StringToHash("turn_90_L");
+        private static readonly int Turn90R = Animator.StringToHash("turn_90_R");
+        private static readonly int TrotForward = Animator.StringToHash("trot_forward");
+        private static readonly int HitReaction = Animator.StringToHash("hit_reaction");
 
 
         private void Start()
         {
+            _minDistance = minTargetDistance;
+            _maxDistance = maxTargetDistance;
+
+            _startTime = Time.time;
+
             _agent = GetComponent<NavMeshAgent>();
             _animator = GetComponent<Animator>();
-            InvokeRepeating(nameof(RandomAction), 0, cooldown);
+            InvokeRepeating(nameof(RandomAction), 0, actionCooldown);
         }
 
         private void Update()
         {
-            if (_agent.destination == transform.position && _currentAnimation != "stand_to_sit" &&
-                _currentAnimation != "sit_to_stand") SetAnimation("idle");
+            if (_agent.destination == transform.position && _currentAnimation != StandToSit &&
+                _currentAnimation != SitToStand) SetAnimation(Idle);
+
+            if (Time.time - _startTime > 15f)
+            {
+            }
         }
 
-        private static void OnDeath()
-        {
-            // TODO: death animation, drop items
-        }
-
-        private void SetAnimation(string animationName)
+        private void SetAnimation(int animationName)
         {
             if (_currentAnimation == animationName) return;
             _animator.Play(animationName);
             _currentAnimation = animationName;
-            Debug.Log("Set animation to: " + animationName);
         }
 
-        // rotate to face the target location, then walk to it
-        // needs to be changed in order to use different animations (
-        private void WalkToRandomLocation(string animationName = "walk_forward")
+        private void OnDeath()
         {
-            _destination = RandomNavmeshLocation(maxTargetDistance, minTargetDistance);
+            StartCoroutine(DeathAnimation());
+        }
+
+        private void OnHit()
+        {
+            // hit_reaction has a separate layer in the animation controller since it's so it can be played on top of other animations
+            _animator.SetTrigger(HitReaction);
+        }
+
+        private IEnumerator DeathAnimation()
+        {
+            SetAnimation(Death);
+            yield return new WaitForSeconds(despawnTime);
+            
+            var position = transform.position;
+            inventory.dropAllItems(new Vector3(position.x, position.y+1f, position.z));
+            Destroy(gameObject);
+        }
+
+        private void WalkToRandomLocation(int animationName)
+        {
+            _destination = RandomNavmeshLocation(_maxDistance, _minDistance);
             var targetRotation = Quaternion.LookRotation(_destination - transform.position);
 
-            if (targetRotation.eulerAngles.y is > 45 and < 180 && _currentAnimation != "turn_90_R")
-                SetAnimation("turn_90_R");
-            else if (targetRotation.eulerAngles.y is > 180 and < 315 && _currentAnimation != "turn_90_L")
-                SetAnimation("turn_90_L");
-            Invoke(nameof(StartWalking), 1);
+            // doesn't work yet, but can't be bothered to fix it
+            if (targetRotation.eulerAngles.y is > 45 and < 180)
+                SetAnimation(Turn90R);
+            else if (targetRotation.eulerAngles.y is > 180 and < 315)
+                SetAnimation(Turn90L);
+
+            StartCoroutine(StartWalkingAfterRotation(animationName));
         }
 
-        private void StartWalking(string animationName = "walk_forward")
+        private IEnumerator StartWalkingAfterRotation(int animationName)
         {
-            // remove when using WalkToRandomLocation()!!
-            _destination = RandomNavmeshLocation(maxTargetDistance, minTargetDistance);
+            yield return new WaitForSeconds(1f);
 
             _agent.SetDestination(_destination);
+            // _agent.angularSpeed = 45f;
             SetAnimation(animationName);
         }
 
         private void RandomAction()
         {
-            if (_currentAnimation == "stand_to_sit")
+            if (_currentAnimation == StandToSit)
             {
-                SetAnimation("sit_to_stand");
+                SetAnimation(SitToStand);
                 return;
             }
 
             var random = Random.Range(0, 5);
+            // TODO: eating animation is sometimes cancelled by other animations
             switch (random)
             {
                 case 0:
-                    SetAnimation("stand_to_sit");
+                    SetAnimation(StandToSit);
                     return;
                 case 1:
-                    StartWalking();
+                    _minDistance = minTargetDistance;
+                    _maxDistance = maxTargetDistance;
+                    WalkToRandomLocation(WalkForward);
                     return;
                 case 2:
-                    StartWalking("trot_forward");
+                    _minDistance = minTargetDistance + 3;
+                    _maxDistance = maxTargetDistance + 3;
+                    WalkToRandomLocation(TrotForward);
                     return;
                 case 3:
-                    StartWalking("run_forward");
+                    _minDistance = minTargetDistance + 5;
+                    _maxDistance = maxTargetDistance + 5;
+                    WalkToRandomLocation(RunForward);
                     return;
                 case 4:
-                    SetAnimation("eating");
+                    SetAnimation(Eat);
                     return;
             }
         }
