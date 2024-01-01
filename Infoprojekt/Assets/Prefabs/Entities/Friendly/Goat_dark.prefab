@@ -2653,9 +2653,10 @@ MonoBehaviour:
   IsInvincible: 0
   Health: 10
   MaxHealth: 10
+  despawnTime: 5
+  actionCooldown: 7.5
   maxTargetDistance: 10
-  minTargetDistance: 4
-  cooldown: 7.5
+  minTargetDistance: 5
 --- !u!95 &3507746843320673369
 Animator:
   serializedVersion: 5
@@ -2666,7 +2667,7 @@ Animator:
   m_GameObject: {fileID: 3507746843320673371}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 7c15ae6bbcc45654caaae2112b64a86a, type: 2}
-  m_Controller: {fileID: 9100000, guid: e7010c7942fa7dd4182302157e228a7c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1ecb0711cb2d6fa4686a7d7cbd4d4461, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
