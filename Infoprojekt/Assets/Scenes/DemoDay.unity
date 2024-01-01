@@ -6662,7 +6662,11 @@ PrefabInstance:
     - target: {fileID: 664017737412200597, guid: 5df4ed86592ba384cbbc470ad1e65c0c, type: 3}
       propertyPath: m_Controller
       value: 
+<<<<<<< HEAD
       objectReference: {fileID: 9100000, guid: 1ecb0711cb2d6fa4686a7d7cbd4d4461, type: 2}
+=======
+      objectReference: {fileID: 9100000, guid: 0d88362066462ed47a7689ca8a135500, type: 2}
+>>>>>>> ad6a84d966ee7441da9a9713207f3048ba1209c2
     - target: {fileID: 2949867483532907886, guid: 5df4ed86592ba384cbbc470ad1e65c0c, type: 3}
       propertyPath: m_Name
       value: Sheep_cream
@@ -6706,6 +6710,14 @@ PrefabInstance:
     - target: {fileID: 5979953057083699864, guid: 5df4ed86592ba384cbbc470ad1e65c0c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838486526482301280, guid: 5df4ed86592ba384cbbc470ad1e65c0c, type: 3}
+      propertyPath: actionCooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838486526482301280, guid: 5df4ed86592ba384cbbc470ad1e65c0c, type: 3}
+      propertyPath: minTargetDistance
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15703,7 +15715,19 @@ PrefabInstance:
     - target: {fileID: 4229878778699433787, guid: a9ec8e5001487a349b9ab55376dfbfd1, type: 3}
       propertyPath: m_Controller
       value: 
+<<<<<<< HEAD
       objectReference: {fileID: 9100000, guid: 1ecb0711cb2d6fa4686a7d7cbd4d4461, type: 2}
+=======
+      objectReference: {fileID: 9100000, guid: 0d88362066462ed47a7689ca8a135500, type: 2}
+    - target: {fileID: 6864463558197726926, guid: a9ec8e5001487a349b9ab55376dfbfd1, type: 3}
+      propertyPath: actionCooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864463558197726926, guid: a9ec8e5001487a349b9ab55376dfbfd1, type: 3}
+      propertyPath: minTargetDistance
+      value: 3
+      objectReference: {fileID: 0}
+>>>>>>> ad6a84d966ee7441da9a9713207f3048ba1209c2
     - target: {fileID: 7023807086616689974, guid: a9ec8e5001487a349b9ab55376dfbfd1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.2609515
@@ -15945,6 +15969,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1804688838143295515, guid: 19053a146658de140a5f7e7112eeeaa1, type: 3}
+<<<<<<< HEAD
+=======
+      propertyPath: actionCooldown
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804688838143295515, guid: 19053a146658de140a5f7e7112eeeaa1, type: 3}
+>>>>>>> ad6a84d966ee7441da9a9713207f3048ba1209c2
       propertyPath: minTargetDistance
       value: 5
       objectReference: {fileID: 0}
@@ -15991,7 +16022,11 @@ PrefabInstance:
     - target: {fileID: 3507746843320673369, guid: 19053a146658de140a5f7e7112eeeaa1, type: 3}
       propertyPath: m_Controller
       value: 
+<<<<<<< HEAD
       objectReference: {fileID: 9100000, guid: 1ecb0711cb2d6fa4686a7d7cbd4d4461, type: 2}
+=======
+      objectReference: {fileID: 9100000, guid: 0d88362066462ed47a7689ca8a135500, type: 2}
+>>>>>>> ad6a84d966ee7441da9a9713207f3048ba1209c2
     - target: {fileID: 3507746843320673371, guid: 19053a146658de140a5f7e7112eeeaa1, type: 3}
       propertyPath: m_Name
       value: Goat_dark
@@ -16117,10 +16152,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 6400839966483938887, guid: 7ef95046e3414254caabbe34de95d585, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 1ecb0711cb2d6fa4686a7d7cbd4d4461, type: 2}
+=======
+>>>>>>> ad6a84d966ee7441da9a9713207f3048ba1209c2
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16177,12 +16215,23 @@ PrefabInstance:
     - target: {fileID: 3084024626696190681, guid: 0834b7f7a4dc3bb48a5d1ba578c43b28, type: 3}
       propertyPath: m_Controller
       value: 
+<<<<<<< HEAD
       objectReference: {fileID: 9100000, guid: 1ecb0711cb2d6fa4686a7d7cbd4d4461, type: 2}
+=======
+      objectReference: {fileID: 9100000, guid: 0d88362066462ed47a7689ca8a135500, type: 2}
+>>>>>>> ad6a84d966ee7441da9a9713207f3048ba1209c2
     - target: {fileID: 3084024626696190684, guid: 0834b7f7a4dc3bb48a5d1ba578c43b28, type: 3}
       propertyPath: m_Name
       value: Goat
       objectReference: {fileID: 0}
     - target: {fileID: 8714928370122485890, guid: 0834b7f7a4dc3bb48a5d1ba578c43b28, type: 3}
+<<<<<<< HEAD
+=======
+      propertyPath: actionCooldown
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714928370122485890, guid: 0834b7f7a4dc3bb48a5d1ba578c43b28, type: 3}
+>>>>>>> ad6a84d966ee7441da9a9713207f3048ba1209c2
       propertyPath: minTargetDistance
       value: 5
       objectReference: {fileID: 0}
