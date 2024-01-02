@@ -32,7 +32,7 @@ public class CharacterMovement : MonoBehaviour
     public bool attackdamage2;
     public bool attackdamage1;
     public bool attackdamage;
-    public bool attackArrowPressed;
+    public bool attackBowPressed;
     public bool rotein = false;
     public Transform characterMesh;
     public GameObject Arrow;
@@ -59,7 +59,7 @@ public class CharacterMovement : MonoBehaviour
         input.CharacterControls.Attack.performed += ctx => attackPressed = ctx.ReadValueAsButton();
         input.CharacterControls.Jump.performed += ctx => jumpPressed = ctx.ReadValueAsButton();
         input.CharacterControls.Sneak.performed += ctx => sneakPressed = ctx.ReadValueAsButton();
-        input.CharacterControls.Attack.canceled += ctx => attackArrowPressed = ctx.ReadValueAsButton();
+        input.CharacterControls.AttackBow.performed += ctx => attackBowPressed = ctx.ReadValueAsButton();
 
 
         input.CharacterControls.Rotate.started += onRotationInput;
@@ -89,11 +89,11 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         //Bogen
-        if(!attackPressed && canRelease) 
+        if(!attackBowPressed && canRelease) 
         {
             attackReleased = true;
         }
-        if(attackPressed)
+        if(attackBowPressed)
         {
             arrowTimer += Time.deltaTime;
 
@@ -142,6 +142,7 @@ public class CharacterMovement : MonoBehaviour
         bool isRunning = animator.GetBool(isRunningHash);
         bool isWalking = animator.GetBool(isWalkingHash);
         bool isShooting = animator.GetBool("shoot");
+        bool isBow = animator.GetBool("arrowStand");
         bool wpressed = Input.GetKey(KeyCode.W);
         bool isJumping = animator.GetBool("jump");
         bool isSneaking = animator.GetBool("sneak");
@@ -175,12 +176,7 @@ public class CharacterMovement : MonoBehaviour
         {
             attackdamage1 = true;
             animator.SetBool("shoot", true);
-            canRelease = true;
-            arr = Instantiate(Arrow, RefPoint.transform.position, RefPoint.transform.rotation);
-            arr.transform.Rotate(new Vector3(0, 0, 90));
-            arr.transform.parent = RefPoint.transform;
-            rb = arr.GetComponent<Rigidbody>();
-            rb.isKinematic = true;
+            
 
         }
         if (!attackPressed)
@@ -198,6 +194,23 @@ public class CharacterMovement : MonoBehaviour
 
 
         }
+
+        if(attackBowPressed && !isBow)
+        {
+            animator.SetBool("arrowStand", true);
+            canRelease = true;
+            arr = Instantiate(Arrow, RefPoint.transform.position, RefPoint.transform.rotation);
+            arr.transform.Rotate(new Vector3(0, 0, 90));
+            arr.transform.parent = RefPoint.transform;
+            rb = arr.GetComponent<Rigidbody>();
+            rb.isKinematic = true;
+        }
+        if(!attackBowPressed)
+        {
+            animator.SetBool("arrowStand", false);
+        }
+
+
         if(attackReleased)
         {
 

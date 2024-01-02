@@ -80,6 +80,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttackBow"",
+                    ""type"": ""Button"",
+                    ""id"": ""0473daca-1106-408a-aceb-f0f28d40f908"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -97,7 +106,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c936faa0-a2b5-4a1d-af92-3dcc2c3a8891"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -192,6 +201,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Sneak"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d13c3cf8-1d24-4dfa-99b2-77eb7a2f04d8"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackBow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f6790b6-0f6c-4f32-8b65-552cadd3e16d"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackBow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +237,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControls_Attack = m_CharacterControls.FindAction("Attack", throwIfNotFound: true);
         m_CharacterControls_Jump = m_CharacterControls.FindAction("Jump", throwIfNotFound: true);
         m_CharacterControls_Sneak = m_CharacterControls.FindAction("Sneak", throwIfNotFound: true);
+        m_CharacterControls_AttackBow = m_CharacterControls.FindAction("AttackBow", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +305,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_Attack;
     private readonly InputAction m_CharacterControls_Jump;
     private readonly InputAction m_CharacterControls_Sneak;
+    private readonly InputAction m_CharacterControls_AttackBow;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -283,6 +316,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_CharacterControls_Attack;
         public InputAction @Jump => m_Wrapper.m_CharacterControls_Jump;
         public InputAction @Sneak => m_Wrapper.m_CharacterControls_Sneak;
+        public InputAction @AttackBow => m_Wrapper.m_CharacterControls_AttackBow;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -310,6 +344,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Sneak.started += instance.OnSneak;
             @Sneak.performed += instance.OnSneak;
             @Sneak.canceled += instance.OnSneak;
+            @AttackBow.started += instance.OnAttackBow;
+            @AttackBow.performed += instance.OnAttackBow;
+            @AttackBow.canceled += instance.OnAttackBow;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
@@ -332,6 +369,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Sneak.started -= instance.OnSneak;
             @Sneak.performed -= instance.OnSneak;
             @Sneak.canceled -= instance.OnSneak;
+            @AttackBow.started -= instance.OnAttackBow;
+            @AttackBow.performed -= instance.OnAttackBow;
+            @AttackBow.canceled -= instance.OnAttackBow;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -357,5 +397,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSneak(InputAction.CallbackContext context);
+        void OnAttackBow(InputAction.CallbackContext context);
     }
 }
