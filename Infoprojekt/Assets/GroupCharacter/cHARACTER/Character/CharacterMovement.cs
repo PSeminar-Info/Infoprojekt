@@ -32,8 +32,18 @@ public class CharacterMovement : MonoBehaviour
     public bool attackdamage2;
     public bool attackdamage1;
     public bool attackdamage;
+    public bool attackArrowPressed;
     public bool rotein = false;
     public Transform characterMesh;
+    public GameObject Arrow;
+    Arrow arrow;
+    private bool attackReleased;
+    private bool canRelease;
+    private float arrowTimer;
+    GameObject arr;
+    public GameObject RefPoint;
+    private Rigidbody rb;
+
     void Awake()
     {
         walkpace = 3;
@@ -49,6 +59,8 @@ public class CharacterMovement : MonoBehaviour
         input.CharacterControls.Attack.performed += ctx => attackPressed = ctx.ReadValueAsButton();
         input.CharacterControls.Jump.performed += ctx => jumpPressed = ctx.ReadValueAsButton();
         input.CharacterControls.Sneak.performed += ctx => sneakPressed = ctx.ReadValueAsButton();
+        input.CharacterControls.Attack.canceled += ctx => attackArrowPressed = ctx.ReadValueAsButton();
+
 
         input.CharacterControls.Rotate.started += onRotationInput;
         input.CharacterControls.Rotate.performed += onRotationInput;
@@ -76,6 +88,18 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Bogen
+        if(!attackPressed && canRelease) 
+        {
+            attackReleased = true;
+        }
+        if(attackPressed)
+        {
+            arrowTimer += Time.deltaTime;
+
+        }
+       
+        
         charact.transform.position = characterMesh.position;
         if (!plhe.dead)
         {
@@ -114,6 +138,7 @@ public class CharacterMovement : MonoBehaviour
     }
     void handleMovement()
     {
+
         bool isRunning = animator.GetBool(isRunningHash);
         bool isWalking = animator.GetBool(isWalkingHash);
         bool isShooting = animator.GetBool("shoot");
@@ -150,9 +175,15 @@ public class CharacterMovement : MonoBehaviour
         {
             attackdamage1 = true;
             animator.SetBool("shoot", true);
-            
+            canRelease = true;
+            arr = Instantiate(Arrow, RefPoint.transform.position, RefPoint.transform.rotation);
+            arr.transform.Rotate(new Vector3(0, 0, 90));
+            arr.transform.parent = RefPoint.transform;
+            rb = arr.GetComponent<Rigidbody>();
+            rb.isKinematic = true;
+
         }
-        if(!attackPressed)
+        if (!attackPressed)
         {
             animator.SetBool("shoot", false);
 
@@ -165,8 +196,23 @@ public class CharacterMovement : MonoBehaviour
         {
             animator.SetBool("Idle", false);
 
-        }
 
+        }
+        if(attackReleased)
+        {
+
+            rb.isKinematic = false;
+
+            Debug.Log("geht" + arrowTimer);
+            arr.transform.parent = null;
+
+            arrow = arr.GetComponent<Arrow>();
+
+            arrow.Shoot(arrowTimer * 40);
+            attackReleased = false;
+            canRelease = false;
+            arrowTimer = 0;
+        }
 
 
 
