@@ -1,44 +1,44 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
-namespace Entities.Npc.Friendly
+namespace Entities.Npc.Friendly.Sheep
 {
     public class SheepController : Npc
     {
-        private float _startTime;
+        private static readonly int Death = Animator.StringToHash("death");
+        private static readonly int HitReaction = Animator.StringToHash("hit_reaction");
+        private static readonly int Idle = Animator.StringToHash("idle");
+        private static readonly int Eat = Animator.StringToHash("eat");
+        private static readonly int SitToStand = Animator.StringToHash("sit_to_stand");
+        private static readonly int StandToSit = Animator.StringToHash("stand_to_sit");
+        private static readonly int WalkForward = Animator.StringToHash("walk_forward");
+        private static readonly int RunForward = Animator.StringToHash("run_forward");
+        private static readonly int TrotForward = Animator.StringToHash("trot_forward");
+        private static readonly int Turn90L = Animator.StringToHash("turn_90_L");
+        private static readonly int Turn90R = Animator.StringToHash("turn_90_R");
 
-        public float despawnTime = 5f;
+        public float deathTime = 2f;
 
-        public float actionCooldown = 5f;
+        public float minimumCooldown = 4f;
+        public float maximumCooldown = 6f;
 
         // Movement
         public float maxTargetDistance = 7.5f;
         public float minTargetDistance = 3f;
-
-        // _maxDistance and _minDistance are used to increase distance when running/trotting, walking uses default values
-        private float _maxDistance;
-        private float _minDistance;
-
-        private Vector3 _destination;
 
         // Animation: using hash instead of string for performance, setA
         private NavMeshAgent _agent;
         private Animator _animator;
 
         private int _currentAnimation;
-        private static readonly int Death = Animator.StringToHash("death");
-        private static readonly int SitToStand = Animator.StringToHash("sit_to_stand");
-        private static readonly int StandToSit = Animator.StringToHash("stand_to_sit");
-        private static readonly int Idle = Animator.StringToHash("idle");
-        private static readonly int Eat = Animator.StringToHash("eat");
-        private static readonly int WalkForward = Animator.StringToHash("walk_forward");
-        private static readonly int RunForward = Animator.StringToHash("run_forward");
-        private static readonly int Turn90L = Animator.StringToHash("turn_90_L");
-        private static readonly int Turn90R = Animator.StringToHash("turn_90_R");
-        private static readonly int TrotForward = Animator.StringToHash("trot_forward");
-        private static readonly int HitReaction = Animator.StringToHash("hit_reaction");
+
+        private Vector3 _destination;
+
+        // _maxDistance and _minDistance are used to increase distance when running/trotting, walking uses default values
+        private float _maxDistance;
+        private float _minDistance;
+        private float _startTime;
 
 
         private void Start()
@@ -50,13 +50,14 @@ namespace Entities.Npc.Friendly
 
             _agent = GetComponent<NavMeshAgent>();
             _animator = GetComponent<Animator>();
-            InvokeRepeating(nameof(RandomAction), 0, actionCooldown);
+            InvokeRepeating(nameof(RandomAction), 0, Random.Range(minimumCooldown, maximumCooldown));
         }
 
         private void Update()
         {
             if (_agent.destination == transform.position && _currentAnimation != StandToSit &&
-                _currentAnimation != SitToStand) SetAnimation(Idle);
+                _currentAnimation != SitToStand)
+                SetAnimation(Idle);
 
             if (Time.time - _startTime > 15f)
             {
@@ -84,10 +85,10 @@ namespace Entities.Npc.Friendly
         private IEnumerator DeathAnimation()
         {
             SetAnimation(Death);
-            yield return new WaitForSeconds(despawnTime);
-            
+            yield return new WaitForSeconds(deathTime);
+
             var position = transform.position;
-            inventory.dropAllItems(new Vector3(position.x, position.y+1f, position.z));
+            inventory.dropAllItems(new Vector3(position.x, position.y + 1f, position.z));
             Destroy(gameObject);
         }
 

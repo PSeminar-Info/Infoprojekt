@@ -7,8 +7,8 @@ namespace Entities
     {
         public InventoryObject inventory;
         public bool IsInvincible;
-        public float Health;
-        public float MaxHealth;
+        public float Health = 1;
+        public float MaxHealth = 1;
 
         private void Start()
         {
