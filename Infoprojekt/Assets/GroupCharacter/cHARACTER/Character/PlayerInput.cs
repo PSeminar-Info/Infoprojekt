@@ -28,15 +28,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             ""id"": ""bdc8707e-5242-4026-85a1-9d62074f52e2"",
             ""actions"": [
                 {
-                    ""name"": ""Movement"",
-                    ""type"": ""Value"",
-                    ""id"": ""73a8bfc4-d95e-4137-bdcd-7699127af7f8"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Run"",
                     ""type"": ""Button"",
                     ""id"": ""0a89b8bf-7705-4aa5-af14-6e8b5a04f845"",
@@ -89,20 +80,45 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""W"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef3d4230-1ff8-4c75-b4b1-28610923d1cc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""A"",
+                    ""type"": ""Button"",
+                    ""id"": ""c682d738-c546-46ea-ae24-28cf7a184ea9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""S"",
+                    ""type"": ""Button"",
+                    ""id"": ""cce31bf5-2cf5-48c8-8d4c-8fc0216c2628"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""D"",
+                    ""type"": ""Button"",
+                    ""id"": ""f5e638fb-e676-4ecd-bd3a-247aca9048ee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""50154a2c-86d3-4daa-b2fd-060998680399"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": ""StickDeadzone"",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""c936faa0-a2b5-4a1d-af92-3dcc2c3a8891"",
@@ -172,7 +188,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""09a2880c-47d7-4e5c-9e38-2aa978bb2a6a"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/b"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -223,6 +239,94 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""AttackBow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8733aa18-57a3-4cc7-a76c-289b0cd86e61"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""W"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b65a438c-caaa-43ed-a68b-8a4472b62a36"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""W"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0cc05ed5-f5dd-4b8c-bcc1-4fbe3c3c638b"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""A"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21f81a27-0fef-4459-9f4e-9edeb2a167dd"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""A"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34f74aa6-21d7-469e-ad93-1f5bd7776dbe"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""S"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84446cf5-5f43-4b37-a348-930c30729891"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""S"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9b0cb94-de7a-4860-a3ff-adce3cc91ac2"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""D"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf5d21a9-bb99-4f15-9346-d16e46a0c0ae"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""D"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -231,13 +335,16 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
 }");
         // CharacterControls
         m_CharacterControls = asset.FindActionMap("CharacterControls", throwIfNotFound: true);
-        m_CharacterControls_Movement = m_CharacterControls.FindAction("Movement", throwIfNotFound: true);
         m_CharacterControls_Run = m_CharacterControls.FindAction("Run", throwIfNotFound: true);
         m_CharacterControls_Rotate = m_CharacterControls.FindAction("Rotate", throwIfNotFound: true);
         m_CharacterControls_Attack = m_CharacterControls.FindAction("Attack", throwIfNotFound: true);
         m_CharacterControls_Jump = m_CharacterControls.FindAction("Jump", throwIfNotFound: true);
         m_CharacterControls_Sneak = m_CharacterControls.FindAction("Sneak", throwIfNotFound: true);
         m_CharacterControls_AttackBow = m_CharacterControls.FindAction("AttackBow", throwIfNotFound: true);
+        m_CharacterControls_W = m_CharacterControls.FindAction("W", throwIfNotFound: true);
+        m_CharacterControls_A = m_CharacterControls.FindAction("A", throwIfNotFound: true);
+        m_CharacterControls_S = m_CharacterControls.FindAction("S", throwIfNotFound: true);
+        m_CharacterControls_D = m_CharacterControls.FindAction("D", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -299,24 +406,30 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     // CharacterControls
     private readonly InputActionMap m_CharacterControls;
     private List<ICharacterControlsActions> m_CharacterControlsActionsCallbackInterfaces = new List<ICharacterControlsActions>();
-    private readonly InputAction m_CharacterControls_Movement;
     private readonly InputAction m_CharacterControls_Run;
     private readonly InputAction m_CharacterControls_Rotate;
     private readonly InputAction m_CharacterControls_Attack;
     private readonly InputAction m_CharacterControls_Jump;
     private readonly InputAction m_CharacterControls_Sneak;
     private readonly InputAction m_CharacterControls_AttackBow;
+    private readonly InputAction m_CharacterControls_W;
+    private readonly InputAction m_CharacterControls_A;
+    private readonly InputAction m_CharacterControls_S;
+    private readonly InputAction m_CharacterControls_D;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
         public CharacterControlsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_CharacterControls_Movement;
         public InputAction @Run => m_Wrapper.m_CharacterControls_Run;
         public InputAction @Rotate => m_Wrapper.m_CharacterControls_Rotate;
         public InputAction @Attack => m_Wrapper.m_CharacterControls_Attack;
         public InputAction @Jump => m_Wrapper.m_CharacterControls_Jump;
         public InputAction @Sneak => m_Wrapper.m_CharacterControls_Sneak;
         public InputAction @AttackBow => m_Wrapper.m_CharacterControls_AttackBow;
+        public InputAction @W => m_Wrapper.m_CharacterControls_W;
+        public InputAction @A => m_Wrapper.m_CharacterControls_A;
+        public InputAction @S => m_Wrapper.m_CharacterControls_S;
+        public InputAction @D => m_Wrapper.m_CharacterControls_D;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -326,9 +439,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Add(instance);
-            @Movement.started += instance.OnMovement;
-            @Movement.performed += instance.OnMovement;
-            @Movement.canceled += instance.OnMovement;
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
@@ -347,13 +457,22 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @AttackBow.started += instance.OnAttackBow;
             @AttackBow.performed += instance.OnAttackBow;
             @AttackBow.canceled += instance.OnAttackBow;
+            @W.started += instance.OnW;
+            @W.performed += instance.OnW;
+            @W.canceled += instance.OnW;
+            @A.started += instance.OnA;
+            @A.performed += instance.OnA;
+            @A.canceled += instance.OnA;
+            @S.started += instance.OnS;
+            @S.performed += instance.OnS;
+            @S.canceled += instance.OnS;
+            @D.started += instance.OnD;
+            @D.performed += instance.OnD;
+            @D.canceled += instance.OnD;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
         {
-            @Movement.started -= instance.OnMovement;
-            @Movement.performed -= instance.OnMovement;
-            @Movement.canceled -= instance.OnMovement;
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
@@ -372,6 +491,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @AttackBow.started -= instance.OnAttackBow;
             @AttackBow.performed -= instance.OnAttackBow;
             @AttackBow.canceled -= instance.OnAttackBow;
+            @W.started -= instance.OnW;
+            @W.performed -= instance.OnW;
+            @W.canceled -= instance.OnW;
+            @A.started -= instance.OnA;
+            @A.performed -= instance.OnA;
+            @A.canceled -= instance.OnA;
+            @S.started -= instance.OnS;
+            @S.performed -= instance.OnS;
+            @S.canceled -= instance.OnS;
+            @D.started -= instance.OnD;
+            @D.performed -= instance.OnD;
+            @D.canceled -= instance.OnD;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -391,12 +522,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public CharacterControlsActions @CharacterControls => new CharacterControlsActions(this);
     public interface ICharacterControlsActions
     {
-        void OnMovement(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSneak(InputAction.CallbackContext context);
         void OnAttackBow(InputAction.CallbackContext context);
+        void OnW(InputAction.CallbackContext context);
+        void OnA(InputAction.CallbackContext context);
+        void OnS(InputAction.CallbackContext context);
+        void OnD(InputAction.CallbackContext context);
     }
 }

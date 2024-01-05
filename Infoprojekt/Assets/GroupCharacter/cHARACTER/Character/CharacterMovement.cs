@@ -44,17 +44,36 @@ public class CharacterMovement : MonoBehaviour
     public GameObject RefPoint;
     private Rigidbody rb;
 
+    float velocityZ = 0.0f;
+    float velocityX = 0.0f;
+    public float acceleration = 4;
+    public float deceleration = 2;
+    float maximumWalkVelocity = 0.5f;
+    float maximuRunVelocity = 2.0f;
+    public bool forwardPressed;
+    public bool leftPressed;
+    public bool rightPressed;
+    private Vector2 CurrentMovementInput;
+    //Swords and Bows for activation and deacivation
+    public GameObject SwordHand;
+    public GameObject SwordBack;
+    public GameObject BowHand;
+    public GameObject BowBack;
+    bool backPressed;
+    float turnSmoothVelocity;
+    public float turnSmoothTime;
+    public float rotationSpeed = 5f;
+
     void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        SwordBack.SetActive(false);
         walkpace = 3;
         sprintpace = 7;
         input = new PlayerInput();
 
-        input.CharacterControls.Movement.performed += ctx =>
-        {
-            currentMovement = ctx.ReadValue<Vector2>();
-            movementPressed = currentMovement.x != 0 || currentMovement.y != 0;
-        };
+       
         input.CharacterControls.Run.performed += ctx => runPressed = ctx.ReadValueAsButton();
         input.CharacterControls.Attack.performed += ctx => attackPressed = ctx.ReadValueAsButton();
         input.CharacterControls.Jump.performed += ctx => jumpPressed = ctx.ReadValueAsButton();
@@ -66,6 +85,12 @@ public class CharacterMovement : MonoBehaviour
         input.CharacterControls.Rotate.performed += onRotationInput;
         input.CharacterControls.Rotate.canceled += onRotationInput;
 
+        input.CharacterControls.W.performed += ctx => forwardPressed = ctx.ReadValueAsButton();
+        input.CharacterControls.A.performed += ctx => leftPressed = ctx.ReadValueAsButton();
+        input.CharacterControls.S.performed += ctx => backPressed = ctx.ReadValueAsButton();
+        input.CharacterControls.D.performed += ctx => rightPressed = ctx.ReadValueAsButton();
+
+
     }
     void onRotationInput(InputAction.CallbackContext context)
     {
@@ -75,6 +100,7 @@ public class CharacterMovement : MonoBehaviour
         isRotationPressed = CurrentRotationInput.x != 0 || CurrentRotationInput.y != 0;
 
     }
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -88,6 +114,21 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float horizontalInput = Input.GetAxis("Horizontal");
+
+
+        if (SwordBack.activeSelf)
+        {
+            SwordHand.SetActive(false);
+            BowHand.SetActive(true);
+            BowBack.SetActive(false);
+        }
+        else
+        {
+            SwordHand.SetActive(true);
+            BowHand.SetActive(false);
+            BowBack.SetActive(true);
+        }
         //Bogen
         if(!attackBowPressed && canRelease) 
         {
@@ -113,26 +154,174 @@ public class CharacterMovement : MonoBehaviour
                 
             }
         }
-        
-            
-        
+
+
+        Motion();
        
+    }
+   
+    void Motion()
+    {
+        
+        
+        float currentMaxVelocity = runPressed ? maximuRunVelocity : maximumWalkVelocity;
+        if (forwardPressed && velocityZ < currentMaxVelocity)
+        {
+            Debug.Log("jur");
+            velocityZ += Time.deltaTime * acceleration;
+        }
+
+        if (leftPressed && velocityX > -currentMaxVelocity)
+        {
+            velocityX -= Time.deltaTime * acceleration;
+
+        }
+        if (rightPressed && velocityX < currentMaxVelocity)
+        {
+            velocityX += Time.deltaTime * acceleration;
+
+        }
+        if (backPressed && velocityZ > -currentMaxVelocity)
+        {
+            Debug.Log("jur");
+            velocityZ -= Time.deltaTime * acceleration;
+        }
+        if (!forwardPressed && velocityZ > 0.0f)
+        {
+            velocityZ -= Time.deltaTime * deceleration;
+        }
+        if (!forwardPressed && velocityZ > 0.0f)
+        {
+            velocityZ  -= Time.deltaTime * deceleration;
+        }
+        if (!backPressed && velocityZ < 0.0f)
+        {
+            velocityZ += Time.deltaTime * deceleration;
+        }
+        if (!leftPressed && velocityX < 0.0f)
+        {
+            velocityX += Time.deltaTime * deceleration;
+        }
+        if (!rightPressed && velocityX > 0.0f)
+        {
+            velocityX -= Time.deltaTime * deceleration;
+        }
+
+        if (!leftPressed && !rightPressed && velocityX != 0.0f && (velocityX > -0.05f && velocityX < 0.05f))
+        {
+            velocityX = 0.0f;
+        }
+        if (!forwardPressed && !backPressed && velocityZ != 0.0f && (velocityZ > -0.05f && velocityZ < 0.05f))
+        {
+            velocityZ = 0.0f;
+        }
+
+
+
+        if (forwardPressed && runPressed && velocityZ > currentMaxVelocity)
+        {
+            velocityZ = currentMaxVelocity;
+            
+        }
+        else if(forwardPressed && velocityZ > currentMaxVelocity)
+        {
+            velocityZ -= Time.deltaTime * deceleration;
+            if (velocityZ > currentMaxVelocity && velocityZ < (currentMaxVelocity + 0.05f))
+            {
+                velocityZ = currentMaxVelocity;
+            }
+        }
+        else if(forwardPressed && velocityZ < currentMaxVelocity && velocityZ >(currentMaxVelocity-0.05f))
+        {
+            velocityZ = currentMaxVelocity;
+        }
+
+
+
+
+        if (rightPressed && runPressed && velocityX > currentMaxVelocity)
+        {
+            velocityX = currentMaxVelocity;
+
+        }
+        else if (rightPressed && velocityX > currentMaxVelocity)
+        {
+            velocityX -= Time.deltaTime * deceleration;
+            if (velocityX > currentMaxVelocity && velocityX < (currentMaxVelocity + 0.05f))
+            {
+                velocityX = currentMaxVelocity;
+            }
+        }
+        else if (rightPressed && velocityX < currentMaxVelocity && velocityX > (currentMaxVelocity - 0.05f))
+        {
+            velocityX = currentMaxVelocity;
+        }
+
+
+
+        if (leftPressed && runPressed && velocityX < -currentMaxVelocity)
+        {
+            velocityX = -currentMaxVelocity;
+
+        }
+        else if (leftPressed && velocityX < -currentMaxVelocity)
+        {
+            velocityX += Time.deltaTime * deceleration;
+            if (velocityX <- currentMaxVelocity && velocityX > (-currentMaxVelocity - 0.05f))
+            {
+                velocityX = -currentMaxVelocity;
+            }
+        }
+        else if (leftPressed && velocityX >- currentMaxVelocity && velocityX < (-currentMaxVelocity + 0.05f))
+        {
+            velocityX = -currentMaxVelocity;
+        }
+
+
+
+
+        if (backPressed && runPressed && velocityZ < -currentMaxVelocity)
+        {
+            velocityZ = -currentMaxVelocity;
+
+        }
+        else if (backPressed && velocityZ < -currentMaxVelocity)
+        {
+            velocityZ += Time.deltaTime * deceleration;
+            if (velocityZ < -currentMaxVelocity && velocityZ > (-currentMaxVelocity - 0.05f))
+            {
+                velocityZ = -currentMaxVelocity;
+            }
+        }
+        else if (backPressed && velocityZ > -currentMaxVelocity && velocityZ < (-currentMaxVelocity + 0.05f))
+        {
+            velocityZ = -currentMaxVelocity;
+        }
+
+
+
+
+
+        animator.SetFloat("VelocityZ", velocityZ);
+        animator.SetFloat("VelocityX", velocityX);
+
     }
     void handleRotation()
     {
-        if(haus)
-        {
-            currentrotation = cam.transform.rotation;
+        // if(haus)
+        // {
+        //    currentrotation = cam.transform.rotation;
 
-        }
-        
-            var targetangle = Mathf.Atan2(currentMovement.x, currentMovement.y) * Mathf.Rad2Deg;
-            transform.rotation = currentrotation * Quaternion.Euler(0, targetangle, 0);
-            var angleright = Mathf.Atan2(CurrentRotation.x, CurrentRotation.y) * Mathf.Rad2Deg;
-            var angler = currentrotation * Quaternion.Euler(0, angleright, 0);
-            cineCam.m_XAxis.Value = CurrentRotation.x * 200 * Time.deltaTime;
-            cineCam.m_YAxis.Value += CurrentRotation.y * -5 * Time.deltaTime;
-       
+        // }
+
+        //     var targetangle = Mathf.Atan2(currentMovement.x, currentMovement.y) * Mathf.Rad2Deg;
+        //     transform.rotation = currentrotation * Quaternion.Euler(0, targetangle, 0);
+        //    var angleright = Mathf.Atan2(CurrentRotation.x, CurrentRotation.y) * Mathf.Rad2Deg;
+        //     var angler = currentrotation * Quaternion.Euler(0, angleright, 0);
+        // cineCam.m_XAxis.Value = CurrentRotation.x * 200 * Time.deltaTime;
+       //  cineCam.m_YAxis.Value += CurrentRotation.y * -5 * Time.deltaTime;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, cam.transform.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
+        transform.rotation = Quaternion.Euler(0, angle, 0);
         
 
     }
@@ -174,6 +363,7 @@ public class CharacterMovement : MonoBehaviour
         }
         if (attackPressed && !isShooting)
         {
+            SwordBack.SetActive(false);
             attackdamage1 = true;
             animator.SetBool("shoot", true);
             
@@ -186,7 +376,7 @@ public class CharacterMovement : MonoBehaviour
         }
         if (!attackPressed && !movementPressed)
         {
-            animator.SetBool("Idle",true);
+            //animator.SetBool("Idle",true);
         }
         else
         {
@@ -197,6 +387,7 @@ public class CharacterMovement : MonoBehaviour
 
         if(attackBowPressed && !isBow)
         {
+            SwordBack.SetActive(true);
             animator.SetBool("arrowStand", true);
             canRelease = true;
             arr = Instantiate(Arrow, RefPoint.transform.position, RefPoint.transform.rotation);
@@ -238,6 +429,7 @@ public class CharacterMovement : MonoBehaviour
         else
         {
             animator.SetBool("jump", false);
+            
         }
         
 

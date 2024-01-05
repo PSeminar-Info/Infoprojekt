@@ -291,3 +291,4 @@ MonoBehaviour:
   rb: {fileID: -8864043705722733126}
   shoot: 0
   force: 0
+  cam: {fileID: 0}
