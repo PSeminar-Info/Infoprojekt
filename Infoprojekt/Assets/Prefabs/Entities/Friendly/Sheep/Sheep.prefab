@@ -625,8 +625,9 @@ MonoBehaviour:
   IsInvincible: 0
   Health: 5
   MaxHealth: 5
-  despawnTime: 5
-  actionCooldown: 5
+  deathTime: 2
+  minimumCooldown: 4
+  maximumCooldown: 6
   maxTargetDistance: 7.5
   minTargetDistance: 3
 --- !u!95 &4229878778699433787
@@ -669,7 +670,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.3
-  m_BaseOffset: 0
+  m_BaseOffset: -0.08
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!54 &3137767708803971540
