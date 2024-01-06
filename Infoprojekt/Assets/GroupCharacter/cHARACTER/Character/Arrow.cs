@@ -29,6 +29,7 @@ public class Arrow : MonoBehaviour
             Debug.Log("hg" + hit.point);
             this.transform.LookAt(hit.point);
         }
+        
         // Hier hast du die Blickrichtung vom Mittelpunkt des Bildschirms aus
         Vector3 kraftRichtung = this.transform.forward; ;
         // Kraft zum Rigidbody hinzufügen

@@ -391,7 +391,7 @@ public class CharacterMovement : MonoBehaviour
             animator.SetBool("arrowStand", true);
             canRelease = true;
             arr = Instantiate(Arrow, RefPoint.transform.position, RefPoint.transform.rotation);
-            arr.transform.Rotate(new Vector3(0, 0, 90));
+            arr.transform.Rotate(new Vector3(0, 0, -180));
             arr.transform.parent = RefPoint.transform;
             rb = arr.GetComponent<Rigidbody>();
             rb.isKinematic = true;

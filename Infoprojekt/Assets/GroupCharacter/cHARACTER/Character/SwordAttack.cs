@@ -3,7 +3,7 @@ using UnityEngine;
 public class SwordAttack : MonoBehaviour
 {
     public float attackRange = 2f;
-    public float knockbackForce = 1f;
+    public float knockbackForce = 1000000f;
     public int damageAmount = 30;
     PlayerAttack playerAttack;
     public GameObject player;
@@ -12,7 +12,7 @@ public class SwordAttack : MonoBehaviour
     void Start()
     {
         playerAttack = player.GetComponent<PlayerAttack>();
-        animator = this.transform.parent.GetComponent<Animator>();
+        animator = this.player.GetComponent<Animator>();
         canattack = false;
     }
     
@@ -69,7 +69,7 @@ public class SwordAttack : MonoBehaviour
             {
                 // Berechne die Richtung vom Schwert zum Gegner
                 Vector3 knockbackDirection = enemy.transform.position - transform.position;
-
+                Debug.Log("kk");
                 // Wende die Kraft auf den Rigidbody an, um den Gegner wegzuschleudern
                 enemyRigidbody.AddForce((Vector3.up + knockbackDirection.normalized) * knockbackForce, ForceMode.Impulse);
             }
