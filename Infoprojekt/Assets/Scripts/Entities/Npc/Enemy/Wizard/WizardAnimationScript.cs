@@ -1,26 +1,18 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Entities.Npc.Enemy.Wizard
 {
-    public class AnimationScript : MonoBehaviour
+    public class WizardAnimationScript : MonoBehaviour
+    // this script has a value of -10 in the Unity execution order
+    // so it should be ready to give the animator to the controller
     {
-        private Animator _animator;
+        public Animator animator;
 
         private void Start()
         {
-            _animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>();
         }
-        
-        public void SetAnimation(int animationHash)
-        {
-            _animator.Play(animationHash);
-        }
-        
-        public void StopAnimation()
-        {
-            _animator.StopPlayback();
-        }
-        
     }
 }

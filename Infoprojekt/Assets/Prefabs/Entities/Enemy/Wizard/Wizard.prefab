@@ -55,9 +55,11 @@ MonoBehaviour:
   moveCooldown: 15
   portalCooldown: 10
   attackCooldown: 5
-  teleportDistance: 15
-  minTeleportDistance: 5
   attackRange: 10
+  maxTeleportDistance: 15
+  minTeleportDistance: 5
+  minMoveDistance: 5
+  maxMoveDistance: 10
   player: {fileID: 0}
   portal: {fileID: 2503444574796475513, guid: 57d7c7cb5538c8943902a1d87486778a, type: 3}
   bigProjectile: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
@@ -5012,9 +5014,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6522544443635835438, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5800796185683667076, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5568592434201407133, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2497491462180174514, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2202892853515455343, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
       propertyPath: m_Name
       value: wizard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6164996480583612547, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449996119470504636, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2258390121140554724, guid: 35a20c89ff1a21b4899eb25f799b5aed, type: 3}
       propertyPath: m_ApplyRootMotion
@@ -5029,15 +5059,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5026482756751204071}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8322184615111682376}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6031181012596989031}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2272075783514625357}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
       insertIndex: -1
@@ -5048,77 +5069,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
   m_PrefabInstance: {fileID: 1028386330824945262}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5026482756751204071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181523024749335359}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 377a3aefb63e8e642b8215d4b0e578e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
-  IsInvincible: 0
-  Health: 1
-  MaxHealth: 1
-  moveCooldown: 15
-  portalCooldown: 10
-  attackCooldown: 5
-  teleportDistance: 15
-  minTeleportDistance: 5
-  attackRange: 10
-  player: {fileID: 0}
-  portal: {fileID: 2503444574796475513, guid: 57d7c7cb5538c8943902a1d87486778a, type: 3}
-  bigProjectile: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
-  smallProjectile: {fileID: 3819042581345929414, guid: 755682cc249997b469b813b274adbcf7, type: 3}
---- !u!195 &8322184615111682376
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181523024749335359}
-  m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1.58
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!136 &6031181012596989031
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181523024749335359}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Height: 1.24
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.94, z: 0}
 --- !u!95 &2272075783514625357
 Animator:
   serializedVersion: 5
@@ -5152,6 +5102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8be80d0e5d8ae4faeb8f6d640ae471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 2272075783514625357}
 --- !u!4 &706843685098965381 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}

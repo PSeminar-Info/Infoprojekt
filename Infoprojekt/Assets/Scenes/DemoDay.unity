@@ -9644,6 +9644,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 94185881252008097, guid: 390796ee7acd6934ea769590d76fb9ea, type: 3}
+      propertyPath: portalCooldown
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 94185881252008097, guid: 390796ee7acd6934ea769590d76fb9ea, type: 3}
       propertyPath: maxTeleportDistance
       value: 5
       objectReference: {fileID: 0}
