@@ -26,8 +26,12 @@ public class Arrow : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log("hg" + hit.point);
-            this.transform.LookAt(hit.point);
+            if(hit.distance > 2)
+            {
+                Debug.Log("hg" + hit.point);
+                this.transform.LookAt(hit.point);
+            }
+            
         }
         
         // Hier hast du die Blickrichtung vom Mittelpunkt des Bildschirms aus
