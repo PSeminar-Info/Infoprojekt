@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,10 +7,18 @@ namespace Entities.Npc.Enemy.Spider
 {
     public class SpiderController : Npc
     {
+        // if checks become too laggy, use a coroutine to check every 0.5 seconds or so
+        // coroutine should only be started when the player is in a certain range
+        
         public float maxTargetDistance = 3f;
         public float minTargetDistance = 1f;
+
+        [Tooltip("Minimum cooldown when not in combat")]
         public float minimumCooldown = 1.5f;
+
+        [Tooltip("Maximum cooldown when in combat")]
         public float maximumCooldown = 3f;
+
         public float attackRange = 4f;
         public GameObject player;
 
@@ -27,20 +36,20 @@ namespace Entities.Npc.Enemy.Spider
 
         private void FixedUpdate()
         {
-            if (IsInPlayerRange()) _agent.SetDestination(player.transform.position);
+            if (IsInPlayerRange(player, attackRange)) _agent.SetDestination(player.transform.position);
+            if (Health <= 0) StartCoroutine(nameof(OnDeath));
         }
 
         private void MoveToRandomLocationIfNotAttacking()
         {
-            if (!IsInPlayerRange())
+            if (!IsInPlayerRange(player, attackRange))
                 _agent.SetDestination(RandomNavmeshLocation(maxTargetDistance, minTargetDistance));
         }
 
-        private bool IsInPlayerRange()
+        private IEnumerable OnDeath()
         {
-            // check if player tag is in a sphere of radius attackRange around the spider
-            var colliders = Physics.OverlapSphere(transform.position, attackRange);
-            return colliders.Any(col => col.CompareTag("Player"));
+            yield return new WaitForSeconds(deathTime);
+            Destroy(gameObject);
         }
     }
 }

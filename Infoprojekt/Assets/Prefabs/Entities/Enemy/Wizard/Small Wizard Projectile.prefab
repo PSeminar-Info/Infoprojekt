@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_Name
-      value: small proj Variant
+      value: Small Wizard Projectile
       objectReference: {fileID: 0}
     - target: {fileID: 4884553744783207221, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_LocalScale.x
@@ -26,15 +26,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4884553744783207221, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.528963
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4884553744783207221, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.05009079
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4884553744783207221, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -40.593616
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4884553744783207221, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_LocalRotation.w

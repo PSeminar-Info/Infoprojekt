@@ -78,7 +78,7 @@ namespace Entities.Npc.Friendly.Sheep
 
         private void OnHit()
         {
-            // hit_reaction has a separate layer in the animation controller since it's so it can be played on top of other animations
+            // hit_reaction has a separate layer in the animation controller so it can be played on top of other animations
             _animator.SetTrigger(HitReaction);
         }
 

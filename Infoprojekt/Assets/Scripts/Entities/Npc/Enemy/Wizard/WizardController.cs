@@ -6,15 +6,15 @@ namespace Entities.Npc.Enemy.Wizard
 {
     public class WizardController : Npc
     // the animator needs to be in the child so it doesn't teleport to 0 0 0
-    // animator shouldn't need to be paused anymore in order to move 
-
-    // many behavioural things need the player to work properly, will do those after merge
+    
     {
+        [Tooltip("Cooldown between moving action (when not in combat)")]
         public float moveCooldown = 15f;
+
         public float portalCooldown = 10f;
 
         public float attackCooldown = 5f;
-        public float attackRange = 10f;
+        public float attackRange = 20f;
 
         public float maxTeleportDistance = 15f;
         public float minTeleportDistance = 5f;
@@ -24,8 +24,9 @@ namespace Entities.Npc.Enemy.Wizard
 
         public GameObject player;
         public GameObject portal;
-        public GameObject bigProjectile;
-        public GameObject smallProjectile;
+        public GameObject bigAttack;
+        public GameObject smallAttack;
+        public GameObject homingAttack;
 
         private NavMeshAgent _agent;
         private Vector3 _spawnPosition;
@@ -40,6 +41,7 @@ namespace Entities.Npc.Enemy.Wizard
             _agent = GetComponent<NavMeshAgent>();
             _spawnPosition = transform.position;
             _animator = transform.GetComponentInChildren<WizardAnimationScript>().animator;
+            Invoke(nameof(LightAttack), 5f);
         }
 
         private void Update()
@@ -58,15 +60,13 @@ namespace Entities.Npc.Enemy.Wizard
             var destination = RandomNavmeshLocation(maxTeleportDistance, minTeleportDistance);
             var wizard = transform;
             var rotation = wizard.rotation;
-            var portal0 = Instantiate(portal, destination, rotation);
+
+            // using 5 for simplicity, needs to be changed if the portal duration changes
+            Destroy(Instantiate(portal, destination, rotation), 5);
             yield return new WaitForSeconds(0.25f);
-            var portal1 = Instantiate(portal, wizard.position, rotation);
+            Destroy(Instantiate(portal, wizard.position, rotation), 5);
             yield return new WaitForSeconds(1f);
             _agent.Warp(destination);
-            // will need to change this if the portal duration changes
-            yield return new WaitForSeconds(5f);
-            Destroy(portal0);
-            Destroy(portal1);
         }
 
         private void MoveToRandomLocation()
@@ -74,12 +74,25 @@ namespace Entities.Npc.Enemy.Wizard
             _agent.SetDestination(RandomNavmeshLocation(maxMoveDistance, minMoveDistance));
         }
 
+        // 3 projectiles in player direction
         private void LightAttack()
         {
+            var wiz = transform;
+            Instantiate(smallAttack, wiz.position, wiz.rotation);
         }
 
+        // 5 projectiles in all directions
         private void HeavyAttack()
         {
+            var wiz = transform;
+            Instantiate(bigAttack, wiz.position, wiz.rotation);
+        }
+
+        // one projectile
+        private void HomingAttack()
+        {
+            var wiz = transform;
+            Instantiate(homingAttack, wiz.position, wiz.rotation);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,7 +11,7 @@ namespace Entities.Npc
         /// </summary>
         /// <param name="radius">Maximum distance from object</param>
         /// <returns>Vector3 position</returns>
-        public Vector3 RandomNavmeshLocation(float radius)
+        protected Vector3 RandomNavmeshLocation(float radius)
         {
             var randomDirection = Random.insideUnitSphere * radius;
             randomDirection += transform.position;
@@ -26,7 +27,7 @@ namespace Entities.Npc
         /// <param name="radius">Maximum distance from object</param>
         /// <param name="minDistance">Minimum distance from object</param>
         /// <returns>Vector3 position</returns>
-        public Vector3 RandomNavmeshLocation(float radius, float minDistance)
+        protected Vector3 RandomNavmeshLocation(float radius, float minDistance)
         {
             var randomDirection = Random.insideUnitSphere * radius;
             randomDirection += transform.position;
@@ -35,6 +36,15 @@ namespace Entities.Npc
             if (Vector3.Distance(finalPosition, transform.position) < minDistance)
                 return RandomNavmeshLocation(radius, minDistance);
             return finalPosition;
+        }
+        
+        protected bool IsInPlayerRange(GameObject player, float radius)
+        {
+            // OverlapSphereNonAlloc is faster than OverlapSphere and doesn't generate garbage, but will miss collisions if the array is too small
+            // will need to increase the amount if there are a lot of colliders and the player doesn't get detected properly
+            var overlapResults = new Collider[100];
+            Physics.OverlapSphereNonAlloc(transform.position, radius, overlapResults);
+            return overlapResults.Any(col => col.CompareTag("Player"));
         }
     }
 }
