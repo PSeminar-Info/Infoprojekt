@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 377a3aefb63e8e642b8215d4b0e578e8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - player: {instanceID: 0}
+  - portalPrefab: {fileID: 2503444574796475513, guid: 57d7c7cb5538c8943902a1d87486778a, type: 3}
+  - bigProjectilePrefab: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
+  - smallProjectilePrefab: {fileID: 3819042581345929414, guid: 755682cc249997b469b813b274adbcf7, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
