@@ -167,7 +167,6 @@ public class CharacterMovement : MonoBehaviour
         float currentMaxVelocity = runPressed ? maximuRunVelocity : maximumWalkVelocity;
         if (forwardPressed && velocityZ < currentMaxVelocity)
         {
-            Debug.Log("jur");
             velocityZ += Time.deltaTime * acceleration;
         }
 
@@ -183,7 +182,6 @@ public class CharacterMovement : MonoBehaviour
         }
         if (backPressed && velocityZ > -currentMaxVelocity)
         {
-            Debug.Log("jur");
             velocityZ -= Time.deltaTime * acceleration;
         }
         if (!forwardPressed && velocityZ > 0.0f)
