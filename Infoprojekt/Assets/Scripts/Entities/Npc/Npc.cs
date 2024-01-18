@@ -37,7 +37,7 @@ namespace Entities.Npc
                 return RandomNavmeshLocation(radius, minDistance);
             return finalPosition;
         }
-        
+
         protected bool IsInPlayerRange(GameObject player, float radius)
         {
             // OverlapSphereNonAlloc is faster than OverlapSphere and doesn't generate garbage, but will miss collisions if the array is too small

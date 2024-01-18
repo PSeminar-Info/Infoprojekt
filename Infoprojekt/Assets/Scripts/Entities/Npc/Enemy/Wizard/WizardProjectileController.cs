@@ -17,15 +17,14 @@ namespace Entities.Npc.Enemy.Wizard
         public float rotationSpeed = 0.05f;
 
         private Rigidbody _rigidBody;
-        private GameObject _parent;
+        private Vector3 _spawnPosition;
 
         private void Start()
         {
             if (rotationSpeed < 0) rotationSpeed = 0;
             if (rotationSpeed > 1) rotationSpeed = 1;
-
             _rigidBody = GetComponent<Rigidbody>();
-            _parent = gameObject.transform.parent.gameObject;
+            _spawnPosition = transform.position;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -41,7 +40,7 @@ namespace Entities.Npc.Enemy.Wizard
             //     transform.rotation = Quaternion.Slerp(transform.rotation, _parent.transform.rotation, rotationSpeed);
 
             _rigidBody.AddForce(transform.forward * 10);
-            if (Vector3.Distance(transform.position, _parent.transform.position) > 50)
+            if (Vector3.Distance(transform.position, _spawnPosition) > 50)
                 Destroy(gameObject);
         }
     }
