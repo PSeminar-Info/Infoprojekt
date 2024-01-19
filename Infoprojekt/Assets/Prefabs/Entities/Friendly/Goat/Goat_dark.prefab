@@ -2610,9 +2610,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3507746843320673366}
   - component: {fileID: 1804688838143295515}
+  - component: {fileID: 3816606057043784801}
   - component: {fileID: 3507746843320673369}
   - component: {fileID: 8789313156249743068}
-  - component: {fileID: 3816606057043784801}
   - component: {fileID: 5657664943280160634}
   m_Layer: 0
   m_Name: Goat_dark
@@ -2655,10 +2655,37 @@ MonoBehaviour:
   Health: 10
   MaxHealth: 10
   deathTime: 2
-  minimumCooldown: 6
-  maximumCooldown: 8.5
+  minimumCooldown: 25
+  maximumCooldown: 35
   maxTargetDistance: 10
   minTargetDistance: 5
+--- !u!54 &3816606057043784801
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3507746843320673371}
+  serializedVersion: 4
+  m_Mass: 20
+  m_Drag: 0
+  m_AngularDrag: 50
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &3507746843320673369
 Animator:
   serializedVersion: 5
@@ -2702,33 +2729,6 @@ NavMeshAgent:
   m_BaseOffset: -0.08
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &3816606057043784801
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3507746843320673371}
-  serializedVersion: 4
-  m_Mass: 20
-  m_Drag: 0
-  m_AngularDrag: 20
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &5657664943280160634
 BoxCollider:
   m_ObjectHideFlags: 0

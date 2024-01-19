@@ -3251,8 +3251,8 @@ MonoBehaviour:
   Health: 10
   MaxHealth: 10
   deathTime: 2
-  minimumCooldown: 6
-  maximumCooldown: 8.5
+  minimumCooldown: 25
+  maximumCooldown: 35
   maxTargetDistance: 10
   minTargetDistance: 5
 --- !u!54 &5732571760872279351
@@ -3265,7 +3265,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 20
   m_Drag: 0
-  m_AngularDrag: 20
+  m_AngularDrag: 50
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

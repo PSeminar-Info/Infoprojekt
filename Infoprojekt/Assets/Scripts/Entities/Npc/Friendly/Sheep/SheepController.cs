@@ -55,8 +55,8 @@ namespace Entities.Npc.Friendly.Sheep
 
         private void Update()
         {
-            if (_agent.destination == transform.position && _currentAnimation != StandToSit &&
-                _currentAnimation != SitToStand)
+            if (Vector3.Distance(_agent.destination, transform.position) < 0.3 &&
+                _currentAnimation != StandToSit && _currentAnimation != SitToStand)
                 SetAnimation(Idle);
 
             if (Time.time - _startTime > 15f)

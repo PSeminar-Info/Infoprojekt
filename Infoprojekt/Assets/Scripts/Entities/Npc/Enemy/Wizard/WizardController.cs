@@ -59,15 +59,15 @@ namespace Entities.Npc.Enemy.Wizard
             }
         }
 
-        // wizard should teleport away from player if they get too close, second portal should also face the player
+        // wizard should teleport away from target if they get too close, second portal should also face the target
         private IEnumerator TeleportToRandomLocation()
         {
-            // this needs refactoring, wizard should almost always face the player, not just when teleporting
+            // this needs refactoring, wizard should almost always face the target, not just when teleporting
             // just keeping it for testing 
             gameObject.transform.LookAt(player);
 
 
-            // wizard will need to face the player so the portal is facing the right direction
+            // wizard will need to face the target so the portal is facing the right direction
             var destination = RandomNavmeshLocation(maxTeleportDistance, minTeleportDistance);
             var wizard = transform;
             var rotation = wizard.rotation;
@@ -84,8 +84,27 @@ namespace Entities.Npc.Enemy.Wizard
         {
             _agent.SetDestination(RandomNavmeshLocation(maxMoveDistance, minMoveDistance));
         }
+        
+        // might add some more logic later
+        private void Attack()
+        {
+            if (Vector3.Distance(transform.position, player.position) > attackRange) return;
+            transform.LookAt(player, transform.up);
+            switch (Random.Range(0, 3))
+            {
+                case 0:
+                    LightAttack();
+                    break;
+                case 1:
+                    HeavyAttack();
+                    break;
+                case 2:
+                    HomingAttack();
+                    break;
+            }
+        }
 
-        // 3 projectiles in player direction
+        // 3 projectiles in target direction
         private void LightAttack()
         {
             var wiz = transform;
@@ -99,7 +118,7 @@ namespace Entities.Npc.Enemy.Wizard
             Instantiate(bigAttack, wiz.position, wiz.rotation);
         }
 
-        // one projectile
+        // two projectiles above wizard
         private void HomingAttack()
         {
             var wiz = transform;
