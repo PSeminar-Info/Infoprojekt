@@ -173,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2165175a01c618419d9362af272fada, type: 3}
       propertyPath: m_Name
-      value: Rotebeerenbusch (1)
+      value: Bush_berries6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -230,7 +230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2165175a01c618419d9362af272fada, type: 3}
       propertyPath: m_Name
-      value: Rotebeerenbusch (5)
+      value: Bush_berries0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -287,7 +287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2165175a01c618419d9362af272fada, type: 3}
       propertyPath: m_Name
-      value: Rotebeerenbusch (8)
+      value: Bush_berries3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 590859540}
   - component: {fileID: 590859539}
   m_Layer: 0
-  m_Name: Wald 300x300
+  m_Name: Forest 300x300
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -452,7 +452,7 @@ Terrain:
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 71809d74376227a40a2bf77c745c9c3c, type: 2}
   m_TreeDistance: 5000
-  m_TreeBillboardDistance: 1118
+  m_TreeBillboardDistance: 192
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
   m_DetailObjectDistance: 80
@@ -554,7 +554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9ce6693041377e24ab0bbe7210917065, type: 3}
       propertyPath: m_Name
-      value: "Weitere B\xE4ume"
+      value: Wondertree
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -611,7 +611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2165175a01c618419d9362af272fada, type: 3}
       propertyPath: m_Name
-      value: Rotebeerenbusch (9)
+      value: Bush_berries4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -668,7 +668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2165175a01c618419d9362af272fada, type: 3}
       propertyPath: m_Name
-      value: Rotebeerenbusch (3)
+      value: Bush_berries8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -725,7 +725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2165175a01c618419d9362af272fada, type: 3}
       propertyPath: m_Name
-      value: Rotebeerenbusch
+      value: Bush_berries5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -782,7 +782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2165175a01c618419d9362af272fada, type: 3}
       propertyPath: m_Name
-      value: Rotebeerenbusch (10)
+      value: Bush_berries10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -931,7 +931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2165175a01c618419d9362af272fada, type: 3}
       propertyPath: m_Name
-      value: Rotebeerenbusch (6)
+      value: Bush_berries1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -988,7 +988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2165175a01c618419d9362af272fada, type: 3}
       propertyPath: m_Name
-      value: Rotebeerenbusch (11)
+      value: Bush_berries11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1045,7 +1045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2165175a01c618419d9362af272fada, type: 3}
       propertyPath: m_Name
-      value: Rotebeerenbusch (7)
+      value: Bush_berries2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1148,7 +1148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2165175a01c618419d9362af272fada, type: 3}
       propertyPath: m_Name
-      value: Rotebeerenbusch (2)
+      value: Bush_berries7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1205,7 +1205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b2165175a01c618419d9362af272fada, type: 3}
       propertyPath: m_Name
-      value: Rotebeerenbusch (4)
+      value: Bush_berries9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1284,15 +1284,15 @@ SceneRoots:
   - {fileID: 541021798}
   - {fileID: 1666929519}
   - {fileID: 694192796}
-  - {fileID: 1184733728}
-  - {fileID: 246496105}
-  - {fileID: 1730077779}
-  - {fileID: 1174745845}
-  - {fileID: 2080803915}
   - {fileID: 250410316}
   - {fileID: 1453257858}
   - {fileID: 1543256246}
   - {fileID: 454893738}
   - {fileID: 1117999404}
+  - {fileID: 1184733728}
+  - {fileID: 246496105}
+  - {fileID: 1730077779}
+  - {fileID: 1174745845}
+  - {fileID: 2080803915}
   - {fileID: 1281892595}
   - {fileID: 1488130629}
