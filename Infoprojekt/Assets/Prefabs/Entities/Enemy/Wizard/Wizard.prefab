@@ -5072,6 +5072,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: wizard
       objectReference: {fileID: 0}
+    - target: {fileID: 3497208160958688952, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.0256
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497208160958688952, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.0256
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497208160958688952, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.0256
+      objectReference: {fileID: 0}
     - target: {fileID: 6164996480583612547, guid: 29cadddd0b0223943ba99c5a8c83b70b, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -5114,7 +5126,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d4a6a67641c019f4fb0543f404b75118, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0

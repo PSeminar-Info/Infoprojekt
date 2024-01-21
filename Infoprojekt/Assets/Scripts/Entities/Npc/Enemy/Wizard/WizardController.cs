@@ -6,7 +6,6 @@ namespace Entities.Npc.Enemy.Wizard
 {
     public class WizardController : Npc
     // the animator needs to be in the child so it doesn't teleport to 0 0 0
-
     {
         [Header("Attack")] public float attackCooldown = 5f;
         public float attackRange = 40f;
@@ -38,6 +37,7 @@ namespace Entities.Npc.Enemy.Wizard
         // temp objects are supposed to be stored in child of the wizard
 
         private float _lastActionTime;
+        private static readonly int Attack = Animator.StringToHash("Attack");
 
 
         private void Start()
@@ -84,9 +84,9 @@ namespace Entities.Npc.Enemy.Wizard
         {
             _agent.SetDestination(RandomNavmeshLocation(maxMoveDistance, minMoveDistance));
         }
-        
+
         // might add some more logic later
-        private void Attack()
+        private void AttackPlayer()
         {
             if (Vector3.Distance(transform.position, player.position) > attackRange) return;
             transform.LookAt(player, transform.up);
@@ -107,6 +107,7 @@ namespace Entities.Npc.Enemy.Wizard
         // 3 projectiles in target direction
         private void LightAttack()
         {
+            _animator.SetTrigger(Attack);
             var wiz = transform;
             Instantiate(smallAttack, wiz.position, wiz.rotation);
         }
@@ -114,6 +115,7 @@ namespace Entities.Npc.Enemy.Wizard
         // 5 projectiles in all directions
         private void HeavyAttack()
         {
+            _animator.SetTrigger(Attack);
             var wiz = transform;
             Instantiate(bigAttack, wiz.position, wiz.rotation);
         }
@@ -121,6 +123,7 @@ namespace Entities.Npc.Enemy.Wizard
         // two projectiles above wizard
         private void HomingAttack()
         {
+            _animator.SetTrigger(Attack);
             var wiz = transform;
             Instantiate(homingAttack, wiz.position, wiz.rotation);
         }
