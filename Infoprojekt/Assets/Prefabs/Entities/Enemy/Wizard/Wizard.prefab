@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377a3aefb63e8e642b8215d4b0e578e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
+  inventory: {fileID: 11400000, guid: 9c2797be1ba72dc498b043073cc9c1f4, type: 2}
   IsInvincible: 0
   Health: 10
   MaxHealth: 10
