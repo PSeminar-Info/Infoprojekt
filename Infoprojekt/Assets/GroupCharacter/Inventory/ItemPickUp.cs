@@ -6,6 +6,8 @@ public class ItemPickUp : MonoBehaviour
 {
     public Item Item;
     private GameObject panel; // Das GameObject ist jetzt private
+    public bool EPressed;
+
     private void Start()
     {
         // Suchen Sie das Panel in der Hierarchie und weisen Sie es der privaten Variable zu
@@ -15,22 +17,29 @@ public class ItemPickUp : MonoBehaviour
         {
             panel.SetActive(false); // Deaktivieren Sie das Panel beim Start
         }
+        
+    }
+    void Update()
+    {
+        if (EPressed)
+        {
+            OpenPanel();
+
+            PickUp();
+        }
     }
     void PickUp()
     {
         InventoryManager.Instance.Add(Item);
         Destroy(gameObject);
+        ClosePanel();
     }
     void OnTriggerStay(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
         {
             OpenPanel();
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                PickUp();
-                ClosePanel();
-            }
+           
         }
     }
     void OnTriggerExit(Collider other)

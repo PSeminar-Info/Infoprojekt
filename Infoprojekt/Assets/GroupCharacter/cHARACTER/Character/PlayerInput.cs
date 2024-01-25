@@ -40,7 +40,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": ""Rotate"",
                     ""type"": ""Value"",
                     ""id"": ""70586d3f-acb0-4b1e-90d9-bac196c992df"",
-                    ""expectedControlType"": ""Stick"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -116,6 +116,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PickUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""023ac494-f4ce-483f-aa0f-284b6fdeae5c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -143,8 +152,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d4f7d0b4-b0ca-48e2-9f42-5caf1c8c527f"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""id"": ""bbe5ff64-be74-410b-9181-0513cefa6b98"",
+                    ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -327,6 +336,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""D"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b981cb0c-f7b8-4a14-aee8-7e59d79917d6"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PickUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -345,6 +365,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControls_A = m_CharacterControls.FindAction("A", throwIfNotFound: true);
         m_CharacterControls_S = m_CharacterControls.FindAction("S", throwIfNotFound: true);
         m_CharacterControls_D = m_CharacterControls.FindAction("D", throwIfNotFound: true);
+        m_CharacterControls_PickUp = m_CharacterControls.FindAction("PickUp", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -416,6 +437,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_A;
     private readonly InputAction m_CharacterControls_S;
     private readonly InputAction m_CharacterControls_D;
+    private readonly InputAction m_CharacterControls_PickUp;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -430,6 +452,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @A => m_Wrapper.m_CharacterControls_A;
         public InputAction @S => m_Wrapper.m_CharacterControls_S;
         public InputAction @D => m_Wrapper.m_CharacterControls_D;
+        public InputAction @PickUp => m_Wrapper.m_CharacterControls_PickUp;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -469,6 +492,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @D.started += instance.OnD;
             @D.performed += instance.OnD;
             @D.canceled += instance.OnD;
+            @PickUp.started += instance.OnPickUp;
+            @PickUp.performed += instance.OnPickUp;
+            @PickUp.canceled += instance.OnPickUp;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
@@ -503,6 +529,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @D.started -= instance.OnD;
             @D.performed -= instance.OnD;
             @D.canceled -= instance.OnD;
+            @PickUp.started -= instance.OnPickUp;
+            @PickUp.performed -= instance.OnPickUp;
+            @PickUp.canceled -= instance.OnPickUp;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -532,5 +561,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnA(InputAction.CallbackContext context);
         void OnS(InputAction.CallbackContext context);
         void OnD(InputAction.CallbackContext context);
+        void OnPickUp(InputAction.CallbackContext context);
     }
 }

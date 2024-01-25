@@ -28,18 +28,17 @@ public class Arrow : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            if(hit.collider.gameObject.tag == "enemy")
-            {
+           
                 Debug.Log("hg" + hit.point);
                 this.transform.LookAt(hit.point);
-            }
+           
             
         }
         
         // Hier hast du die Blickrichtung vom Mittelpunkt des Bildschirms aus
         Vector3 kraftRichtung = this.transform.forward; ;
         // Kraft zum Rigidbody hinzufügen
-        rb.AddForce(kraftRichtung * force, ForceMode.Impulse);
+        rb.AddForce(kraftRichtung * -force, ForceMode.Impulse);
     }
     private void OnTriggerEnter(Collider collision)
     {

@@ -63,7 +63,9 @@ public class CharacterMovement : MonoBehaviour
     float turnSmoothVelocity;
     public float turnSmoothTime;
     public float rotationSpeed = 5f;
-
+    public bool pickUpPressed;
+    public CinemachineFreeLook AimCam;
+    public CinemachineFreeLook ThirdPersonCam;
     void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -79,6 +81,7 @@ public class CharacterMovement : MonoBehaviour
         input.CharacterControls.Jump.performed += ctx => jumpPressed = ctx.ReadValueAsButton();
         input.CharacterControls.Sneak.performed += ctx => sneakPressed = ctx.ReadValueAsButton();
         input.CharacterControls.AttackBow.performed += ctx => attackBowPressed = ctx.ReadValueAsButton();
+        input.CharacterControls.PickUp.performed += ctx => pickUpPressed = ctx.ReadValueAsButton();
 
 
         input.CharacterControls.Rotate.started += onRotationInput;
@@ -317,10 +320,12 @@ public class CharacterMovement : MonoBehaviour
         //    var angleright = Mathf.Atan2(CurrentRotation.x, CurrentRotation.y) * Mathf.Rad2Deg;
         //     var angler = currentrotation * Quaternion.Euler(0, angleright, 0);
         // cineCam.m_XAxis.Value = CurrentRotation.x * 200 * Time.deltaTime;
-       //  cineCam.m_YAxis.Value += CurrentRotation.y * -5 * Time.deltaTime;
+        //  cineCam.m_YAxis.Value += CurrentRotation.y * -5 * Time.deltaTime;
+
+
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, cam.transform.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
         transform.rotation = Quaternion.Euler(0, angle, 0);
-        
+
 
     }
     void handleMovement()
@@ -385,6 +390,12 @@ public class CharacterMovement : MonoBehaviour
 
         if(attackBowPressed && !isBow)
         {
+            ThirdPersonCam.gameObject.SetActive(false);
+            AimCam.gameObject.SetActive(true);
+            AimCam.m_XAxis.Value = ThirdPersonCam.m_XAxis.Value;
+            AimCam.m_YAxis.Value = ThirdPersonCam.m_YAxis.Value;
+           
+           
             SwordBack.SetActive(true);
             animator.SetBool("arrowStand", true);
             canRelease = true;
@@ -396,13 +407,19 @@ public class CharacterMovement : MonoBehaviour
         }
         if(!attackBowPressed)
         {
+            
             animator.SetBool("arrowStand", false);
+            
         }
 
 
         if(attackReleased)
         {
 
+            ThirdPersonCam.gameObject.SetActive(true);
+            AimCam.gameObject.SetActive(false);
+            ThirdPersonCam.m_XAxis.Value = AimCam.m_XAxis.Value;
+            ThirdPersonCam.m_YAxis.Value = AimCam.m_YAxis.Value;
             rb.isKinematic = false;
 
             Debug.Log("geht" + arrowTimer);
@@ -434,6 +451,17 @@ public class CharacterMovement : MonoBehaviour
 
 
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.tag == "Collectable" && pickUpPressed)
+        {
+            Debug.Log("kurva");
+
+            ItemPickUp script = other.gameObject.GetComponent<ItemPickUp>();
+            script.EPressed = true;
+        }
+    }
+    
     void OnEnable()
     {
         input.CharacterControls.Enable();

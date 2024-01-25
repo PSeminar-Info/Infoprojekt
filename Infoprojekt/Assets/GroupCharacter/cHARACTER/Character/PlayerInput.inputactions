@@ -18,7 +18,7 @@
                     "name": "Rotate",
                     "type": "Value",
                     "id": "70586d3f-acb0-4b1e-90d9-bac196c992df",
-                    "expectedControlType": "Stick",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PickUp",
+                    "type": "Button",
+                    "id": "023ac494-f4ce-483f-aa0f-284b6fdeae5c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -121,8 +130,8 @@
                 },
                 {
                     "name": "",
-                    "id": "d4f7d0b4-b0ca-48e2-9f42-5caf1c8c527f",
-                    "path": "<Gamepad>/rightStick",
+                    "id": "bbe5ff64-be74-410b-9181-0513cefa6b98",
+                    "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -303,6 +312,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "D",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b981cb0c-f7b8-4a14-aee8-7e59d79917d6",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PickUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
