@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2220952096008172060}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Big Wizard Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
