@@ -12,10 +12,9 @@ TagManager:
   - TransparentFX
   - Ignore Raycast
   - Environment
-  - EnemyProjectile
   - Water
   - UI
-  - 
+  - EnemyProjectile
   - 
   - 
   - 
