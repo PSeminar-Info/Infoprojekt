@@ -3,11 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - enemy
+  - Collectable
+  - floor
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
+  - Environment
   - EnemyProjectile
   - Water
   - UI
