@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2220952096008172060}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Big Wizard Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,9 +44,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2220952096008172060}
     m_Modifications:
+    - target: {fileID: 2770880803813411057, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_Name
       value: Big Wizard Projectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4884553744783207221, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_LocalPosition.x
@@ -106,9 +114,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2220952096008172060}
     m_Modifications:
+    - target: {fileID: 2770880803813411057, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_Name
       value: Big Wizard Projectile (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4884553744783207221, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_LocalPosition.x
@@ -168,9 +184,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2220952096008172060}
     m_Modifications:
+    - target: {fileID: 2770880803813411057, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_Name
       value: Big Wizard Projectile (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4884553744783207221, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_LocalPosition.x
@@ -230,9 +254,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2220952096008172060}
     m_Modifications:
+    - target: {fileID: 2770880803813411057, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_Name
       value: Big Wizard Projectile (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4884553744783207221, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_LocalPosition.x
@@ -292,9 +324,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2220952096008172060}
     m_Modifications:
+    - target: {fileID: 2770880803813411057, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_Name
       value: Big Wizard Projectile (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255570777652936274, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4884553744783207221, guid: a9543eace368f5f48b5eaa355b6b8f90, type: 3}
       propertyPath: m_LocalPosition.x

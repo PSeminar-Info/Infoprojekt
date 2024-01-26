@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1279231124588227114}
   - component: {fileID: -6721765240112508373}
   - component: {fileID: -8032124301801651806}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Big Wizard Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 14ac691aecf1e4641b03376119d86c47, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6014248179961861934, guid: e1ddacdd184737a469dce70e73e17993, type: 3}
