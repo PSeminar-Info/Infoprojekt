@@ -1353,7 +1353,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.55
+  m_ScreenY: 0.84
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -1668,7 +1668,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642113363}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.52701724, y: 0.000000017059206, z: -0.000000010578862, w: 0.8498546}
+  m_LocalRotation: {x: 0.2968838, y: 1e-45, z: -0, w: 0.9549136}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2379,8 +2379,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818365306}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.047308166, y: 0.10856275, z: -0.0051723714, w: 0.99294984}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.14439936, y: 0.14091375, z: -0.02077978, w: 0.97921413}
+  m_LocalPosition: {x: 0, y: -2, z: 0.4247055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3156,7 +3156,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.6
+  m_ScreenY: 1.4
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -4396,7 +4396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1578928485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4474,7 +4474,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
-    m_InvertInput: 0
+    m_InvertInput: 1
     m_MinValue: 0
     m_MaxValue: 1
     m_Wrap: 0
@@ -4541,7 +4541,7 @@ Transform:
   m_GameObject: {fileID: 1578928484}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.8, y: 1.12, z: -21.27}
+  m_LocalPosition: {x: -5.8, y: 4.12, z: -22.264706}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4855,7 +4855,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663707827}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5423481, y: -0.000000021684006, z: 0.000000013997768, w: 0.8401539}
+  m_LocalRotation: {x: 0.4529825, y: 0.000000015339824, z: -0.000000007794188, w: 0.8915194}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4939,7 +4939,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681658541}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.55754036, y: -0.000000015969853, z: 0.00000001072558, w: 0.8301499}
+  m_LocalRotation: {x: 0.52701724, y: -0.000000016348924, z: 0.000000010138401, w: 0.8498546}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5064,7 +5064,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691584598}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00093977555, y: 0.087505005, z: 0.00008255177, w: 0.99616367}
+  m_LocalRotation: {x: 0.2315055, y: 0.11203254, z: -0.026849348, w: 0.96598816}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5184,7 +5184,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.6
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -5310,7 +5310,7 @@ MonoBehaviour:
   m_LookaheadIgnoreY: 0
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
-  m_ScreenX: 0.3
+  m_ScreenX: 0.2
   m_ScreenY: 1.5
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
@@ -5984,7 +5984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076003871}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.03586581, y: 0.08744833, z: 0.0031505248, w: 0.99551827}
+  m_LocalRotation: {x: 0.19647528, y: 0.15001483, z: -0.030433252, w: 0.9684869}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6088,7 +6088,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 27.99
+  field of view: 40
   orthographic: 0
   orthographic size: 10
   m_Depth: 0
@@ -6114,8 +6114,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080274791}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.03586583, y: 0.087448336, z: 0.0031505253, w: 0.99551827}
-  m_LocalPosition: {x: -5.8, y: 1.12, z: -21.27}
+  m_LocalRotation: {x: 0.5270173, y: -0.000000032697844, z: 0.000000020276797, w: 0.8498546}
+  m_LocalPosition: {x: -5.8, y: 7.785933, z: -21.972822}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6247,7 +6247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2092117993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6295,7 +6295,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
-    m_InvertInput: 0
+    m_InvertInput: 1
     m_MinValue: 0
     m_MaxValue: 1
     m_Wrap: 0
