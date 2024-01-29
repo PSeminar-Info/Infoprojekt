@@ -38,7 +38,7 @@ namespace Entities.Npc
             return finalPosition;
         }
 
-        protected bool IsInPlayerRange(GameObject player, float radius)
+        protected bool IsPlayerInRange(float radius)
         {
             // OverlapSphereNonAlloc is faster than OverlapSphere and doesn't generate garbage, but will miss collisions if the array is too small
             // will need to increase the amount if there are a lot of colliders and the target doesn't get detected properly
