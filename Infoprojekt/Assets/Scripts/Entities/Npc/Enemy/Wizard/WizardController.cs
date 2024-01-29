@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,7 +16,7 @@ namespace Entities.Npc.Enemy.Wizard
         [Header("Movement")] [Tooltip("Cooldown between moving action (when not in combat)")]
         public float moveCooldown = 15f;
 
-        public float portalCooldown = 10f;
+        public float portalCooldown = 5f;
 
         public float maxTeleportDistance = 15f;
         public float minTeleportDistance = 5f;
@@ -37,16 +38,17 @@ namespace Entities.Npc.Enemy.Wizard
         // temp objects are supposed to be stored in child of the wizard
 
         private float _lastActionTime;
+        private float _lastShootTime;
         private static readonly int Attack = Animator.StringToHash("Attack");
 
 
         private void Start()
         {
-            _lastActionTime = Time.time;
+            _lastActionTime = Time.time - 100;
+            _lastShootTime = Time.time - 100;
             _agent = GetComponent<NavMeshAgent>();
             _spawnPosition = transform.position;
             _animator = transform.GetComponentInChildren<WizardAnimationScript>().animator;
-            Invoke(nameof(LightAttack), 5f);
             // _tempObjects = gameObject.transform.GetChild(1).gameObject.transform;
         }
 
@@ -56,6 +58,13 @@ namespace Entities.Npc.Enemy.Wizard
             {
                 _lastActionTime = Time.time;
                 StartCoroutine(nameof(TeleportToRandomLocation));
+            }
+
+            if (Time.time - _lastShootTime > attackCooldown && IsPlayerInRange(50, transform))
+            {
+                Debug.Log("INRANGE SHOOT");
+                AttackPlayer();
+                _lastShootTime = Time.time; 
             }
         }
 
@@ -90,7 +99,7 @@ namespace Entities.Npc.Enemy.Wizard
         {
             if (Vector3.Distance(transform.position, player.position) > attackRange) return;
             transform.LookAt(player, transform.up);
-            switch (Random.Range(0, 3))
+            switch (UnityEngine.Random.Range(0, 3))
             {
                 case 0:
                     LightAttack();

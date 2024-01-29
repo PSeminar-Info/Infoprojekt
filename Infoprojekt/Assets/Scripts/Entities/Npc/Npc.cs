@@ -38,13 +38,18 @@ namespace Entities.Npc
             return finalPosition;
         }
 
-        protected bool IsPlayerInRange(float radius, Transform objectTransform)
+        public bool IsPlayerInRange(float radius, Transform objectTransform)
         {
-            // OverlapSphereNonAlloc is faster than OverlapSphere and doesn't generate garbage, but will miss collisions if the array is too small
-            // will need to increase the amount if there are a lot of colliders and the target doesn't get detected properly
-            var overlapResults = new Collider[100];
-            Physics.OverlapSphereNonAlloc(objectTransform.position, radius, overlapResults);
-            return overlapResults.Any(col => col.CompareTag("Player"));
+            Collider[] colliders = Physics.OverlapSphere(objectTransform.position, radius);
+            // Überprüfe, ob mindestens ein Collider vorhanden ist
+            if (colliders != null && colliders.Length > 0)
+            {
+                // Deine vorhandene Logik für die Überprüfung des Spielers hier
+                return colliders.Any(col => col.CompareTag("Player"));
+            }
+
+            return false;
         }
+
     }
 }
