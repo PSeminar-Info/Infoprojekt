@@ -16,7 +16,7 @@ namespace Entities.Npc.Enemy.Wizard
         [Header("Movement")] [Tooltip("Cooldown between moving action (when not in combat)")]
         public float moveCooldown = 15f;
 
-        public float portalCooldown = 5f;
+        public float portalCooldown = 3f;
 
         public float maxTeleportDistance = 15f;
         public float minTeleportDistance = 5f;
@@ -50,6 +50,7 @@ namespace Entities.Npc.Enemy.Wizard
             _spawnPosition = transform.position;
             _animator = transform.GetComponentInChildren<WizardAnimationScript>().animator;
             // _tempObjects = gameObject.transform.GetChild(1).gameObject.transform;
+            MoveToRandomLocation();
         }
 
         private void Update()
@@ -60,7 +61,7 @@ namespace Entities.Npc.Enemy.Wizard
                 StartCoroutine(nameof(TeleportToRandomLocation));
             }
 
-            if (Time.time - _lastShootTime > attackCooldown && IsPlayerInRange(50, transform))
+            if (Time.time - _lastShootTime > attackCooldown && IsPlayerInRange(15, transform))
             {
                 Debug.Log("INRANGE SHOOT");
                 AttackPlayer();
@@ -87,6 +88,7 @@ namespace Entities.Npc.Enemy.Wizard
             Destroy(Instantiate(portal, wizard.position, rotation), 5);
             yield return new WaitForSeconds(1f);
             _agent.Warp(destination);
+            MoveToRandomLocation();
         }
 
         private void MoveToRandomLocation()

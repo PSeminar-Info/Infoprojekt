@@ -58,7 +58,7 @@ MonoBehaviour:
   activationRange: 30
   player: {fileID: 0}
   moveCooldown: 15
-  portalCooldown: 10
+  portalCooldown: 3
   maxTeleportDistance: 15
   minTeleportDistance: 5
   minMoveDistance: 5

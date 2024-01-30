@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // ctrl c ctrl v from https://www.youtube.com/watch?v=f473C43s8nE
-    [Header("Movement")] public float moveSpeed = 7;
+    [Header("Movement")] public float moveSpeed = 5;
 
     public float groundDrag;
 
