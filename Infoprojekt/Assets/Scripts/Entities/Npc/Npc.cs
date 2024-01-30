@@ -38,18 +38,9 @@ namespace Entities.Npc
             return finalPosition;
         }
 
-        public bool IsPlayerInRange(float radius, Transform objectTransform)
+        protected bool IsPlayerInRange(float radius, GameObject player)
         {
-            Collider[] colliders = Physics.OverlapSphere(objectTransform.position, radius);
-            // Überprüfe, ob mindestens ein Collider vorhanden ist
-            if (colliders != null && colliders.Length > 0)
-            {
-                // Deine vorhandene Logik für die Überprüfung des Spielers hier
-                return colliders.Any(col => col.CompareTag("Player"));
-            }
-
-            return false;
+            return Vector3.Distance(player.transform.position, transform.position) < radius;
         }
-
     }
 }

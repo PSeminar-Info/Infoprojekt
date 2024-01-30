@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,7 +12,7 @@ namespace Entities.Npc.Enemy.Wizard
         [Header("Attack")] public float attackCooldown = 5f;
         public float attackRange = 40f;
         public float activationRange = 30f;
-        public Transform player;
+        public GameObject player;
 
         [Header("Movement")] [Tooltip("Cooldown between moving action (when not in combat)")]
         public float moveCooldown = 15f;
@@ -49,8 +50,12 @@ namespace Entities.Npc.Enemy.Wizard
             _agent = GetComponent<NavMeshAgent>();
             _spawnPosition = transform.position;
             _animator = transform.GetComponentInChildren<WizardAnimationScript>().animator;
-            // _tempObjects = gameObject.transform.GetChild(1).gameObject.transform;
-            MoveToRandomLocation();
+
+            if (player.IsUnityNull())
+            {
+                player = GameObject.FindWithTag("Player");
+                Debug.Log("player not assigned, finding via tag");
+            }
         }
 
         private void Update()
@@ -61,11 +66,11 @@ namespace Entities.Npc.Enemy.Wizard
                 StartCoroutine(nameof(TeleportToRandomLocation));
             }
 
-            if (Time.time - _lastShootTime > attackCooldown && IsPlayerInRange(15, transform))
+            if (Time.time - _lastShootTime > attackCooldown && IsPlayerInRange(15, player))
             {
-                Debug.Log("INRANGE SHOOT");
+                Debug.Log("RANGE SHOT");
                 AttackPlayer();
-                _lastShootTime = Time.time; 
+                _lastShootTime = Time.time;
             }
         }
 
@@ -74,7 +79,7 @@ namespace Entities.Npc.Enemy.Wizard
         {
             // this needs refactoring, wizard should almost always face the target, not just when teleporting
             // just keeping it for testing 
-            gameObject.transform.LookAt(player);
+            gameObject.transform.LookAt(player.transform);
 
 
             // wizard will need to face the target so the portal is facing the right direction
@@ -99,8 +104,8 @@ namespace Entities.Npc.Enemy.Wizard
         // might add some more logic later
         private void AttackPlayer()
         {
-            if (Vector3.Distance(transform.position, player.position) > attackRange) return;
-            transform.LookAt(player, transform.up);
+            if (Vector3.Distance(transform.position, player.transform.position) > attackRange) return;
+            transform.LookAt(player.transform, transform.up);
             switch (UnityEngine.Random.Range(0, 3))
             {
                 case 0:
