@@ -38,9 +38,9 @@ namespace Entities.Npc
             return finalPosition;
         }
 
-        protected bool IsPlayerInRange(float radius, GameObject player)
+        protected bool IsInRange(GameObject @object, float radius)
         {
-            return Vector3.Distance(player.transform.position, transform.position) < radius;
+            return Vector3.Distance(@object.transform.position, transform.position) < radius;
         }
     }
 }
