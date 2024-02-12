@@ -20,7 +20,7 @@ public class CharacterMovement : MonoBehaviour
     Vector2 CurrentRotationInput;
     Vector3 CurrentRotation;
     bool isRotationPressed;
-    public  CinemachineFreeLook cineCam;
+    //  CinemachineFreeLook cineCam;
     private bool attackPressed = false;
     
     public bool jumpPressed;
@@ -55,22 +55,32 @@ public class CharacterMovement : MonoBehaviour
     public bool rightPressed;
     private Vector2 CurrentMovementInput;
     //Swords and Bows for activation and deacivation
-    public GameObject SwordHand;
-    public GameObject SwordBack;
-    public GameObject BowHand;
-    public GameObject BowBack;
+   
     bool backPressed;
     float turnSmoothVelocity;
     public float turnSmoothTime;
     public float rotationSpeed = 5f;
     public bool pickUpPressed;
-    public CinemachineFreeLook AimCam;
-    public CinemachineFreeLook ThirdPersonCam;
+    public bool rota;
+    public CinemachineVirtualCamera AimCam;
+    public CinemachineVirtualCamera ThirdPersonCam;
+
+
+    //BokAttack
+    public int book1;
+    public int book2;
+    public int book3;
+    Book book;
+    private bool firstbook;
+    private bool secondbook;
+    private bool thirdbook;
+    public float price1;
+    public float price2;
+    public float price3;
     void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        SwordBack.SetActive(false);
         walkpace = 3;
         sprintpace = 7;
         input = new PlayerInput();
@@ -82,6 +92,10 @@ public class CharacterMovement : MonoBehaviour
         input.CharacterControls.Sneak.performed += ctx => sneakPressed = ctx.ReadValueAsButton();
         input.CharacterControls.AttackBow.performed += ctx => attackBowPressed = ctx.ReadValueAsButton();
         input.CharacterControls.PickUp.performed += ctx => pickUpPressed = ctx.ReadValueAsButton();
+
+        input.CharacterControls.BookFirst.performed += ctx => firstbook = ctx.ReadValueAsButton();
+        input.CharacterControls.BookSecond.performed += ctx => secondbook = ctx.ReadValueAsButton();
+        input.CharacterControls.BookThird.performed += ctx => thirdbook = ctx.ReadValueAsButton();
 
 
         input.CharacterControls.Rotate.started += onRotationInput;
@@ -110,6 +124,7 @@ public class CharacterMovement : MonoBehaviour
         playerattack = this.GetComponent<PlayerAttack>();
         animator = GetComponent<Animator>();
         plhe = this.GetComponent<PlayerHealth>();
+        book = this.GetComponent<Book>();
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
     }
@@ -120,18 +135,7 @@ public class CharacterMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
 
 
-        if (SwordBack.activeSelf)
-        {
-            SwordHand.SetActive(false);
-            BowHand.SetActive(true);
-            BowBack.SetActive(false);
-        }
-        else
-        {
-            SwordHand.SetActive(true);
-            BowHand.SetActive(false);
-            BowBack.SetActive(true);
-        }
+       
         //Bogen
         if(!attackBowPressed && canRelease) 
         {
@@ -324,7 +328,7 @@ public class CharacterMovement : MonoBehaviour
 
 
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, cam.transform.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
-        transform.rotation = Quaternion.Euler(0, angle, 0);
+        transform.rotation = Quaternion.Euler(0, cam.transform.eulerAngles.y, 0);
 
 
     }
@@ -366,7 +370,6 @@ public class CharacterMovement : MonoBehaviour
         }
         if (attackPressed && !isShooting)
         {
-            SwordBack.SetActive(false);
             attackdamage1 = true;
             animator.SetBool("shoot", true);
             
@@ -390,17 +393,16 @@ public class CharacterMovement : MonoBehaviour
 
         if(attackBowPressed && !isBow)
         {
-            ThirdPersonCam.gameObject.SetActive(false);
             AimCam.gameObject.SetActive(true);
-            AimCam.m_XAxis.Value = ThirdPersonCam.m_XAxis.Value;
-            AimCam.m_YAxis.Value = ThirdPersonCam.m_YAxis.Value;
+
+            ThirdPersonCam.gameObject.SetActive(false);
+            // AimCam.m_XAxis.Value = ThirdPersonCam.m_XAxis.Value;
+            // AimCam.m_YAxis.Value = ThirdPersonCam.m_YAxis.Value;
            
-           
-            SwordBack.SetActive(true);
             animator.SetBool("arrowStand", true);
             canRelease = true;
             arr = Instantiate(Arrow, RefPoint.transform.position, RefPoint.transform.rotation);
-            arr.transform.Rotate(new Vector3(0, 0, -180));
+            //arr.transform.Rotate(new Vector3(0, 90, 0));
             arr.transform.parent = RefPoint.transform;
             rb = arr.GetComponent<Rigidbody>();
             rb.isKinematic = true;
@@ -418,8 +420,8 @@ public class CharacterMovement : MonoBehaviour
 
             ThirdPersonCam.gameObject.SetActive(true);
             AimCam.gameObject.SetActive(false);
-            ThirdPersonCam.m_XAxis.Value = AimCam.m_XAxis.Value;
-            ThirdPersonCam.m_YAxis.Value = AimCam.m_YAxis.Value;
+          //  ThirdPersonCam.VerticalAxis.Value = AimCam.m_VerticalAxis.Value;
+            //ThirdPersonCam.m_YAxis.Value = AimCam.m_YAxis.Value;
             rb.isKinematic = false;
 
             Debug.Log("geht" + arrowTimer);
@@ -435,7 +437,6 @@ public class CharacterMovement : MonoBehaviour
 
 
 
-
         if (jumpPressed)
          { 
         
@@ -446,7 +447,29 @@ public class CharacterMovement : MonoBehaviour
             animator.SetBool("jump", false);
             
         }
-        
+
+        //BookAttack
+        if(firstbook && book.attackFinished && plhe.mana > price1)
+        {
+            book.attackFinished = false;
+            plhe.mana -= price1;
+            book.AttackBook(book1);
+        }
+        if(secondbook && book.attackFinished && plhe.mana > price2)
+        {
+            book.attackFinished = false;
+            plhe.mana -= price2;
+            book.AttackBook(book2);
+
+        }
+        if (thirdbook && book.attackFinished && plhe.mana > price3)
+        {
+            book.attackFinished = false;
+            plhe.mana -= price3;
+            book.AttackBook(book3);
+
+        }
+
 
 
 
