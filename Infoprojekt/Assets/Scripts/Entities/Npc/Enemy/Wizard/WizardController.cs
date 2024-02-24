@@ -1,53 +1,75 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace Entities.Npc.Enemy.Wizard
 {
     public class WizardController : Npc
     // the animator needs to be in the child so it doesn't teleport to 0 0 0
     {
-        [Header("Attack")] public float attackCooldown = 5f;
+        private static readonly int Attack = Animator.StringToHash("Attack");
+
+
+        [Header("Combat")] public float attackCooldown = 5f;
         public float attackRange = 40f;
         public float activationRange = 30f;
-        public Transform player;
+        public float rotationSpeed = 5f;
+        public GameObject player;
 
         [Header("Movement")] [Tooltip("Cooldown between moving action (when not in combat)")]
         public float moveCooldown = 15f;
 
         public float portalCooldown = 10f;
 
-        public float maxTeleportDistance = 15f;
-        public float minTeleportDistance = 5f;
-        public float minMoveDistance = 5f;
-        public float maxMoveDistance = 10f;
+        [Tooltip("Distance from player to spawn portal")]
+        public float playerDistance = 12.5f;
 
+        public float maxDistanceFromPlayer = 40f;
+        
+        [Tooltip("Max distance the wizard can teleport via portal")]
+        public float maxTeleportDistance = 25f;
+        [Tooltip("Min distance the wizard can teleport via portal")]
+        public float minTeleportDistance = 5f;
+        [Tooltip("Min distance the wizard can move when not in combat")]
+        public float minMoveDistance = 5f;
+        [Tooltip("Max distance the wizard can move when not in combat")]
+        public float maxMoveDistance = 10f;
+        [Tooltip("Max distance the wizard can move when in combat, min is 0")]
+        public float combatMoveDistance = 5f;
+        
         [Header("Attack Prefabs")] public GameObject portal;
+
+        // 6 projectiles in all directions
         public GameObject bigAttack;
+
+        // 3 projectiles in target direction
         public GameObject smallAttack;
+
+        // two projectiles above wizard
         public GameObject homingAttack;
 
-        private NavMeshAgent _agent;
-        private Vector3 _spawnPosition;
-        private Animator _animator;
-
-        // I don't know if this is the smartest way to do it since you have to access the child but it cleans the scene hierarchy
-        // but to change it you'd just have to change Start() 
-        // private Transform _tempObjects;
-        // temp objects are supposed to be stored in child of the wizard
 
         private float _lastActionTime;
-        private static readonly int Attack = Animator.StringToHash("Attack");
+        private float _lastShootTime;
+        private Vector3 _spawnPosition;
 
+        private NavMeshAgent _agent;
+        private Animator _animator;
 
         private void Start()
         {
-            _lastActionTime = Time.time;
+            _lastActionTime = Time.time - 100;
+            _lastShootTime = Time.time - 100;
             _agent = GetComponent<NavMeshAgent>();
             _spawnPosition = transform.position;
             _animator = transform.GetComponentInChildren<WizardAnimationScript>().animator;
-            Invoke(nameof(LightAttack), 5f);
-            // _tempObjects = gameObject.transform.GetChild(1).gameObject.transform;
+            if (player.IsUnityNull())
+            {
+                player = GameObject.FindWithTag("Player");
+                Debug.Log("Player not assigned to " + gameObject.name + ", finding via tag");
+            }
         }
 
         private void Update()
@@ -57,75 +79,115 @@ namespace Entities.Npc.Enemy.Wizard
                 _lastActionTime = Time.time;
                 StartCoroutine(nameof(TeleportToRandomLocation));
             }
+
+            if (Time.time - _lastShootTime > attackCooldown && Time.time - _lastActionTime > attackCooldown &&
+                IsInRange(player, attackRange))
+            {
+                Debug.Log("In range, attacking");
+                AttackPlayer();
+                _lastShootTime = Time.time;
+            }
         }
 
         // wizard should teleport away from target if they get too close, second portal should also face the target
         private IEnumerator TeleportToRandomLocation()
         {
-            // this needs refactoring, wizard should almost always face the target, not just when teleporting
-            // just keeping it for testing 
-            gameObject.transform.LookAt(player);
+            gameObject.transform.LookAt(player.transform);
 
+            // will need to balance between performance and looks
+            if (Vector3.Distance(player.transform.position, transform.position) >
+                playerDistance + maxTeleportDistance - 10)
+                yield break;
 
             // wizard will need to face the target so the portal is facing the right direction
             var destination = RandomNavmeshLocation(maxTeleportDistance, minTeleportDistance);
-            var wizard = transform;
-            var rotation = wizard.rotation;
+            var telLocation = GetTeleportLocation(); //temp, all destination switched with tellocation
+            var playerPos = player.transform.position;
+            var destinationDirection = (playerPos - telLocation).normalized;
+            var position = transform.position;
+            var directionToPlayer = (playerPos - position).normalized;
 
-            // using current duration for simplicity, needs to be changed if the portal duration changes
-            Destroy(Instantiate(portal, destination, rotation), 5);
+            // using static duration for simplicity, needs to be changed if the portal duration changes
+            Destroy(Instantiate(portal, telLocation, Quaternion.LookRotation(destinationDirection)), 5);
             yield return new WaitForSeconds(0.25f);
-            Destroy(Instantiate(portal, wizard.position, rotation), 5);
+            // rotation switched with quaternion
+            Destroy(Instantiate(portal, position, Quaternion.LookRotation(directionToPlayer)), 5);
             yield return new WaitForSeconds(1f);
-            _agent.Warp(destination);
+            _agent.Warp(telLocation);
+            yield return new WaitForSeconds(1f);
+            MoveToRandomLocation();
         }
 
-        private void MoveToRandomLocation()
+        private void MoveToRandomLocation(bool inCombat = false)
         {
-            _agent.SetDestination(RandomNavmeshLocation(maxMoveDistance, minMoveDistance));
+            if (inCombat)
+            {
+                _agent.destination = RandomNavmeshLocation(combatMoveDistance, 0);
+                return;
+            }
+
+            _agent.destination = RandomNavmeshLocation(maxMoveDistance, minMoveDistance);
         }
 
-        // might add some more logic later
         private void AttackPlayer()
         {
-            if (Vector3.Distance(transform.position, player.position) > attackRange) return;
-            transform.LookAt(player, transform.up);
+            if (Vector3.Distance(transform.position, player.transform.position) > attackRange)
+                Debug.LogWarning("This shouldn't be called, " + gameObject.name + " is out of range");
+
+
+            transform.LookAt(player.transform, transform.up);
             switch (Random.Range(0, 3))
             {
                 case 0:
-                    LightAttack();
+                    StartCoroutine(PerformAttack(smallAttack, 1f));
                     break;
                 case 1:
-                    HeavyAttack();
+                    StartCoroutine(PerformAttack(bigAttack, 1f));
                     break;
                 case 2:
-                    HomingAttack();
+                    StartCoroutine(PerformAttack(homingAttack, 1f));
                     break;
             }
         }
 
-        // 3 projectiles in target direction
-        private void LightAttack()
+        // animation needs to be played directly since it will otherwise be played after the method returns
+        // because triggers are played the next frame, not immediately
+        private IEnumerator PerformAttack(GameObject attackPrefab, float delay)
         {
-            _animator.SetTrigger(Attack);
             var wiz = transform;
-            Instantiate(smallAttack, wiz.position, wiz.rotation);
+            _animator.Play(Attack);
+            yield return new WaitForSeconds(delay);
+            wiz.LookAt(player.transform, wiz.up);
+            Instantiate(attackPrefab, wiz.position, wiz.rotation);
         }
 
-        // 5 projectiles in all directions
-        private void HeavyAttack()
-        {
-            _animator.SetTrigger(Attack);
-            var wiz = transform;
-            Instantiate(bigAttack, wiz.position, wiz.rotation);
-        }
 
-        // two projectiles above wizard
-        private void HomingAttack()
+        // tries to find a location outside of player range but inside of teleport range
+        // will return random location if it can't find a suitable one
+        // but in that case the method shouldn't even be called
+        private Vector3 GetTeleportLocation()
         {
-            _animator.SetTrigger(Attack);
-            var wiz = transform;
-            Instantiate(homingAttack, wiz.position, wiz.rotation);
+            var destination = RandomNavmeshLocation(maxTeleportDistance, minTeleportDistance);
+            var attempts = 0;
+
+            if (Vector3.Distance(player.transform.position, transform.position) >
+                playerDistance + maxTeleportDistance - 2)
+                Debug.LogWarning("Player is very far away, method shouldn't be called");
+
+            do
+            {
+                if (attempts > 100)
+                {
+                    Debug.LogWarning("Couldn't find a suitable teleport location, aborting");
+                    break;
+                }
+
+                destination = RandomNavmeshLocation(maxTeleportDistance, minTeleportDistance);
+                attempts++;
+            } while (Vector3.Distance(destination, player.transform.position) < playerDistance ||
+                     Vector3.Distance(destination, player.transform.position) > maxDistanceFromPlayer);
+
+            return destination;
         }
     }
 }
