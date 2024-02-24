@@ -24,11 +24,17 @@ public class OpenInventory : MonoBehaviour
             {
                 panel.SetActive(true);
                 invman.ListItems();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                Time.timeScale=0;
 
             }
             else
             {
                 panel.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                Time.timeScale=1;
                 foreach (Transform item in ItemContent)
                 {
                     Destroy(item.gameObject);

@@ -125,6 +125,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BookFirst"",
+                    ""type"": ""Button"",
+                    ""id"": ""ec2522a7-eb60-4ae3-a2fb-03b02374990d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BookSecond"",
+                    ""type"": ""Button"",
+                    ""id"": ""216492d5-b15b-47d3-b242-25f998878324"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BookThird"",
+                    ""type"": ""Button"",
+                    ""id"": ""a394f0ae-ee54-4ae9-875b-b7f5c53c553d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -197,7 +224,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""09a2880c-47d7-4e5c-9e38-2aa978bb2a6a"",
-                    ""path"": ""<Keyboard>/b"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -347,6 +374,39 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""PickUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e294d7c0-ee8e-4a70-85f1-1cb97c2c1469"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BookFirst"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8bdd2d59-6b54-4630-8b25-18477dbc6519"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BookSecond"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7bdad552-3137-4aa2-a9ec-9084d1359bd3"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BookThird"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -366,6 +426,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControls_S = m_CharacterControls.FindAction("S", throwIfNotFound: true);
         m_CharacterControls_D = m_CharacterControls.FindAction("D", throwIfNotFound: true);
         m_CharacterControls_PickUp = m_CharacterControls.FindAction("PickUp", throwIfNotFound: true);
+        m_CharacterControls_BookFirst = m_CharacterControls.FindAction("BookFirst", throwIfNotFound: true);
+        m_CharacterControls_BookSecond = m_CharacterControls.FindAction("BookSecond", throwIfNotFound: true);
+        m_CharacterControls_BookThird = m_CharacterControls.FindAction("BookThird", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -438,6 +501,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_S;
     private readonly InputAction m_CharacterControls_D;
     private readonly InputAction m_CharacterControls_PickUp;
+    private readonly InputAction m_CharacterControls_BookFirst;
+    private readonly InputAction m_CharacterControls_BookSecond;
+    private readonly InputAction m_CharacterControls_BookThird;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -453,6 +519,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @S => m_Wrapper.m_CharacterControls_S;
         public InputAction @D => m_Wrapper.m_CharacterControls_D;
         public InputAction @PickUp => m_Wrapper.m_CharacterControls_PickUp;
+        public InputAction @BookFirst => m_Wrapper.m_CharacterControls_BookFirst;
+        public InputAction @BookSecond => m_Wrapper.m_CharacterControls_BookSecond;
+        public InputAction @BookThird => m_Wrapper.m_CharacterControls_BookThird;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -495,6 +564,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @PickUp.started += instance.OnPickUp;
             @PickUp.performed += instance.OnPickUp;
             @PickUp.canceled += instance.OnPickUp;
+            @BookFirst.started += instance.OnBookFirst;
+            @BookFirst.performed += instance.OnBookFirst;
+            @BookFirst.canceled += instance.OnBookFirst;
+            @BookSecond.started += instance.OnBookSecond;
+            @BookSecond.performed += instance.OnBookSecond;
+            @BookSecond.canceled += instance.OnBookSecond;
+            @BookThird.started += instance.OnBookThird;
+            @BookThird.performed += instance.OnBookThird;
+            @BookThird.canceled += instance.OnBookThird;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
@@ -532,6 +610,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @PickUp.started -= instance.OnPickUp;
             @PickUp.performed -= instance.OnPickUp;
             @PickUp.canceled -= instance.OnPickUp;
+            @BookFirst.started -= instance.OnBookFirst;
+            @BookFirst.performed -= instance.OnBookFirst;
+            @BookFirst.canceled -= instance.OnBookFirst;
+            @BookSecond.started -= instance.OnBookSecond;
+            @BookSecond.performed -= instance.OnBookSecond;
+            @BookSecond.canceled -= instance.OnBookSecond;
+            @BookThird.started -= instance.OnBookThird;
+            @BookThird.performed -= instance.OnBookThird;
+            @BookThird.canceled -= instance.OnBookThird;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -562,5 +649,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnS(InputAction.CallbackContext context);
         void OnD(InputAction.CallbackContext context);
         void OnPickUp(InputAction.CallbackContext context);
+        void OnBookFirst(InputAction.CallbackContext context);
+        void OnBookSecond(InputAction.CallbackContext context);
+        void OnBookThird(InputAction.CallbackContext context);
     }
 }
