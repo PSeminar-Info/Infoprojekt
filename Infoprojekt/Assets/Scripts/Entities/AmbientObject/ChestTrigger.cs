@@ -5,7 +5,7 @@ using UnityEngine;
 public class Trigger : MonoBehaviour
 {
     private bool Triggeractive = false;
-    
+    private bool Chestopen = false;
 
 
     public void OnTriggerEnter(Collider other)
@@ -22,7 +22,12 @@ public class Trigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Triggeractive = false;
-            CloseChest();
+            
+        }
+
+        if (Chestopen == true)
+        {
+            CloseChest();    
         }
         
     }
@@ -39,13 +44,15 @@ public class Trigger : MonoBehaviour
 
      void OpenChest()
     {
-        transform.GetChild(1).Rotate(-60, 0, 0);
+        transform.GetChild(1).RotateAround(transform.GetChild(3).position,Vector3.left,60);
+        Chestopen = true;
         
         // Inventar öffnen
     }
     void CloseChest()
     {
-        transform.GetChild(1).Rotate(60, 0, 0);
+        transform.GetChild(1).RotateAround(transform.GetChild(3).position, Vector3.left, -60);
+        Chestopen = false;
         // Inventar schließen
     }
         
