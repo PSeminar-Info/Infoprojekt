@@ -8,11 +8,13 @@ public class CameraController : MonoBehaviour
     public Rigidbody rb;
 
     public float rotationSpeed = 1f;
+    public Camera defaultCamera;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        SetDefaultCamera();
     }
 
     private void Update()
@@ -30,5 +32,18 @@ public class CameraController : MonoBehaviour
         if (inputDirection != Vector3.zero)
             playerObj.forward =
                 Vector3.Slerp(playerObj.forward, inputDirection.normalized, Time.fixedDeltaTime * rotationSpeed);
+    }
+
+    void SetDefaultCamera()
+    {
+        if (defaultCamera != null)
+        {
+            Camera.main.enabled = false; // Deaktiviere die vorherige Hauptkamera
+            defaultCamera.enabled = true; // Aktiviere die neue Standardkamera
+        }
+        else
+        {
+            Debug.LogWarning("Keine Standardkamera zugewiesen!");
+        }
     }
 }

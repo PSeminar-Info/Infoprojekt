@@ -103,6 +103,33 @@
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "BookFirst",
+                    "type": "Button",
+                    "id": "ec2522a7-eb60-4ae3-a2fb-03b02374990d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BookSecond",
+                    "type": "Button",
+                    "id": "216492d5-b15b-47d3-b242-25f998878324",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BookThird",
+                    "type": "Button",
+                    "id": "a394f0ae-ee54-4ae9-875b-b7f5c53c553d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -175,7 +202,7 @@
                 {
                     "name": "",
                     "id": "09a2880c-47d7-4e5c-9e38-2aa978bb2a6a",
-                    "path": "<Keyboard>/b",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -323,6 +350,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "PickUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e294d7c0-ee8e-4a70-85f1-1cb97c2c1469",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BookFirst",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8bdd2d59-6b54-4630-8b25-18477dbc6519",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BookSecond",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7bdad552-3137-4aa2-a9ec-9084d1359bd3",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BookThird",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
