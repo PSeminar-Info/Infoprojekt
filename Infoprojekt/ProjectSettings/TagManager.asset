@@ -7,6 +7,7 @@ TagManager:
   - enemy
   - Collectable
   - floor
+  - door
   layers:
   - Default
   - TransparentFX
