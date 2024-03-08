@@ -51,8 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 9c2797be1ba72dc498b043073cc9c1f4, type: 2}
   IsInvincible: 0
-  Health: 10
-  MaxHealth: 10
+  Health: 50
+  MaxHealth: 50
   attackCooldown: 5
   attackRange: 40
   activationRange: 30
@@ -62,12 +62,11 @@ MonoBehaviour:
   portalCooldown: 10
   playerDistance: 12.5
   maxDistanceFromPlayer: 30
-  portalDistance: 15
   maxTeleportDistance: 25
   minTeleportDistance: 5
   minMoveDistance: 5
   maxMoveDistance: 10
-  maxCombatMoveDistance: 5
+  combatMoveDistance: 5
   portal: {fileID: 2503444574796475513, guid: 57d7c7cb5538c8943902a1d87486778a, type: 3}
   bigAttack: {fileID: 6653055062989315869, guid: 569eb68b84576ad4c811d95f218b835e, type: 3}
   smallAttack: {fileID: 1299126003732038036, guid: 88743738acd679c4f86de597544c93da, type: 3}

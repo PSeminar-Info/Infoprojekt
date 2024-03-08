@@ -19,7 +19,7 @@ namespace Entities.Npc.Enemy.Wizard
         public GameObject player;
 
         [Header("Movement")] [Tooltip("Cooldown between moving action (when not in combat)")]
-        public float moveCooldown = 15f;
+        public float moveCooldown = 10f;
 
         public float portalCooldown = 10f;
 
@@ -74,10 +74,16 @@ namespace Entities.Npc.Enemy.Wizard
 
         private void Update()
         {
-            if (Time.time - _lastActionTime > portalCooldown && transform.name == "Wizard")
+            if (Time.time - _lastActionTime > portalCooldown)
             {
                 _lastActionTime = Time.time;
                 StartCoroutine(nameof(TeleportToRandomLocation));
+            }
+            
+            if(!IsInRange(player, attackRange) && Time.time - _lastActionTime > moveCooldown)
+            {
+                _lastActionTime = Time.time;
+                MoveToRandomLocation();
             }
 
             if (Time.time - _lastShootTime > attackCooldown && Time.time - _lastActionTime > attackCooldown &&
