@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        SetDefaultCamera();
+        // SetDefaultCamera();
     }
 
     private void Update()
