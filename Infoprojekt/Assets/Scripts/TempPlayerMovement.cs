@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class PlayerMovement : MonoBehaviour
 
     public float walkSpeed;
     public float sprintSpeed;
+
+    public Scene graveyard;
+    public Scene map;
+    private Scene _activeScene;
 
     [Header("Keybinds")] public KeyCode jumpKey = KeyCode.Space;
 
@@ -31,6 +36,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        graveyard = SceneManager.GetSceneByName("graveyardlandscape");
+        map = SceneManager.GetSceneByName("Map");
+        _activeScene = graveyard;
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true;
 
@@ -39,8 +47,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _activeScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(_activeScene == graveyard ? "Map" : "graveyardlandscape");
+        }
+
         moveSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
-        // ground check
         _grounded = true; //Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
         MyInput();
