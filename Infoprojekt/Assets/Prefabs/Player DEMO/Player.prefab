@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 425355954328707305}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.454, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -632,7 +632,7 @@ MonoBehaviour:
   playerObj: {fileID: 8319986157672370093}
   rb: {fileID: 3195874729768483901}
   rotationSpeed: 7
-  defaultCamera: {fileID: 0}
+  defaultCamera: {fileID: 8167020804636509948}
 --- !u!114 &1081344756116227182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,7 +647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4294967295
   m_IgnoreTag: 
   m_TransparentLayers:
     serializedVersion: 2
@@ -900,7 +900,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5513691302193658057}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.083039574, y: -0.00000002201831, z: 0.000000036173425, w: 0.99654627}
+  m_LocalRotation: {x: -0.08303961, y: -0.000000031908858, z: 0.000000052422394, w: 0.9965463}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1082,13 +1082,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ef913a17e4bb93428cce6ac7f0a855d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  moveSpeed: 30
   groundDrag: 5
-  jumpForce: 10
-  jumpCooldown: 0.25
-  airMultiplier: 0
-  walkSpeed: 0
-  sprintSpeed: 0
+  jumpForce: 100
+  jumpCooldown: 0
+  airMultiplier: 1
+  walkSpeed: 30
+  sprintSpeed: 65
   jumpKey: 32
   playerHeight: 2
   whatIsGround:
@@ -1103,7 +1103,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8915941961265130028}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
