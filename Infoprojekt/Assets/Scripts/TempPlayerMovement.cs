@@ -73,6 +73,11 @@ public class PlayerMovement : MonoBehaviour
 
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            _rb.AddForce(Vector3.down * 1000, ForceMode.Force);
+        }
     }
 
     private void MovePlayer()
