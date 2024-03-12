@@ -48,6 +48,9 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             _activeScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(_activeScene == graveyard ? "Map" : "graveyardlandscape");
