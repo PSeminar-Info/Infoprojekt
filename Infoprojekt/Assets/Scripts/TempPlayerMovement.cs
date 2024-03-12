@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Scene graveyard;
     public Scene map;
+    [FormerlySerializedAs("see")] public Scene lake;
+    public Scene mountains;
     private Scene _activeScene;
 
     [Header("Keybinds")] public KeyCode jumpKey = KeyCode.Space;
@@ -38,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
     {
         graveyard = SceneManager.GetSceneByName("graveyardlandscape");
         map = SceneManager.GetSceneByName("Map");
+        lake = SceneManager.GetSceneByName("see");
+        mountains = SceneManager.GetSceneByName("Mountains");
         _activeScene = graveyard;
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true;
@@ -53,7 +58,22 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             _activeScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(_activeScene == graveyard ? "Map" : "graveyardlandscape");
+            // gy 1; lake 2; mountains 3; map 0
+            switch (_activeScene.name)
+            {
+                case "Map":
+                    SceneManager.LoadScene(1);
+                    break;
+                case "graveyardlandscape":
+                    SceneManager.LoadScene(2);
+                    break;
+                case "see":
+                    SceneManager.LoadScene(3);
+                    break;
+                default:
+                    SceneManager.LoadScene(0);
+                    break;
+            }
         }
 
         moveSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
