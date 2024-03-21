@@ -4,5 +4,23 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/DemoDay.unity
+    guid: 6a24c8cbd75695d41b3382f253cdfd53
+  - enabled: 0
+    path: Assets/Scenes/SceneStartMenu.unity
+    guid: 5a44dc414dfa15d4eadbff7e8156c2f3
+  - enabled: 1
+    path: Assets/Scenes/Map.unity
+    guid: fdf63946a735c5046b50177da98599d3
+  - enabled: 1
+    path: Assets/Scenes/graveyardlandscape.unity
+    guid: 2c68d41eb32e894419ec3b9b4ce777b7
+  - enabled: 1
+    path: Assets/Scenes/see.unity
+    guid: 8d97e5e43dca3144b8a5457498c72144
+  - enabled: 1
+    path: Assets/Scenes/Mountains.unity
+    guid: 7883034813997864f8f35362d39fb751
   m_configObjects: {}

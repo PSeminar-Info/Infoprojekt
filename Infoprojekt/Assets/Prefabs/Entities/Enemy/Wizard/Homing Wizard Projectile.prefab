@@ -8,9 +8,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2991798094787608165, guid: 755682cc249997b469b813b274adbcf7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3262395919227200703, guid: 755682cc249997b469b813b274adbcf7, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3262395919227200703, guid: 755682cc249997b469b813b274adbcf7, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3819042581345929414, guid: 755682cc249997b469b813b274adbcf7, type: 3}
       propertyPath: m_Name
-      value: Homing Wizard Projectile Variant
+      value: Homing Wizard Projectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819042581345929414, guid: 755682cc249997b469b813b274adbcf7, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5492225701860171169, guid: 755682cc249997b469b813b274adbcf7, type: 3}
       propertyPath: m_LocalScale.x
@@ -70,6 +86,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7828806104974465570, guid: 755682cc249997b469b813b274adbcf7, type: 3}
       propertyPath: isHoming
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7828806104974465570, guid: 755682cc249997b469b813b274adbcf7, type: 3}
+      propertyPath: rotationSpeed
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

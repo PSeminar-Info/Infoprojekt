@@ -3206,9 +3206,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3084024626696190678}
   - component: {fileID: 8714928370122485890}
+  - component: {fileID: 5732571760872279351}
   - component: {fileID: 3084024626696190681}
   - component: {fileID: 5370372467328236816}
-  - component: {fileID: 5732571760872279351}
+  - component: {fileID: 3075379873019264229}
   m_Layer: 0
   m_Name: Goat
   m_TagString: Untagged
@@ -3245,15 +3246,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88666e5fc1640d84e903b6231ea1dff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
+  inventory: {fileID: 11400000, guid: 05ebe8c1817d0584a8d8ba773d43b967, type: 2}
   IsInvincible: 0
   Health: 10
   MaxHealth: 10
   deathTime: 2
-  minimumCooldown: 6
-  maximumCooldown: 8.5
+  minimumCooldown: 25
+  maximumCooldown: 35
   maxTargetDistance: 10
   minTargetDistance: 5
+--- !u!54 &5732571760872279351
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3084024626696190684}
+  serializedVersion: 4
+  m_Mass: 20
+  m_Drag: 0
+  m_AngularDrag: 50
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &3084024626696190681
 Animator:
   serializedVersion: 5
@@ -3297,33 +3325,27 @@ NavMeshAgent:
   m_BaseOffset: -0.08
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &5732571760872279351
-Rigidbody:
+--- !u!65 &3075379873019264229
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3084024626696190684}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.39, y: 1.09, z: 1.12}
+  m_Center: {x: 0, y: 0.63, z: 0.12}
 --- !u!1 &3084024626740517228
 GameObject:
   m_ObjectHideFlags: 0

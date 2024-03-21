@@ -37,14 +37,10 @@ namespace Entities.Npc
                 return RandomNavmeshLocation(radius, minDistance);
             return finalPosition;
         }
-        
-        protected bool IsInPlayerRange(GameObject player, float radius)
+
+        protected bool IsInRange(GameObject @object, float radius)
         {
-            // OverlapSphereNonAlloc is faster than OverlapSphere and doesn't generate garbage, but will miss collisions if the array is too small
-            // will need to increase the amount if there are a lot of colliders and the player doesn't get detected properly
-            var overlapResults = new Collider[100];
-            Physics.OverlapSphereNonAlloc(transform.position, radius, overlapResults);
-            return overlapResults.Any(col => col.CompareTag("Player"));
+            return Vector3.Distance(@object.transform.position, transform.position) < radius;
         }
     }
 }
