@@ -31,14 +31,16 @@ public class Arrow : MonoBehaviour
            
                 Debug.Log("hg" + hit.transform.gameObject);
                 this.transform.LookAt(hit.point);
-           
-            
+
+
         }
-        
+
         // Hier hast du die Blickrichtung vom Mittelpunkt des Bildschirms aus
         Vector3 kraftRichtung = this.transform.forward; ;
         // Kraft zum Rigidbody hinzufügen
         rb.AddForce(kraftRichtung * force, ForceMode.Impulse);
+        this.transform.Rotate(new Vector3(90, 0, 0));
+
     }
     private void OnTriggerEnter(Collider collision)
     {

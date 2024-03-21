@@ -62,8 +62,7 @@ public class CharacterMovement : MonoBehaviour
     public float rotationSpeed = 5f;
     public bool pickUpPressed;
     public bool rota;
-    public CinemachineVirtualCamera AimCam;
-    public CinemachineVirtualCamera ThirdPersonCam;
+    
 
 
     //BokAttack
@@ -393,16 +392,16 @@ public class CharacterMovement : MonoBehaviour
 
         if(attackBowPressed && !isBow)
         {
-            AimCam.gameObject.SetActive(true);
+           // AimCam.gameObject.SetActive(true);
 
-            ThirdPersonCam.gameObject.SetActive(false);
+           // ThirdPersonCam.gameObject.SetActive(false);
             // AimCam.m_XAxis.Value = ThirdPersonCam.m_XAxis.Value;
             // AimCam.m_YAxis.Value = ThirdPersonCam.m_YAxis.Value;
            
             animator.SetBool("arrowStand", true);
             canRelease = true;
             arr = Instantiate(Arrow, RefPoint.transform.position, RefPoint.transform.rotation);
-            //arr.transform.Rotate(new Vector3(0, 90, 0));
+            arr.transform.Rotate(new Vector3(0, 0, 90));
             arr.transform.parent = RefPoint.transform;
             rb = arr.GetComponent<Rigidbody>();
             rb.isKinematic = true;
@@ -418,8 +417,8 @@ public class CharacterMovement : MonoBehaviour
         if(attackReleased)
         {
 
-            ThirdPersonCam.gameObject.SetActive(true);
-            AimCam.gameObject.SetActive(false);
+            //ThirdPersonCam.gameObject.SetActive(true);
+            //AimCam.gameObject.SetActive(false);
           //  ThirdPersonCam.VerticalAxis.Value = AimCam.m_VerticalAxis.Value;
             //ThirdPersonCam.m_YAxis.Value = AimCam.m_YAxis.Value;
             rb.isKinematic = false;

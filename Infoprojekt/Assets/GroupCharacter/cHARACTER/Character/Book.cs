@@ -19,7 +19,7 @@ public class Book : MonoBehaviour
         {
             cooldown += Time.deltaTime;
         }
-        if(cooldown > 5)
+        if(cooldown > 3)
         {
             attackFinished = true;
             cooldown = 0;
