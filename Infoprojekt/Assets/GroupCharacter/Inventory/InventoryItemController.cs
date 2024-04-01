@@ -15,4 +15,5 @@ public class InventoryItemController : MonoBehaviour
         item = newItem;
 
     }
+    
 }

@@ -42,16 +42,16 @@ public class Arrow : MonoBehaviour
         this.transform.Rotate(new Vector3(90, 0, 0));
 
     }
-    private void OnTriggerEnter(Collider collision)
+    private void OnCollisionEnter(Collision collision)
     {
         // Überprüfe, ob der Spieler mit dem Boden kollidiert
-        if (collision.gameObject.tag == "floor")
+        if (collision.gameObject.tag != "Player")
         {
             //Destroy(this.gameObject);
-            rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+            rb.isKinematic = true;
 
         }
-        if(collision.gameObject.tag == "enemy")
+        if (collision.gameObject.tag == "enemy")
         {
             ApplyDamageAndKnockback(collision.gameObject);
 

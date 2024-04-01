@@ -21,6 +21,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void Remove(Item item)
     {
+        Debug.Log(item);
         Items.Remove(item);
     }
     public void ListItems()
@@ -42,6 +43,7 @@ public class InventoryManager : MonoBehaviour
         SetInventoryItems();
 
     }
+   
     public void SetInventoryItems()
     {
         InventoryItems = ItemContent.GetComponentsInChildren<InventoryItemController>();

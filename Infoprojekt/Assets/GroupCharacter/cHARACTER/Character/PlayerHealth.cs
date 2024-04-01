@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public Slider ManaBar;
     public Text TextMana;
     Animator animator;
-    public int Health = 100;
+    public int Health = 10;
     public float mana;
     public bool animationn = false;
     public GameObject Panel;
@@ -25,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if(mana < 100)
         {
             mana += 0.01f;
@@ -71,6 +72,7 @@ public class PlayerHealth : MonoBehaviour
         HealtBar.value = Health;
         TextHealth.text = "" + Health;
     }
+
     
 
 }
