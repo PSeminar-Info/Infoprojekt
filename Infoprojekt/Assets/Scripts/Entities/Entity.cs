@@ -1,18 +1,19 @@
 using ScriptableObjects.Inventory.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Entities
 {
     public abstract class Entity : MonoBehaviour
     {
         public InventoryObject inventory;
-        public bool IsInvincible;
-        public float Health = 1;
-        public float MaxHealth = 1;
+        [FormerlySerializedAs("IsInvincible")] public bool isInvincible;
+        [FormerlySerializedAs("Health")] public float health = 1;
+        [FormerlySerializedAs("MaxHealth")] public float maxHealth = 1;
 
         private void Start()
         {
-            Health = MaxHealth;
+            health = maxHealth;
             // TODO: spawn animation
         }
 
@@ -28,23 +29,23 @@ namespace Entities
 
         private void Die()
         {
-            Health = 0;
+            health = 0;
             OnDeath();
         }
 
         public void Heal(float amount)
         {
-            Health += amount;
-            if (Health > MaxHealth) Health = MaxHealth;
+            health += amount;
+            if (health > maxHealth) health = maxHealth;
         }
 
         public void TakeDamage(float amount)
         {
-            if (IsInvincible) return;
+            if (isInvincible) return;
             // TODO: damage animation
 
-            Health -= amount;
-            if (Health <= 0) Die();
+            health -= amount;
+            if (health <= 0) Die();
         }
     }
 }

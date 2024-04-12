@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class ItemController : MonoBehaviour
+namespace GroupCharacter.Inventory
 {
-    public Item Item;
+    public class ItemController : MonoBehaviour
+    {
+        [FormerlySerializedAs("Item")] public Item item;
+    }
 }

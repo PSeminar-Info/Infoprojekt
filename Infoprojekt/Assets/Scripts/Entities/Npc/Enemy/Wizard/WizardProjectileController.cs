@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Entities.Npc.Enemy.Wizard
 {
@@ -20,7 +19,7 @@ namespace Entities.Npc.Enemy.Wizard
 
         [Tooltip("Controls the speed of homing projectiles. Normal projectiles use force.")]
         public float speed = 10f;
-        
+
         public float despawnDistance = 75f;
 
 
@@ -39,12 +38,6 @@ namespace Entities.Npc.Enemy.Wizard
             if (rotationSpeed > 1) rotationSpeed = 1;
             _rb = GetComponent<Rigidbody>();
             _spawnPosition = transform.position;
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            Destroy(Instantiate(explosion, transform.position, Quaternion.identity), 3);
-            Destroy(gameObject);
         }
 
         private void FixedUpdate()
@@ -69,6 +62,12 @@ namespace Entities.Npc.Enemy.Wizard
             _rb.AddForce(transform.forward * force);
             if (Vector3.Distance(transform.position, _spawnPosition) > despawnDistance)
                 Destroy(gameObject);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Destroy(Instantiate(explosion, transform.position, Quaternion.identity), 3);
+            Destroy(gameObject);
         }
     }
 }

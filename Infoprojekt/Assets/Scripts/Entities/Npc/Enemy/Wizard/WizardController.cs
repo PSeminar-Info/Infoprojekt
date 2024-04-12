@@ -2,12 +2,11 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 namespace Entities.Npc.Enemy.Wizard
 {
     public class WizardController : Npc
-    // the animator needs to be in the child so it doesn't teleport to 0 0 0
+    // the animator needs to be in the child, so it doesn't teleport to 0 0 0
     {
         private static readonly int Attack = Animator.StringToHash("Attack");
 
@@ -27,18 +26,22 @@ namespace Entities.Npc.Enemy.Wizard
         public float playerDistance = 12.5f;
 
         public float maxDistanceFromPlayer = 40f;
-        
+
         [Tooltip("Max distance the wizard can teleport via portal")]
         public float maxTeleportDistance = 25f;
+
         [Tooltip("Min distance the wizard can teleport via portal")]
         public float minTeleportDistance = 5f;
+
         [Tooltip("Min distance the wizard can move when not in combat")]
         public float minMoveDistance = 5f;
+
         [Tooltip("Max distance the wizard can move when not in combat")]
         public float maxMoveDistance = 10f;
+
         [Tooltip("Max distance the wizard can move when in combat, min is 0")]
         public float combatMoveDistance = 5f;
-        
+
         [Header("Attack Prefabs")] public GameObject portal;
 
         // 6 projectiles in all directions
@@ -50,13 +53,13 @@ namespace Entities.Npc.Enemy.Wizard
         // two projectiles above wizard
         public GameObject homingAttack;
 
+        private NavMeshAgent _agent;
+        private Animator _animator;
+
 
         private float _lastActionTime;
         private float _lastShootTime;
         private Vector3 _spawnPosition;
-
-        private NavMeshAgent _agent;
-        private Animator _animator;
 
         private void Start()
         {
@@ -79,8 +82,8 @@ namespace Entities.Npc.Enemy.Wizard
                 _lastActionTime = Time.time;
                 StartCoroutine(nameof(TeleportToRandomLocation));
             }
-            
-            if(!IsInRange(player, attackRange) && Time.time - _lastActionTime > moveCooldown)
+
+            if (!IsInRange(player, attackRange) && Time.time - _lastActionTime > moveCooldown)
             {
                 _lastActionTime = Time.time;
                 MoveToRandomLocation();

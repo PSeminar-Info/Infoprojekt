@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    private bool _readyToJump;
 
     public float walkSpeed;
     public float sprintSpeed;
@@ -21,21 +20,22 @@ public class PlayerMovement : MonoBehaviour
     public Scene map;
     [FormerlySerializedAs("see")] public Scene lake;
     public Scene mountains;
-    private Scene _activeScene;
 
     [Header("Keybinds")] public KeyCode jumpKey = KeyCode.Space;
 
     [Header("Ground Check")] public float playerHeight;
     public LayerMask whatIsGround;
-    private bool _grounded;
 
     public Transform orientation;
+    private Scene _activeScene;
+    private bool _grounded;
 
     private float _horizontalInput;
-    private float _verticalInput;
 
     private Vector3 _moveDirection;
     private Rigidbody _rb;
+    private bool _readyToJump;
+    private float _verticalInput;
 
     private void Start()
     {
@@ -110,10 +110,7 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            _rb.AddForce(Vector3.down * 1000, ForceMode.Force);
-        }
+        if (Input.GetKey(KeyCode.LeftControl)) _rb.AddForce(Vector3.down * 1000, ForceMode.Force);
     }
 
     private void MovePlayer()
@@ -132,12 +129,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
+        var flatVel = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
 
         // limit velocity if needed
         if (flatVel.magnitude > moveSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            var limitedVel = flatVel.normalized * moveSpeed;
             _rb.velocity = new Vector3(limitedVel.x, _rb.velocity.y, limitedVel.z);
         }
     }

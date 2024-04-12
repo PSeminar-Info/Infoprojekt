@@ -1,78 +1,74 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+namespace GroupCharacter.cHARACTER.Character
 {
-    // Start is called before the first frame update
-    public Slider HealtBar;
-    public Text TextHealth;
-    public Slider ManaBar;
-    public Text TextMana;
-    Animator animator;
-    public int Health = 10;
-    public float mana;
-    public bool animationn = false;
-    public GameObject Panel;
-    public bool dead;
-    void Start()
+    public class PlayerHealth : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
+        // Start is called before the first frame update
+        [FormerlySerializedAs("HealtBar")] public Slider healtBar;
+        [FormerlySerializedAs("TextHealth")] public Text textHealth;
+        [FormerlySerializedAs("ManaBar")] public Slider manaBar;
+        [FormerlySerializedAs("TextMana")] public Text textMana;
+        [FormerlySerializedAs("Health")] public int health = 10;
+        public float mana;
+        public bool animationn;
+        [FormerlySerializedAs("Panel")] public GameObject panel;
+        public bool dead;
+        private Animator _animator;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        if(mana < 100)
+        private void Start()
         {
-            mana += 0.01f;
-            ManaBar.value = mana;
-            TextMana.text = "" + ManaBar.value;
+            _animator = GetComponent<Animator>();
         }
-        else
-        {
-            mana = 100;
-            ManaBar.value = mana;
-            TextMana.text = "" + mana;
-        }
-       
 
-        if (animationn)
+        // Update is called once per frame
+        private void Update()
         {
-          //  animator.SetBool("Trank", true);
-            Panel.SetActive(false);
-            animationn = false;
-        }
-        else
-        {
+            if (mana < 100)
+            {
+                mana += 0.01f;
+                manaBar.value = mana;
+                textMana.text = "" + manaBar.value;
+            }
+            else
+            {
+                mana = 100;
+                manaBar.value = mana;
+                textMana.text = "" + mana;
+            }
+
+
+            if (animationn)
+            {
+                //  animator.SetBool("Trank", true);
+                panel.SetActive(false);
+                animationn = false;
+            }
+
             //animator.SetBool("Trank", false);
+            UpdateHealthBar();
+            if (health <= 0)
+            {
+                _animator.SetBool("die", true);
+                dead = true;
+            }
         }
 
-        UpdateHealthBar();
-        if(Health <= 0)
+        // public void TakeDamage()
+        // {
+        //     Health -= 20;
+        //     if(Health < 0 )
+        //     {
+        //         Health = 0;
+        //     }  
+        //     UpdateHealthBar();
+        // }
+        public void UpdateHealthBar()
         {
-            animator.SetBool("die",true);
-            dead = true;
+            healtBar.value = health;
+            textHealth.text = "" + health;
         }
     }
-    // public void TakeDamage()
-    // {
-    //     Health -= 20;
-    //     if(Health < 0 )
-    //     {
-    //         Health = 0;
-    //     }  
-    //     UpdateHealthBar();
-    // }
-    public void UpdateHealthBar()
-    {
-        HealtBar.value = Health;
-        TextHealth.text = "" + Health;
-    }
-
-    
-
 }

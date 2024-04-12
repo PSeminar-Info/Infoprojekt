@@ -1,71 +1,60 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+namespace GroupCharacter.cHARACTER.Character
 {
-   
-    public float  timetoattack = 0.5f;
-    float timer = 0 ;
-    public float dammage;
-    public GameObject specialattack;
-    public float explosionRadius = 3f;
-    public float explosionForce = 100f;
-    Animator animator;
-    public bool special;
-    private bool first;
-    void Start()
+    public class PlayerAttack : MonoBehaviour
     {
-        animator = this.GetComponent<Animator>();
-        special = false;
-        first = true;
-    }
-    void Update()
-    {
-        
-       
-        if(GetAnimation("attack3") && !special && first)
-        {
-            special = true;
-            first = false;
-        }
-        if (!GetAnimation("attack3"))
-        {
-            special = false;
-            first = true;
-        }
-        if (special)
-        {
-            timer += Time.deltaTime;
+        public float timetoattack = 0.5f;
+        public float dammage;
+        public GameObject specialattack;
+        public float explosionRadius = 3f;
+        public float explosionForce = 100f;
+        public bool special;
+        private Animator _animator;
+        private bool _first;
+        private float _timer;
 
-        }
-        if (timer > timetoattack)
+        private void Start()
         {
-            Vector3 ins = this.transform.position + Vector3.up * 1;
-            Instantiate(specialattack,ins, Quaternion.identity);
-            timer = 0;
+            _animator = GetComponent<Animator>();
             special = false;
-            first = false;
+            _first = true;
         }
-    }
-    public bool GetAnimation(string name)
-    {
-        // ‹berpr¸fe die aktuelle Animation
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        // ‹berpr¸fe, ob die Animation mit einem bestimmten Namen abgespielt wird
-        if (stateInfo.IsName(name))
+        private void Update()
         {
-            return true;
+            if (GetAnimation("attack3") && !special && _first)
+            {
+                special = true;
+                _first = false;
+            }
+
+            if (!GetAnimation("attack3"))
+            {
+                special = false;
+                _first = true;
+            }
+
+            if (special) _timer += Time.deltaTime;
+            if (_timer > timetoattack)
+            {
+                var ins = transform.position + Vector3.up * 1;
+                Instantiate(specialattack, ins, Quaternion.identity);
+                _timer = 0;
+                special = false;
+                _first = false;
+            }
         }
-        else
+
+        public bool GetAnimation(string name)
         {
+            // √úberpr√ºfe die aktuelle Animation
+            var stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+
+            // √úberpr√ºfe, ob die Animation mit einem bestimmten Namen abgespielt wird
+            if (stateInfo.IsName(name))
+                return true;
             return false;
         }
     }
-    
-    
-   
-   
-
 }
