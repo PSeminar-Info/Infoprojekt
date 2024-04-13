@@ -62,6 +62,9 @@ public class CharacterMovement : MonoBehaviour
     public float rotationSpeed = 5f;
     public bool pickUpPressed;
     public bool rota;
+
+    public GameObject sword;
+    public GameObject bow;
     
 
 
@@ -142,6 +145,8 @@ public class CharacterMovement : MonoBehaviour
         }
         if(attackBowPressed)
         {
+            sword.SetActive(false);
+            bow.SetActive(true);
             arrowTimer += Time.deltaTime;
 
         }
@@ -369,6 +374,8 @@ public class CharacterMovement : MonoBehaviour
         }
         if (attackPressed && !isShooting)
         {
+            sword.SetActive(true);
+            bow.SetActive(false);
             attackdamage1 = true;
             animator.SetBool("shoot", true);
             
