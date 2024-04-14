@@ -61,7 +61,7 @@ public class Arrow : MonoBehaviour
     {
 
         // Überprüfe, ob das betroffene Objekt ein Skript für die Verwaltung von Lebenspunkten hat
-        EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+        Entities.Npc.Enemy.Wizard.WizardController enemyHealth = enemy.GetComponent<Entities.Npc.Enemy.Wizard.WizardController>();
         Rigidbody enemyRigidbody = enemy.GetComponent<Rigidbody>();
 
         if (enemyHealth != null)

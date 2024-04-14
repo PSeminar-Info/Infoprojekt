@@ -5,9 +5,14 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject player;
+    SwordAttack swordattack;
+    public float damage;
     void Start()
     {
-        
+        player = GameObject.FindWithTag("sword");
+
+        swordattack = player.GetComponent<SwordAttack>();
     }
 
     // Update is called once per frame
@@ -20,7 +25,7 @@ public class Laser : MonoBehaviour
         if(col.gameObject.tag == "enemy")
         {
             Debug.Log("abcd");
-
+            swordattack.ApplyDamageAndKnockback(col.gameObject,damage);
         }
     }
 }

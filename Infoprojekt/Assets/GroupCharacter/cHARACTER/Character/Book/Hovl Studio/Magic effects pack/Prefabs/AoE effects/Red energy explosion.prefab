@@ -39241,6 +39241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c361d6f44c939b74e9a47bec84d422f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  damage: 44
 --- !u!136 &7743919329999338017
 CapsuleCollider:
   m_ObjectHideFlags: 0

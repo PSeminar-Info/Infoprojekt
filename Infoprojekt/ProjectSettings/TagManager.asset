@@ -9,6 +9,7 @@ TagManager:
   - floor
   - door
   - Effect
+  - sword
   layers:
   - Default
   - TransparentFX

@@ -49,36 +49,40 @@ public class SwordAttack : MonoBehaviour
             {
                 Debug.Log("müsstegehen");
 
-                ApplyDamageAndKnockback(hitCollider.gameObject);
+                ApplyDamageAndKnockback(hitCollider.gameObject,damageAmount);
             }
         }
     }
 
-    public void ApplyDamageAndKnockback(GameObject enemy)
+    public void ApplyDamageAndKnockback(GameObject enemy, float damagee)
     {
 
         // Überprüfe, ob das betroffene Objekt ein Skript für die Verwaltung von Lebenspunkten hat
-        
-        //wizardController = enemy.GetComponent<WizardController>();
+        Entities.Npc.Enemy.Wizard.WizardController enemyHealth = enemy.GetComponent<Entities.Npc.Enemy.Wizard.WizardController>();
         Rigidbody enemyRigidbody = enemy.GetComponent<Rigidbody>();
 
-        //if (wizardController != null)
-       // {
-          //  wizardController.TakeDamage(damageAmount);
+        if (enemyHealth != null)
+        {
+            // Wende Schaden an
+            enemyHealth.TakeDamage(damagee);
 
             // Schleudere den Gegner weg
             if (enemyRigidbody != null)
             {
-
                 // Berechne die Richtung vom Schwert zum Gegner
                 Vector3 knockbackDirection = enemy.transform.position - transform.position;
                 Debug.Log("kk");
                 // Wende die Kraft auf den Rigidbody an, um den Gegner wegzuschleudern
                 enemyRigidbody.AddForce((Vector3.up + knockbackDirection.normalized) * knockbackForce, ForceMode.Impulse);
             }
-       // }
-       
+        }
+        else
+        {
+            // Füge hier zusätzlichen Code hinzu, um Schaden bei Objekten ohne Health-Skript zu verursachen
+        }
     }
+
+
     float GetCurrentAnimationTime()
     {
         // Holen Sie sich Informationen über den aktuellen Zustand der Animation

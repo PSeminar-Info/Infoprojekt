@@ -49083,6 +49083,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebeeadf7883616479bc3895844f935b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  damage: 1
 --- !u!136 &4867352448161462036
 CapsuleCollider:
   m_ObjectHideFlags: 0
