@@ -88,7 +88,7 @@ namespace Entities.Npc.Friendly.Sheep
             yield return new WaitForSeconds(deathTime);
 
             var position = transform.position;
-            inventory.dropAllItems(new Vector3(position.x, position.y + 1f, position.z));
+            inventory.DropAllItems(new Vector3(position.x, position.y + 1f, position.z));
             Destroy(gameObject);
         }
 

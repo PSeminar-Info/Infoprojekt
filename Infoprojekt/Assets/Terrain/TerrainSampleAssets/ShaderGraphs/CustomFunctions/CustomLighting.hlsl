@@ -1,19 +1,19 @@
 void MainLight_half(float3 WorldPos, out half3 Dir, out half3 Color, out half DistanceAtten, out half ShadowAtten)
 {
-#if 1
-   Dir = half3(0.5, 0.5, 0);
-   Color = 1;
-   DistanceAtten = 1;
-   ShadowAtten = 1;
-#else
+    #if 1
+    Dir = half3(0.5, 0.5, 0);
+    Color = 1;
+    DistanceAtten = 1;
+    ShadowAtten = 1;
+    #else
    half4 shadowCoord = TransformWorldToShadowCoord(WorldPos);
    Light mainLight = GetMainLight(shadowCoord);
    Dir = mainLight.direction;
    Color = mainLight.color;
    DistanceAtten = mainLight.distanceAttenuation;
    ShadowAtten = mainLight.shadowAttenuation;
-#endif
-   Dir = 0;
+    #endif
+    Dir = 0;
 }
 
 void SampleSH_half(half3 normalWS, out half3 Ambient)

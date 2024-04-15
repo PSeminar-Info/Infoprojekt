@@ -22,7 +22,7 @@ namespace ScriptableObjects.Inventory.Scripts
             items.Add(new InventorySlot(item, amount));
         }
 
-        public void dropAllItems(Vector3 position)
+        public void DropAllItems(Vector3 position)
         {
             foreach (var slot in items)
                 for (var i = 0; i < slot.amount; i++)
