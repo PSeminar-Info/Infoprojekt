@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TeleportScript : MonoBehaviour
 {
     bool enter = false;
     public GameObject Canvas;
     bool showGUI = false;
+    public ToggleManager togglemanager;
+    //bool ob du schon das gebiet erkundet hast
     bool[] unlocked = new bool[10];
+
+    public ToggleGroup ToggleGroup;
 
     void Start()
     {
@@ -30,7 +36,12 @@ public class TeleportScript : MonoBehaviour
 
     public void Teleport()
     {
-        
+        print(togglemanager.GetMap());
+        if (togglemanager.GetMap().Equals("mountain"))
+        {
+            SceneManager.LoadScene("Mountains");
+        }
+        /*
         if (unlocked[1])
         {
             print("Super du wirst tpt");
@@ -38,8 +49,9 @@ public class TeleportScript : MonoBehaviour
         else
         {
            StartCoroutine(Wait());
-        }
+        }*/
     }
+    
 
     public void Cancel() 
     {
@@ -83,6 +95,7 @@ public class TeleportScript : MonoBehaviour
     //ja leck eier ich weiﬂ der code ist scuffed
     IEnumerator Wait()
     {
+        //zeigt dass man des Gebiet noch nicht unlocked hat
         showGUI = true;
         yield return new WaitForSeconds(5);
         showGUI = false;
