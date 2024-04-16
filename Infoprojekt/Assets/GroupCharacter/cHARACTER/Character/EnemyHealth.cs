@@ -1,28 +1,28 @@
 using UnityEngine;
 
-namespace GroupCharacter.cHARACTER.Character
+public class EnemyHealth : MonoBehaviour
 {
-    public class EnemyHealth : MonoBehaviour
+    public int maxHealth = 100;
+    private int currentHealth;
+
+    void Start()
     {
-        public int maxHealth = 100;
-        private int _currentHealth;
+        currentHealth = maxHealth;
+    }
 
-        private void Start()
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
         {
-            _currentHealth = maxHealth;
+            Die();
         }
+    }
 
-        public void TakeDamage(int damage)
-        {
-            _currentHealth -= damage;
-
-            if (_currentHealth <= 0) Die();
-        }
-
-        private void Die()
-        {
-            // FÃ¼ge hier weitere Aktionen hinzu, die bei Tod des Gegners ausgefÃ¼hrt werden sollen
-            Destroy(gameObject);
-        }
+    void Die()
+    {
+        // Füge hier weitere Aktionen hinzu, die bei Tod des Gegners ausgeführt werden sollen
+        Destroy(gameObject);
     }
 }

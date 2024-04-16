@@ -1,43 +1,41 @@
 using UnityEngine;
 
-namespace GroupCharacter.cHARACTER.Character
+public class SpecialAttack : MonoBehaviour
 {
-    public class SpecialAttack : MonoBehaviour
+    public float explosionRadius = 5f;
+    public float explosionForce = 1000000f;
+    private int damageAmount = 50;
+    void Start()
     {
-        public float explosionRadius = 5f;
-        public float explosionForce = 1000000f;
-        private readonly int _damageAmount = 50;
+        Explode();
+    }
 
-        private void Start()
+    void Explode()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+
+        foreach (Collider collider in colliders)
         {
-            Explode();
-        }
+            Rigidbody rb = collider.GetComponent<Rigidbody>();
 
-        private void Explode()
-        {
-            var colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-
-            foreach (var collider in colliders)
+            if (rb != null)
             {
-                var rb = collider.GetComponent<Rigidbody>();
+                // Berechne die Richtung vom Zentrum der Explosion zum Collider
+                Vector3 explosionDirection = collider.transform.position - transform.position;
 
-                if (rb != null)
+                // Berechne die Explosionkraft basierend auf der Entfernung zum Zentrum der Explosion
+                float distance = explosionDirection.magnitude;
+                float falloff = 1 - (distance / explosionRadius);
+                float force = Mathf.Max(0, falloff) * explosionForce;
+
+                // Wende die Kraft auf den Rigidbody an
+                rb.AddForce((Vector3.up + explosionDirection.normalized) * force, ForceMode.Impulse);
+
+                EnemyHealth enemyHealth = collider.gameObject.GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
                 {
-                    // Berechne die Richtung vom Zentrum der Explosion zum Collider
-                    var explosionDirection = collider.transform.position - transform.position;
-
-                    // Berechne die Explosionkraft basierend auf der Entfernung zum Zentrum der Explosion
-                    var distance = explosionDirection.magnitude;
-                    var falloff = 1 - distance / explosionRadius;
-                    var force = Mathf.Max(0, falloff) * explosionForce;
-
-                    // Wende die Kraft auf den Rigidbody an
-                    rb.AddForce((Vector3.up + explosionDirection.normalized) * force, ForceMode.Impulse);
-
-                    var enemyHealth = collider.gameObject.GetComponent<EnemyHealth>();
-                    if (enemyHealth != null)
-                        // Wende Schaden an
-                        enemyHealth.TakeDamage(_damageAmount);
+                    // Wende Schaden an
+                    enemyHealth.TakeDamage(damageAmount);
                 }
             }
         }

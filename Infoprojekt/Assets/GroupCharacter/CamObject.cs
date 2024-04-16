@@ -1,18 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace GroupCharacter
+public class CamObject : MonoBehaviour
 {
-    public class CamObject : MonoBehaviour
+    // Start is called before the first frame update
+    void Start()
     {
-        // Start is called before the first frame update
-        private void Start()
-        {
-        }
+        
+    }
 
-        // Update is called once per frame
-        private void Update()
-        {
-            transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0);
-        }
+    // Update is called once per frame
+    void Update()
+    {
+        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0);
     }
 }

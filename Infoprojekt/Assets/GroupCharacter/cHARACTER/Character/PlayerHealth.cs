@@ -1,74 +1,78 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace GroupCharacter.cHARACTER.Character
+public class PlayerHealth : MonoBehaviour
 {
-    public class PlayerHealth : MonoBehaviour
+    // Start is called before the first frame update
+    public Slider HealtBar;
+    public Text TextHealth;
+    public Slider ManaBar;
+    public Text TextMana;
+    Animator animator;
+    public int Health = 10;
+    public float mana;
+    public bool animationn = false;
+    public GameObject Panel;
+    public bool dead;
+    void Start()
     {
-        // Start is called before the first frame update
-        [FormerlySerializedAs("HealtBar")] public Slider healtBar;
-        [FormerlySerializedAs("TextHealth")] public Text textHealth;
-        [FormerlySerializedAs("ManaBar")] public Slider manaBar;
-        [FormerlySerializedAs("TextMana")] public Text textMana;
-        [FormerlySerializedAs("Health")] public int health = 10;
-        public float mana;
-        public bool animationn;
-        [FormerlySerializedAs("Panel")] public GameObject panel;
-        public bool dead;
-        private Animator _animator;
+        animator = GetComponent<Animator>();
 
-        private void Start()
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        if(mana < 100)
         {
-            _animator = GetComponent<Animator>();
+            mana += 0.01f;
+            ManaBar.value = mana;
+            TextMana.text = "" + ManaBar.value;
         }
-
-        // Update is called once per frame
-        private void Update()
+        else
         {
-            if (mana < 100)
-            {
-                mana += 0.01f;
-                manaBar.value = mana;
-                textMana.text = "" + manaBar.value;
-            }
-            else
-            {
-                mana = 100;
-                manaBar.value = mana;
-                textMana.text = "" + mana;
-            }
+            mana = 100;
+            ManaBar.value = mana;
+            TextMana.text = "" + mana;
+        }
+       
 
-
-            if (animationn)
-            {
-                //  animator.SetBool("Trank", true);
-                panel.SetActive(false);
-                animationn = false;
-            }
-
+        if (animationn)
+        {
+          //  animator.SetBool("Trank", true);
+            Panel.SetActive(false);
+            animationn = false;
+        }
+        else
+        {
             //animator.SetBool("Trank", false);
-            UpdateHealthBar();
-            if (health <= 0)
-            {
-                _animator.SetBool("die", true);
-                dead = true;
-            }
         }
 
-        // public void TakeDamage()
-        // {
-        //     Health -= 20;
-        //     if(Health < 0 )
-        //     {
-        //         Health = 0;
-        //     }  
-        //     UpdateHealthBar();
-        // }
-        public void UpdateHealthBar()
+        UpdateHealthBar();
+        if(Health <= 0)
         {
-            healtBar.value = health;
-            textHealth.text = "" + health;
+            animator.SetBool("die",true);
+            dead = true;
         }
     }
+    // public void TakeDamage()
+    // {
+    //     Health -= 20;
+    //     if(Health < 0 )
+    //     {
+    //         Health = 0;
+    //     }  
+    //     UpdateHealthBar();
+    // }
+    public void UpdateHealthBar()
+    {
+        HealtBar.value = Health;
+        TextHealth.text = "" + Health;
+    }
+
+    
+
 }

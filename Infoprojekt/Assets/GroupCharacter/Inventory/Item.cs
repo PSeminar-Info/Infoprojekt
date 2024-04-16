@@ -1,14 +1,11 @@
-using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace GroupCharacter.Inventory
+using UnityEngine;
+[CreateAssetMenu(fileName = "New Item", menuName = "Item/Create New Item")]
+
+public class Item : ScriptableObject
 {
-    [CreateAssetMenu(fileName = "New Item", menuName = "Item/Create New Item")]
-    public class Item : ScriptableObject
-    {
-        public int id;
-        public string itemName;
-        public int value;
-        [FormerlySerializedAs("Icon")] public Sprite icon;
-    }
+    public int id;
+    public string itemName;
+    public int value;
+    public Sprite Icon;
 }

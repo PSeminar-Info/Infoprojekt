@@ -1,57 +1,66 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace GroupCharacter.Inventory
+public class ItemPickUp : MonoBehaviour
 {
-    public class ItemPickUp : MonoBehaviour
+    public Item Item;
+    private GameObject panel; // Das GameObject ist jetzt private
+    public bool EPressed;
+
+    private void Start()
     {
-        [FormerlySerializedAs("Item")] public Item item;
-        [FormerlySerializedAs("EPressed")] public bool ePressed;
-        private GameObject _panel; // Das GameObject ist jetzt private
+        // Suchen Sie das Panel in der Hierarchie und weisen Sie es der privaten Variable zu
+        panel = GameObject.Find("PanelPickUp"); // Ändern Sie "NameDesPanels" entsprechend dem Namen Ihres Panels
 
-        private void Start()
+        if (panel != null)
         {
-            // Suchen Sie das Panel in der Hierarchie und weisen Sie es der privaten Variable zu
-            _panel = GameObject.Find("PanelPickUp"); // Ã„ndern Sie "NameDesPanels" entsprechend dem Namen Ihres Panels
-
-            if (_panel != null) _panel.SetActive(false); // Deaktivieren Sie das Panel beim Start
+            panel.SetActive(false); // Deaktivieren Sie das Panel beim Start
         }
-
-        private void Update()
+        
+    }
+    void Update()
+    {
+        if (EPressed)
         {
-            if (ePressed)
-            {
-                OpenPanel();
+            OpenPanel();
 
-                PickUp();
-            }
+            PickUp();
         }
-
-        private void OnTriggerExit(Collider other)
+    }
+    void PickUp()
+    {
+        InventoryManager.Instance.Add(Item);
+        Destroy(gameObject);
+        ClosePanel();
+    }
+    void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player"))
         {
-            if (other.gameObject.CompareTag("Player")) ClosePanel();
+            OpenPanel();
+           
         }
-
-        private void OnTriggerStay(Collider other)
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
         {
-            if (other.gameObject.CompareTag("Player")) OpenPanel();
-        }
-
-        private void PickUp()
-        {
-            InventoryManager.Instance.Add(item);
-            Destroy(gameObject);
             ClosePanel();
         }
-
-        public void OpenPanel()
+    }
+    public void OpenPanel()
+    {
+        if (panel != null)
         {
-            if (_panel != null) _panel.SetActive(true); // Aktivieren Sie das Panel
+            panel.SetActive(true); // Aktivieren Sie das Panel
         }
-
-        public void ClosePanel()
+    }
+    public void ClosePanel()
+    {
+        if (panel != null)
         {
-            if (_panel != null) _panel.SetActive(false); // Aktivieren Sie das Panel
+            panel.SetActive(false); // Aktivieren Sie das Panel
         }
     }
 }

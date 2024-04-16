@@ -124,7 +124,7 @@ MonoBehaviour:
   shoot: 0
   force: 10
   knockbackForce: 1000000
-  damageAmount: 10
+  damageAmount: 2
 --- !u!54 &7844947182938554482
 Rigidbody:
   m_ObjectHideFlags: 0
