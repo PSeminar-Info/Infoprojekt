@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 706843685098965381}
   - {fileID: 4932491133320856341}
@@ -50,9 +50,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 9c2797be1ba72dc498b043073cc9c1f4, type: 2}
-  IsInvincible: 0
-  Health: 50
-  MaxHealth: 50
+  isInvincible: 0
+  health: 50
+  maxHealth: 50
   attackCooldown: 5
   attackRange: 40
   activationRange: 30
