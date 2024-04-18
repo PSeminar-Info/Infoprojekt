@@ -16,18 +16,12 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed;
     public float sprintSpeed;
 
-    public Scene graveyard;
-    public Scene map;
-    [FormerlySerializedAs("see")] public Scene lake;
-    public Scene mountains;
-
     [Header("Keybinds")] public KeyCode jumpKey = KeyCode.Space;
 
     [Header("Ground Check")] public float playerHeight;
     public LayerMask whatIsGround;
 
     public Transform orientation;
-    private Scene _activeScene;
     private bool _grounded;
 
     private float _horizontalInput;
@@ -39,11 +33,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        graveyard = SceneManager.GetSceneByName("graveyardlandscape");
-        map = SceneManager.GetSceneByName("Map");
-        lake = SceneManager.GetSceneByName("see");
-        mountains = SceneManager.GetSceneByName("Mountains");
-        _activeScene = graveyard;
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true;
 
@@ -54,27 +43,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
-
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            _activeScene = SceneManager.GetActiveScene();
-            // gy 1; lake 2; mountains 3; map 0
-            switch (_activeScene.name)
-            {
-                case "Map":
-                    SceneManager.LoadScene(1);
-                    break;
-                case "graveyardlandscape":
-                    SceneManager.LoadScene(2);
-                    break;
-                case "see":
-                    SceneManager.LoadScene(3);
-                    break;
-                default:
-                    SceneManager.LoadScene(0);
-                    break;
-            }
-        }
 
         moveSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
         _grounded = true; //Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
