@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject player;
-    SwordAttack swordattack;
     public float damage;
-    void Start()
+    private SwordAttack swordattack;
+
+    private void Start()
     {
         player = GameObject.FindWithTag("sword");
 
@@ -16,16 +15,16 @@ public class Laser : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
     }
-    void OnTriggerStay(Collider col)
+
+    private void OnTriggerStay(Collider col)
     {
-        if(col.gameObject.tag == "enemy")
+        if (col.gameObject.tag == "enemy")
         {
             Debug.Log("abcd");
-            swordattack.ApplyDamageAndKnockback(col.gameObject,damage);
+            swordattack.ApplyDamageAndKnockback(col.gameObject, damage);
         }
     }
 }

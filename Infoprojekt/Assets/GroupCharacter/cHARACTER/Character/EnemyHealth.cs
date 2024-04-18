@@ -5,7 +5,7 @@ public class EnemyHealth : MonoBehaviour
     public int maxHealth = 100;
     private int currentHealth;
 
-    void Start()
+    private void Start()
     {
         currentHealth = maxHealth;
     }
@@ -14,15 +14,12 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= damage;
 
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+        if (currentHealth <= 0) Die();
     }
 
-    void Die()
+    private void Die()
     {
-        // Füge hier weitere Aktionen hinzu, die bei Tod des Gegners ausgeführt werden sollen
+        // FÃ¼ge hier weitere Aktionen hinzu, die bei Tod des Gegners ausgefÃ¼hrt werden sollen
         Destroy(gameObject);
     }
 }

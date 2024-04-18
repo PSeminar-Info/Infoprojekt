@@ -1,63 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Cinemachine;
+
 public class CharacterMovement : MonoBehaviour
 {
-    Animator animator;
-    int isWalkingHash;
-    int isRunningHash;
     public CharacterController charact;
-    PlayerInput input;
-    Vector2 currentMovement;
-    bool movementPressed;
-    bool runPressed;
-    Quaternion currentrotation;
     public GameObject cam;
-    private float velocity;
     public bool haus = true;
-    Vector2 CurrentRotationInput;
-    Vector3 CurrentRotation;
-    bool isRotationPressed;
-    //  CinemachineFreeLook cineCam;
-    private bool attackPressed = false;
-    
+
     public bool jumpPressed;
-    PlayerHealth plhe;
     public bool sneakPressed;
     public float walkpace;
     public float sprintpace;
-    PlayerAttack playerattack;
     public bool attackdamage2;
     public bool attackdamage1;
     public bool attackdamage;
     public bool attackBowPressed;
-    public bool rotein = false;
+    public bool rotein;
     public Transform characterMesh;
     public GameObject Arrow;
-    Arrow arrow;
-    private bool attackReleased;
-    private bool canRelease;
-    private float arrowTimer;
-    GameObject arr;
     public GameObject RefPoint;
-    private Rigidbody rb;
-
-    float velocityZ = 0.0f;
-    float velocityX = 0.0f;
     public float acceleration = 4;
     public float deceleration = 2;
-    float maximumWalkVelocity = 0.5f;
-    float maximuRunVelocity = 2.0f;
     public bool forwardPressed;
     public bool leftPressed;
     public bool rightPressed;
-    private Vector2 CurrentMovementInput;
-    //Swords and Bows for activation and deacivation
-   
-    bool backPressed;
-    float turnSmoothVelocity;
     public float turnSmoothTime;
     public float rotationSpeed = 5f;
     public bool pickUpPressed;
@@ -65,21 +31,56 @@ public class CharacterMovement : MonoBehaviour
 
     public GameObject sword;
     public GameObject bow;
-    
 
 
     //BokAttack
     public int book1;
     public int book2;
     public int book3;
-    Book book;
-    private bool firstbook;
-    private bool secondbook;
-    private bool thirdbook;
     public float price1;
     public float price2;
     public float price3;
-    void Awake()
+    private Animator animator;
+    private GameObject arr;
+    private Arrow arrow;
+
+    private float arrowTimer;
+
+    //  CinemachineFreeLook cineCam;
+    private bool attackPressed;
+
+    private bool attackReleased;
+    //Swords and Bows for activation and deacivation
+
+    private bool backPressed;
+    private Book book;
+    private bool canRelease;
+    private Vector2 currentMovement;
+    private Vector2 CurrentMovementInput;
+    private Quaternion currentrotation;
+    private Vector3 CurrentRotation;
+    private Vector2 CurrentRotationInput;
+    private bool firstbook;
+    private PlayerInput input;
+    private bool isRotationPressed;
+    private int isRunningHash;
+    private int isWalkingHash;
+    private readonly float maximumWalkVelocity = 0.5f;
+    private readonly float maximuRunVelocity = 2.0f;
+    private bool movementPressed;
+    private PlayerAttack playerattack;
+    private PlayerHealth plhe;
+    private Rigidbody rb;
+    private bool runPressed;
+    private bool secondbook;
+    private bool thirdbook;
+    private float turnSmoothVelocity;
+    private float velocity;
+    private float velocityX;
+
+    private float velocityZ;
+
+    private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -87,7 +88,7 @@ public class CharacterMovement : MonoBehaviour
         sprintpace = 7;
         input = new PlayerInput();
 
-       
+
         input.CharacterControls.Run.performed += ctx => runPressed = ctx.ReadValueAsButton();
         input.CharacterControls.Attack.performed += ctx => attackPressed = ctx.ReadValueAsButton();
         input.CharacterControls.Jump.performed += ctx => jumpPressed = ctx.ReadValueAsButton();
@@ -108,214 +109,170 @@ public class CharacterMovement : MonoBehaviour
         input.CharacterControls.A.performed += ctx => leftPressed = ctx.ReadValueAsButton();
         input.CharacterControls.S.performed += ctx => backPressed = ctx.ReadValueAsButton();
         input.CharacterControls.D.performed += ctx => rightPressed = ctx.ReadValueAsButton();
-
-
     }
-    void onRotationInput(InputAction.CallbackContext context)
-    {
-        CurrentRotationInput = context.ReadValue<Vector2>();
-        CurrentRotation.x = CurrentRotationInput.x;
-        CurrentRotation.y = CurrentRotationInput.y;
-        isRotationPressed = CurrentRotationInput.x != 0 || CurrentRotationInput.y != 0;
 
-    }
-   
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        playerattack = this.GetComponent<PlayerAttack>();
+        playerattack = GetComponent<PlayerAttack>();
         animator = GetComponent<Animator>();
-        plhe = this.GetComponent<PlayerHealth>();
-        book = this.GetComponent<Book>();
+        plhe = GetComponent<PlayerHealth>();
+        book = GetComponent<Book>();
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
+        var horizontalInput = Input.GetAxis("Horizontal");
 
 
-       
         //Bogen
-        if(!attackBowPressed && canRelease) 
-        {
-            attackReleased = true;
-        }
-        if(attackBowPressed)
+        if (!attackBowPressed && canRelease) attackReleased = true;
+        if (attackBowPressed)
         {
             sword.SetActive(false);
             bow.SetActive(true);
             arrowTimer += Time.deltaTime;
-
         }
-       
-        
+
+
         charact.transform.position = characterMesh.position;
         if (!plhe.dead)
         {
-            bool isShooting = animator.GetBool("shoot");
-            bool isRunning = animator.GetBool(isRunningHash);
-            bool isWalking = animator.GetBool(isWalkingHash);
+            var isShooting = animator.GetBool("shoot");
+            var isRunning = animator.GetBool(isRunningHash);
+            var isWalking = animator.GetBool(isWalkingHash);
             handleMovement();
             handleRotation();
             if (!plhe.dead)
             {
-                
             }
         }
 
 
         Motion();
-       
     }
-   
-    void Motion()
+
+    private void OnEnable()
     {
-        
-        
-        float currentMaxVelocity = runPressed ? maximuRunVelocity : maximumWalkVelocity;
-        if (forwardPressed && velocityZ < currentMaxVelocity)
-        {
-            velocityZ += Time.deltaTime * acceleration;
-        }
+        input.CharacterControls.Enable();
+    }
 
-        if (leftPressed && velocityX > -currentMaxVelocity)
-        {
-            velocityX -= Time.deltaTime * acceleration;
+    private void OnDisable()
+    {
+        input.CharacterControls.Disable();
+    }
 
-        }
-        if (rightPressed && velocityX < currentMaxVelocity)
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Collectable" && pickUpPressed)
         {
-            velocityX += Time.deltaTime * acceleration;
+            Debug.Log("kurva");
 
+            var script = other.gameObject.GetComponent<ItemPickUp>();
+            script.EPressed = true;
         }
-        if (backPressed && velocityZ > -currentMaxVelocity)
-        {
-            velocityZ -= Time.deltaTime * acceleration;
-        }
-        if (!forwardPressed && velocityZ > 0.0f)
-        {
-            velocityZ -= Time.deltaTime * deceleration;
-        }
-        if (!forwardPressed && velocityZ > 0.0f)
-        {
-            velocityZ  -= Time.deltaTime * deceleration;
-        }
-        if (!backPressed && velocityZ < 0.0f)
-        {
-            velocityZ += Time.deltaTime * deceleration;
-        }
-        if (!leftPressed && velocityX < 0.0f)
-        {
-            velocityX += Time.deltaTime * deceleration;
-        }
-        if (!rightPressed && velocityX > 0.0f)
-        {
-            velocityX -= Time.deltaTime * deceleration;
-        }
+    }
 
-        if (!leftPressed && !rightPressed && velocityX != 0.0f && (velocityX > -0.05f && velocityX < 0.05f))
-        {
+    private void onRotationInput(InputAction.CallbackContext context)
+    {
+        CurrentRotationInput = context.ReadValue<Vector2>();
+        CurrentRotation.x = CurrentRotationInput.x;
+        CurrentRotation.y = CurrentRotationInput.y;
+        isRotationPressed = CurrentRotationInput.x != 0 || CurrentRotationInput.y != 0;
+    }
+
+    private void Motion()
+    {
+        var currentMaxVelocity = runPressed ? maximuRunVelocity : maximumWalkVelocity;
+        if (forwardPressed && velocityZ < currentMaxVelocity) velocityZ += Time.deltaTime * acceleration;
+
+        if (leftPressed && velocityX > -currentMaxVelocity) velocityX -= Time.deltaTime * acceleration;
+        if (rightPressed && velocityX < currentMaxVelocity) velocityX += Time.deltaTime * acceleration;
+        if (backPressed && velocityZ > -currentMaxVelocity) velocityZ -= Time.deltaTime * acceleration;
+        if (!forwardPressed && velocityZ > 0.0f) velocityZ -= Time.deltaTime * deceleration;
+        if (!forwardPressed && velocityZ > 0.0f) velocityZ -= Time.deltaTime * deceleration;
+        if (!backPressed && velocityZ < 0.0f) velocityZ += Time.deltaTime * deceleration;
+        if (!leftPressed && velocityX < 0.0f) velocityX += Time.deltaTime * deceleration;
+        if (!rightPressed && velocityX > 0.0f) velocityX -= Time.deltaTime * deceleration;
+
+        if (!leftPressed && !rightPressed && velocityX != 0.0f && velocityX > -0.05f && velocityX < 0.05f)
             velocityX = 0.0f;
-        }
-        if (!forwardPressed && !backPressed && velocityZ != 0.0f && (velocityZ > -0.05f && velocityZ < 0.05f))
-        {
+        if (!forwardPressed && !backPressed && velocityZ != 0.0f && velocityZ > -0.05f && velocityZ < 0.05f)
             velocityZ = 0.0f;
-        }
-
 
 
         if (forwardPressed && runPressed && velocityZ > currentMaxVelocity)
         {
             velocityZ = currentMaxVelocity;
-            
         }
-        else if(forwardPressed && velocityZ > currentMaxVelocity)
+        else if (forwardPressed && velocityZ > currentMaxVelocity)
         {
             velocityZ -= Time.deltaTime * deceleration;
-            if (velocityZ > currentMaxVelocity && velocityZ < (currentMaxVelocity + 0.05f))
-            {
+            if (velocityZ > currentMaxVelocity && velocityZ < currentMaxVelocity + 0.05f)
                 velocityZ = currentMaxVelocity;
-            }
         }
-        else if(forwardPressed && velocityZ < currentMaxVelocity && velocityZ >(currentMaxVelocity-0.05f))
+        else if (forwardPressed && velocityZ < currentMaxVelocity && velocityZ > currentMaxVelocity - 0.05f)
         {
             velocityZ = currentMaxVelocity;
         }
 
 
-
-
         if (rightPressed && runPressed && velocityX > currentMaxVelocity)
         {
             velocityX = currentMaxVelocity;
-
         }
         else if (rightPressed && velocityX > currentMaxVelocity)
         {
             velocityX -= Time.deltaTime * deceleration;
-            if (velocityX > currentMaxVelocity && velocityX < (currentMaxVelocity + 0.05f))
-            {
+            if (velocityX > currentMaxVelocity && velocityX < currentMaxVelocity + 0.05f)
                 velocityX = currentMaxVelocity;
-            }
         }
-        else if (rightPressed && velocityX < currentMaxVelocity && velocityX > (currentMaxVelocity - 0.05f))
+        else if (rightPressed && velocityX < currentMaxVelocity && velocityX > currentMaxVelocity - 0.05f)
         {
             velocityX = currentMaxVelocity;
         }
-
 
 
         if (leftPressed && runPressed && velocityX < -currentMaxVelocity)
         {
             velocityX = -currentMaxVelocity;
-
         }
         else if (leftPressed && velocityX < -currentMaxVelocity)
         {
             velocityX += Time.deltaTime * deceleration;
-            if (velocityX <- currentMaxVelocity && velocityX > (-currentMaxVelocity - 0.05f))
-            {
+            if (velocityX < -currentMaxVelocity && velocityX > -currentMaxVelocity - 0.05f)
                 velocityX = -currentMaxVelocity;
-            }
         }
-        else if (leftPressed && velocityX >- currentMaxVelocity && velocityX < (-currentMaxVelocity + 0.05f))
+        else if (leftPressed && velocityX > -currentMaxVelocity && velocityX < -currentMaxVelocity + 0.05f)
         {
             velocityX = -currentMaxVelocity;
         }
 
 
-
-
         if (backPressed && runPressed && velocityZ < -currentMaxVelocity)
         {
             velocityZ = -currentMaxVelocity;
-
         }
         else if (backPressed && velocityZ < -currentMaxVelocity)
         {
             velocityZ += Time.deltaTime * deceleration;
-            if (velocityZ < -currentMaxVelocity && velocityZ > (-currentMaxVelocity - 0.05f))
-            {
+            if (velocityZ < -currentMaxVelocity && velocityZ > -currentMaxVelocity - 0.05f)
                 velocityZ = -currentMaxVelocity;
-            }
         }
-        else if (backPressed && velocityZ > -currentMaxVelocity && velocityZ < (-currentMaxVelocity + 0.05f))
+        else if (backPressed && velocityZ > -currentMaxVelocity && velocityZ < -currentMaxVelocity + 0.05f)
         {
             velocityZ = -currentMaxVelocity;
         }
 
 
-
-
-
         animator.SetFloat("VelocityZ", velocityZ);
         animator.SetFloat("VelocityX", velocityX);
-
     }
-    void handleRotation()
+
+    private void handleRotation()
     {
         // if(haus)
         // {
@@ -331,61 +288,52 @@ public class CharacterMovement : MonoBehaviour
         //  cineCam.m_YAxis.Value += CurrentRotation.y * -5 * Time.deltaTime;
 
 
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, cam.transform.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
+        var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, cam.transform.eulerAngles.y, ref turnSmoothVelocity,
+            turnSmoothTime);
         transform.rotation = Quaternion.Euler(0, cam.transform.eulerAngles.y, 0);
-
-
     }
-    void handleMovement()
-    {
 
-        bool isRunning = animator.GetBool(isRunningHash);
-        bool isWalking = animator.GetBool(isWalkingHash);
-        bool isShooting = animator.GetBool("shoot");
-        bool isBow = animator.GetBool("arrowStand");
-        bool wpressed = Input.GetKey(KeyCode.W);
-        bool isJumping = animator.GetBool("jump");
-        bool isSneaking = animator.GetBool("sneak");
-       
-        if ((movementPressed) && !isWalking)
+    private void handleMovement()
+    {
+        var isRunning = animator.GetBool(isRunningHash);
+        var isWalking = animator.GetBool(isWalkingHash);
+        var isShooting = animator.GetBool("shoot");
+        var isBow = animator.GetBool("arrowStand");
+        var wpressed = Input.GetKey(KeyCode.W);
+        var isJumping = animator.GetBool("jump");
+        var isSneaking = animator.GetBool("sneak");
+
+        if (movementPressed && !isWalking)
         {
             haus = true;
             animator.SetBool(isWalkingHash, true);
             animator.SetBool("shoot", false);
-           
         }
+
         if (!movementPressed && isWalking)
         {
             animator.SetBool(isWalkingHash, false);
-            currentrotation = this.transform.rotation;
+            currentrotation = transform.rotation;
             haus = false;
         }
-        if ((movementPressed && runPressed) && !isRunning)
+
+        if (movementPressed && runPressed && !isRunning)
         {
             haus = true;
             animator.SetBool(isRunningHash, true);
             animator.SetBool("shoot", false);
         }
-        if ((!movementPressed || !runPressed) && isRunning)
-        {
-            animator.SetBool(isRunningHash, false);
-            
-           
-        }
+
+        if ((!movementPressed || !runPressed) && isRunning) animator.SetBool(isRunningHash, false);
         if (attackPressed && !isShooting)
         {
             sword.SetActive(true);
             bow.SetActive(false);
             attackdamage1 = true;
             animator.SetBool("shoot", true);
-            
-
         }
-        if (!attackPressed)
-        {
-            animator.SetBool("shoot", false);
 
-        }
+        if (!attackPressed) animator.SetBool("shoot", false);
         if (!attackPressed && !movementPressed)
         {
             //animator.SetBool("Idle",true);
@@ -393,18 +341,16 @@ public class CharacterMovement : MonoBehaviour
         else
         {
             animator.SetBool("Idle", false);
-
-
         }
 
-        if(attackBowPressed && !isBow)
+        if (attackBowPressed && !isBow)
         {
-           // AimCam.gameObject.SetActive(true);
+            // AimCam.gameObject.SetActive(true);
 
-           // ThirdPersonCam.gameObject.SetActive(false);
+            // ThirdPersonCam.gameObject.SetActive(false);
             // AimCam.m_XAxis.Value = ThirdPersonCam.m_XAxis.Value;
             // AimCam.m_YAxis.Value = ThirdPersonCam.m_YAxis.Value;
-           
+
             animator.SetBool("arrowStand", true);
             canRelease = true;
             arr = Instantiate(Arrow, RefPoint.transform.position, RefPoint.transform.rotation);
@@ -413,20 +359,15 @@ public class CharacterMovement : MonoBehaviour
             rb = arr.GetComponent<Rigidbody>();
             rb.isKinematic = true;
         }
-        if(!attackBowPressed)
+
+        if (!attackBowPressed) animator.SetBool("arrowStand", false);
+
+
+        if (attackReleased)
         {
-            
-            animator.SetBool("arrowStand", false);
-            
-        }
-
-
-        if(attackReleased)
-        {
-
             //ThirdPersonCam.gameObject.SetActive(true);
             //AimCam.gameObject.SetActive(false);
-          //  ThirdPersonCam.VerticalAxis.Value = AimCam.m_VerticalAxis.Value;
+            //  ThirdPersonCam.VerticalAxis.Value = AimCam.m_VerticalAxis.Value;
             //ThirdPersonCam.m_YAxis.Value = AimCam.m_YAxis.Value;
             rb.isKinematic = false;
 
@@ -442,62 +383,31 @@ public class CharacterMovement : MonoBehaviour
         }
 
 
-
         if (jumpPressed)
-         { 
-        
             animator.SetBool("jump", true);
-         }
         else
-        {
             animator.SetBool("jump", false);
-            
-        }
 
         //BookAttack
-        if(firstbook && book.attackFinished && plhe.mana > price1)
+        if (firstbook && book.attackFinished && plhe.mana > price1)
         {
             book.attackFinished = false;
             plhe.mana -= price1;
             book.AttackBook(book1);
         }
-        if(secondbook && book.attackFinished && plhe.mana > price2)
+
+        if (secondbook && book.attackFinished && plhe.mana > price2)
         {
             book.attackFinished = false;
             plhe.mana -= price2;
             book.AttackBook(book2);
-
         }
+
         if (thirdbook && book.attackFinished && plhe.mana > price3)
         {
             book.attackFinished = false;
             plhe.mana -= price3;
             book.AttackBook(book3);
-
-        }
-
-
-
-
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        if(other.gameObject.tag == "Collectable" && pickUpPressed)
-        {
-            Debug.Log("kurva");
-
-            ItemPickUp script = other.gameObject.GetComponent<ItemPickUp>();
-            script.EPressed = true;
         }
     }
-    
-    void OnEnable()
-    {
-        input.CharacterControls.Enable();
-    }
-    void OnDisable()
-    {
-        input.CharacterControls.Disable();
-    }
-    
 }

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Entities.Npc.Enemy.Wizard;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -10,59 +9,51 @@ public class Arrow : MonoBehaviour
     public float force;
     public float knockbackForce = 1000000f;
     public int damageAmount = 10;
-    void Start()
+
+    private void Start()
     {
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // ÃœberprÃ¼fe, ob der Spieler mit dem Boden kollidiert
+        if (collision.gameObject.tag != "Player")
+            //Destroy(this.gameObject);
+            rb.isKinematic = true;
+        if (collision.gameObject.tag == "enemy") ApplyDamageAndKnockback(collision.gameObject);
+    }
+
     public void Shoot(float force)
     {
         // Richtung des Objekts verwenden (y-Komponente ignorieren, um flach zu bleiben)
-        Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+        var screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
 
-        Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+        var ray = Camera.main.ScreenPointToRay(screenCenter);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-           
-                Debug.Log("hg" + hit.transform.gameObject);
-                this.transform.LookAt(hit.point);
-
-
+            Debug.Log("hg" + hit.transform.gameObject);
+            transform.LookAt(hit.point);
         }
 
         // Hier hast du die Blickrichtung vom Mittelpunkt des Bildschirms aus
-        Vector3 kraftRichtung = this.transform.forward; ;
-        // Kraft zum Rigidbody hinzufügen
+        var kraftRichtung = transform.forward;
+        ;
+        // Kraft zum Rigidbody hinzufÃ¼gen
         rb.AddForce(kraftRichtung * force, ForceMode.Impulse);
-        this.transform.Rotate(new Vector3(90, 0, 0));
-
+        transform.Rotate(new Vector3(90, 0, 0));
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        // Überprüfe, ob der Spieler mit dem Boden kollidiert
-        if (collision.gameObject.tag != "Player")
-        {
-            //Destroy(this.gameObject);
-            rb.isKinematic = true;
 
-        }
-        if (collision.gameObject.tag == "enemy")
-        {
-            ApplyDamageAndKnockback(collision.gameObject);
-
-        }
-    }
     public void ApplyDamageAndKnockback(GameObject enemy)
     {
-
-        // Überprüfe, ob das betroffene Objekt ein Skript für die Verwaltung von Lebenspunkten hat
-        Entities.Npc.Enemy.Wizard.WizardController enemyHealth = enemy.GetComponent<Entities.Npc.Enemy.Wizard.WizardController>();
-        Rigidbody enemyRigidbody = enemy.GetComponent<Rigidbody>();
+        // ÃœberprÃ¼fe, ob das betroffene Objekt ein Skript fÃ¼r die Verwaltung von Lebenspunkten hat
+        var enemyHealth = enemy.GetComponent<WizardController>();
+        var enemyRigidbody = enemy.GetComponent<Rigidbody>();
 
         if (enemyHealth != null)
         {
@@ -73,15 +64,13 @@ public class Arrow : MonoBehaviour
             if (enemyRigidbody != null)
             {
                 // Berechne die Richtung vom Schwert zum Gegner
-                Vector3 knockbackDirection = enemy.transform.position - transform.position;
+                var knockbackDirection = enemy.transform.position - transform.position;
                 Debug.Log("kk");
                 // Wende die Kraft auf den Rigidbody an, um den Gegner wegzuschleudern
-                enemyRigidbody.AddForce((Vector3.up + knockbackDirection.normalized) * knockbackForce, ForceMode.Impulse);
+                enemyRigidbody.AddForce((Vector3.up + knockbackDirection.normalized) * knockbackForce,
+                    ForceMode.Impulse);
             }
         }
-        else
-        {
-            // Füge hier zusätzlichen Code hinzu, um Schaden bei Objekten ohne Health-Skript zu verursachen
-        }
+        // FÃ¼ge hier zusÃ¤tzlichen Code hinzu, um Schaden bei Objekten ohne Health-Skript zu verursachen
     }
 }

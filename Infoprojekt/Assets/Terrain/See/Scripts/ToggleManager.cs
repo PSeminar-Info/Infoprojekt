@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ToggleManager : MonoBehaviour
 {
     public GameObject toggleMountain;
     public GameObject toggleLake;
-    public bool mountain = false;
-    public bool lake = false;
-    
+    public bool mountain;
+    public bool lake;
+
     public void changemountain(bool change)
     {
         mountain = change;
@@ -22,6 +19,6 @@ public class ToggleManager : MonoBehaviour
 
     public string GetMap()
     {
-        return mountain ? "mountain" : (lake ? "lake" : "Error");
+        return mountain ? "mountain" : lake ? "lake" : "Error";
     }
 }

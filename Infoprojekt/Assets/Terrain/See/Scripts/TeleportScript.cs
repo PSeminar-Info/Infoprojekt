@@ -1,46 +1,62 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TeleportScript : MonoBehaviour
 {
-    bool enter = false;
     public GameObject Canvas;
-    bool showGUI = false;
     public ToggleManager togglemanager;
-    //bool ob du schon das gebiet erkundet hast
-    bool[] unlocked = new bool[10];
 
     public ToggleGroup ToggleGroup;
+    private bool enter;
 
-    void Start()
+    private bool showGUI;
+
+    //bool ob du schon das gebiet erkundet hast
+    private bool[] unlocked = new bool[10];
+
+    private void Start()
     {
-        Canvas.SetActive(false);    
+        Canvas.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
         //Opens Canvas if Player is in the Trigger Area & presses Key
         if (Input.GetKeyDown(KeyCode.F) && enter && Canvas != null)
         {
-                Canvas.SetActive(true);
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                Time.timeScale = 0.0f;
+            Canvas.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0.0f;
         }
+    }
+
+    private void OnGUI()
+    {
+        if (enter) GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 155, 30), "Press 'F' to teleport");
+
+        //das geht sicher sch√∂ner juckt aber
+        if (showGUI)
+            GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - 300, 250, 30),
+                "Du hast dieses Gebiet noch nicht erkundet");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) enter = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player")) enter = false;
     }
 
     public void Teleport()
     {
         print(togglemanager.GetMap());
-        if (togglemanager.GetMap().Equals("mountain"))
-        {
-            SceneManager.LoadScene("Mountains");
-        }
+        if (togglemanager.GetMap().Equals("mountain")) SceneManager.LoadScene("Mountains");
         /*
         if (unlocked[1])
         {
@@ -51,49 +67,18 @@ public class TeleportScript : MonoBehaviour
            StartCoroutine(Wait());
         }*/
     }
-    
 
-    public void Cancel() 
+
+    public void Cancel()
     {
         Canvas.SetActive(false);
-        Cursor.visible=false;
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
     }
 
-    void OnGUI()
-    {
-        if (enter)
-        {
-            GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 155, 30), "Press 'F' to teleport");
-        }
-
-        //das geht sicher schˆner juckt aber
-        if(showGUI)
-        {
-            GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - 300, 250, 30), "Du hast dieses Gebiet noch nicht erkundet");
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-
-        if (other.CompareTag("Player"))
-        {
-            enter = true;
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            enter = false;
-        }
-    }
-
-    //ja leck eier ich weiﬂ der code ist scuffed
-    IEnumerator Wait()
+    //ja leck eier ich wei√ü der code ist scuffed
+    private IEnumerator Wait()
     {
         //zeigt dass man des Gebiet noch nicht unlocked hat
         showGUI = true;

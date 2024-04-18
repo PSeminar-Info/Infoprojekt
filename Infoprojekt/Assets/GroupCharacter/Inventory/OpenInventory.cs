@@ -1,46 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OpenInventory : MonoBehaviour
 {
-    public GameObject panel; // Referenz auf das zu öffnende Panel
+    public GameObject panel; // Referenz auf das zu Ã¶ffnende Panel
     public GameObject Inventoryman;
-    InventoryManager invman;
     public Transform ItemContent;
+    private InventoryManager invman;
 
-    void Start()
+    private void Start()
     {
         invman = Inventoryman.GetComponent<InventoryManager>();
     }
-    void Update()
+
+    private void Update()
     {
-        // Überprüfe, ob die Taste "E" gedrückt wurde
+        // ÃœberprÃ¼fe, ob die Taste "E" gedrÃ¼ckt wurde
         if (Input.GetKeyDown(KeyCode.I))
         {
-
-            // Öffne das Panel, falls es nicht bereits aktiv ist
+            // Ã–ffne das Panel, falls es nicht bereits aktiv ist
             if (!panel.activeSelf)
             {
                 panel.SetActive(true);
                 invman.ListItems();
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                Time.timeScale=0;
-
+                Time.timeScale = 0;
             }
             else
             {
                 panel.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-                Time.timeScale=1;
-                foreach (Transform item in ItemContent)
-                {
-                    Destroy(item.gameObject);
-                }
+                Time.timeScale = 1;
+                foreach (Transform item in ItemContent) Destroy(item.gameObject);
             }
         }
-        
     }
 }

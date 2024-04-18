@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -88,11 +86,11 @@ public class PlayerMovement : MonoBehaviour
 
         // on ground
         if (_grounded)
-            _rb.AddForce(_moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f), ForceMode.Force);
 
         // in air
         else if (!_grounded)
-            _rb.AddForce(_moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f * airMultiplier), ForceMode.Force);
     }
 
     private void SpeedControl()

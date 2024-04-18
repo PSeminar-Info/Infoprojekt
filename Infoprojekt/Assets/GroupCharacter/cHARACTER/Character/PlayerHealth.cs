@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,23 +8,22 @@ public class PlayerHealth : MonoBehaviour
     public Text TextHealth;
     public Slider ManaBar;
     public Text TextMana;
-    Animator animator;
     public int Health = 10;
     public float mana;
-    public bool animationn = false;
+    public bool animationn;
     public GameObject Panel;
     public bool dead;
-    void Start()
+    private Animator animator;
+
+    private void Start()
     {
         animator = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-        if(mana < 100)
+        if (mana < 100)
         {
             mana += 0.01f;
             ManaBar.value = mana;
@@ -38,26 +35,24 @@ public class PlayerHealth : MonoBehaviour
             ManaBar.value = mana;
             TextMana.text = "" + mana;
         }
-       
+
 
         if (animationn)
         {
-          //  animator.SetBool("Trank", true);
+            //  animator.SetBool("Trank", true);
             Panel.SetActive(false);
             animationn = false;
         }
-        else
-        {
-            //animator.SetBool("Trank", false);
-        }
 
+        //animator.SetBool("Trank", false);
         UpdateHealthBar();
-        if(Health <= 0)
+        if (Health <= 0)
         {
-            animator.SetBool("die",true);
+            animator.SetBool("die", true);
             dead = true;
         }
     }
+
     // public void TakeDamage()
     // {
     //     Health -= 20;
@@ -72,7 +67,4 @@ public class PlayerHealth : MonoBehaviour
         HealtBar.value = Health;
         TextHealth.text = "" + Health;
     }
-
-    
-
 }
