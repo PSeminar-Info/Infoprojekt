@@ -5427,7 +5427,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595053638}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -9.48, y: 5.35, z: -18.890001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5598,7 +5598,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604785449}
   serializedVersion: 2
+<<<<<<< Updated upstream
   m_LocalRotation: {x: 0.03779479, y: 0.15862773, z: -0.0060767536, w: 0.98659617}
+=======
+  m_LocalRotation: {x: 0.03763832, y: 0.18221816, z: -0.006980456, w: 0.9825127}
+>>>>>>> Stashed changes
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9277,7 +9281,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1041958925}
   serializedVersion: 2
+<<<<<<< Updated upstream
   m_LocalRotation: {x: 0.3425314, y: 0.1252921, z: -0.046148226, w: 0.9299702}
+=======
+  m_LocalRotation: {x: 0.34150597, y: 0.14445898, z: -0.053207878, w: 0.9271862}
+>>>>>>> Stashed changes
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10951,7 +10959,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224229885}
   serializedVersion: 2
+<<<<<<< Updated upstream
   m_LocalRotation: {x: 0.3260909, y: 0.11418887, z: -0.03971513, w: 0.9375758}
+=======
+  m_LocalRotation: {x: 0.32528278, y: 0.13187273, z: -0.045865614, w: 0.9352524}
+>>>>>>> Stashed changes
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -20486,7 +20498,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080274791}
   serializedVersion: 2
+<<<<<<< Updated upstream
   m_LocalRotation: {x: 0.34253147, y: 0.1252921, z: -0.04614824, w: 0.92997015}
+=======
+  m_LocalRotation: {x: 0.34150603, y: 0.14445898, z: -0.05320788, w: 0.9271862}
+>>>>>>> Stashed changes
   m_LocalPosition: {x: -9.48, y: 5.35, z: -18.890001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -21345,7 +21361,6 @@ SceneRoots:
   - {fileID: 291527242}
   - {fileID: 52288443}
   - {fileID: 1940115119}
-  - {fileID: 2080274795}
   - {fileID: 910346731}
   - {fileID: 1496786706}
   - {fileID: 649525184}
@@ -21355,6 +21370,7 @@ SceneRoots:
   - {fileID: 1842707920}
   - {fileID: 822093101}
   - {fileID: 119000054}
-  - {fileID: 595053640}
   - {fileID: 2347611362021923079}
   - {fileID: 839240203}
+  - {fileID: 2080274795}
+  - {fileID: 595053640}
