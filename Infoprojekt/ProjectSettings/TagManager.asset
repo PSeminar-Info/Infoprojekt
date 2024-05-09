@@ -9,6 +9,9 @@ TagManager:
   - floor
   - door
   - Effect
+  - forest
+  - graveyard
+  - castle
   layers:
   - Default
   - TransparentFX

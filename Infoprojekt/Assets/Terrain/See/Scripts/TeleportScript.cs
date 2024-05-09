@@ -7,14 +7,12 @@ public class TeleportScript : MonoBehaviour
 {
     public GameObject Canvas;
     public ToggleManager togglemanager;
+    public MapDiscover mapdiscover;
 
     public ToggleGroup ToggleGroup;
     private bool enter;
 
     private bool showGUI;
-
-    //bool ob du schon das gebiet erkundet hast
-    private bool[] unlocked = new bool[10];
 
     private void Start()
     {
@@ -23,7 +21,7 @@ public class TeleportScript : MonoBehaviour
 
     private void Update()
     {
-        //Opens Canvas if Player is in the Trigger Area & presses Key
+        //Öffnet des Canvas
         if (Input.GetKeyDown(KeyCode.F) && enter && Canvas != null)
         {
             Canvas.SetActive(true);
@@ -55,17 +53,37 @@ public class TeleportScript : MonoBehaviour
 
     public void Teleport()
     {
-        print(togglemanager.GetMap());
-        if (togglemanager.GetMap().Equals("mountain")) SceneManager.LoadScene("Mountains");
-        /*
-        if (unlocked[1])
+        if (togglemanager.GetMap().Equals("lazylake"))
         {
-            print("Super du wirst tpt");
+            SceneManager.LoadScene("LazyLake");
+            //Player.transform.position = new Vector3(2,-1,0);
+        } 
+        else if (togglemanager.GetMap().Equals("fisherslake"))
+        {
+            SceneManager.LoadScene("LakeTundra");
+            //GameObject.FindWithTag("Player").transform.position = new Vector3(220, 34, 205);
         }
-        else
+        else if(togglemanager.GetMap().Equals("village"))
         {
-           StartCoroutine(Wait());
-        }*/
+            SceneManager.LoadScene("StartMap");
+            //GameObject.FindWithTag("Player").transform.position = new Vector3(860, 70, -150);
+        }
+        else if(togglemanager.GetMap().Equals("tundracastle"))
+        {
+            SceneManager.LoadScene("LakeTundra");
+        }
+        else if (togglemanager.GetMap().Equals("forest"))
+        {
+            SceneManager.LoadScene("StartMap");
+        }
+        else if (togglemanager.GetMap().Equals("graveyard"))
+        {
+            SceneManager.LoadScene("StartMap");
+        }
+        else if (togglemanager.GetMap().Equals("castle"))
+        {
+            SceneManager.LoadScene("StartMap");
+        }
     }
 
 

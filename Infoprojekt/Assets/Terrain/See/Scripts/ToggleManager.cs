@@ -2,23 +2,52 @@ using UnityEngine;
 
 public class ToggleManager : MonoBehaviour
 {
-    public GameObject toggleMountain;
-    public GameObject toggleLake;
-    public bool mountain;
-    public bool lake;
 
-    public void changemountain(bool change)
+    public bool village;
+    public bool forest;
+    public bool graveyard;
+    public bool castle;
+    public bool lazylake;
+    public bool fisherslake;
+    public bool tundracastle;
+
+    public void changevillage(bool change)
     {
-        mountain = change;
+        village = change;
     }
 
-    public void changelake(bool change)
+    public void changeforest(bool change)
     {
-        lake = change;
+        forest = change;
+    }
+
+    public void changegraveyard(bool change)
+    {
+        graveyard = change;
+    }
+
+    public void changecastle(bool change)
+    {
+        castle = change;
+    }
+
+    public void changelazylake(bool change)
+    {
+        lazylake = change;
+    }
+
+    public void changefisherslake(bool change)
+    {
+        fisherslake = change;
+    }
+
+    public void changetundracastle(bool change)
+    {
+        tundracastle = change;
     }
 
     public string GetMap()
     {
-        return mountain ? "mountain" : lake ? "lake" : "Error";
+        return village ? "village" : forest ? "forest" : graveyard ? "graveyard" : castle ? "castle" : lazylake ? "lazylake" : fisherslake ? "fisherslake" : tundracastle ? "tundracastle" : "Error";
     }
 }
