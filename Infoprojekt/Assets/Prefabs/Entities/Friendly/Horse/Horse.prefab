@@ -684,7 +684,7 @@ Transform:
   m_GameObject: {fileID: 1568264580513533657}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 176.22017, y: 6.8705096, z: 210.39796}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -710,11 +710,11 @@ MonoBehaviour:
   health: 50
   maxHealth: 50
   deathTime: 2
-  disableRandomMovement: 1
+  disableRandomMovement: 0
   minimumCooldown: 8
   maximumCooldown: 15
-  maxTargetDistance: 10
-  minTargetDistance: 5
+  maxTargetDistance: 15
+  minTargetDistance: 7.5
   rider: {fileID: 0}
   ridingPosition: {fileID: 3275415276557710438}
 --- !u!54 &8740674577567712576
@@ -727,7 +727,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 200
   m_Drag: 0
-  m_AngularDrag: 50
+  m_AngularDrag: 300
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -775,7 +775,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -783,7 +783,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.4
+  m_Height: 1.17
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -806,8 +806,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.39, y: 1.09, z: 1.12}
-  m_Center: {x: 0, y: 0.6, z: 0.12}
+  m_Size: {x: 0.39, y: 0.87, z: 1.12}
+  m_Center: {x: 0, y: 0.48, z: 0.12}
 --- !u!1 &1720333899707904461
 GameObject:
   m_ObjectHideFlags: 0

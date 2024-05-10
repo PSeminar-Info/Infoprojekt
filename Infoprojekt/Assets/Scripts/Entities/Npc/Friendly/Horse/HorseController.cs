@@ -54,8 +54,7 @@ namespace Entities.Npc.Friendly.Horse
 
         private void Update()
         {
-            if (Vector3.Distance(_agent.destination, transform.position) < 0.3 &&
-                _currentAnimation != Turn90L && _currentAnimation != Turn90R)
+            if (Vector3.Distance(_agent.destination, transform.position) < 0.3)
                 SetAnimation(Idle);
             if (rider)
             {
@@ -104,11 +103,15 @@ namespace Entities.Npc.Friendly.Horse
             _destination = RandomNavmeshLocation(_maxDistance, _minDistance);
             var targetRotation = Quaternion.LookRotation(_destination - transform.position);
 
-            // doesn't work yet, but can't be bothered to fix it
-            if (targetRotation.eulerAngles.y is > 45 and < 180)
-                SetAnimation(Turn90R);
-            else if (targetRotation.eulerAngles.y is > 180 and < 315)
-                SetAnimation(Turn90L);
+            switch (targetRotation.eulerAngles.y)
+            {
+                case > 45 and < 180:
+                    SetAnimation(Turn90R);
+                    break;
+                case > 180 and < 315:
+                    SetAnimation(Turn90L);
+                    break;
+            }
 
             StartCoroutine(StartWalkingAfterRotation(animationName));
         }
@@ -126,7 +129,6 @@ namespace Entities.Npc.Friendly.Horse
         {
             if (disableRandomMovement) return;
             var random = Random.Range(0, 3);
-            // TODO: eating animation is sometimes cancelled by other animations
             switch (random)
             {
                 case 0:
@@ -135,11 +137,6 @@ namespace Entities.Npc.Friendly.Horse
                     WalkToRandomLocation(WalkForward);
                     return;
                 case 1:
-                    _minDistance = minTargetDistance + 3;
-                    _maxDistance = maxTargetDistance + 3;
-                    WalkToRandomLocation(TrotForward);
-                    return;
-                case 2:
                     SetAnimation(Eat);
                     return;
             }
