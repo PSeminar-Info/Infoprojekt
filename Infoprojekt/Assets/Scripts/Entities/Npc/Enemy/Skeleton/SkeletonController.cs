@@ -10,11 +10,6 @@ namespace Entities.Npc.Enemy.Skeleton
         private readonly float minmove = 10f;
         private string state = "Idle";
 
-        // Start is called before the first frame update
-        private void Start()
-        {
-        }
-
         // Update is called once per frame
         private void Update()
         {

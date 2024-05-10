@@ -710,7 +710,7 @@ MonoBehaviour:
   health: 50
   maxHealth: 50
   deathTime: 2
-  disableRandomMovement: 0
+  disableRandomMovement: 1
   minimumCooldown: 8
   maximumCooldown: 15
   maxTargetDistance: 10
@@ -1218,7 +1218,7 @@ Transform:
   m_GameObject: {fileID: 2458319000482317197}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.87, z: 0}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
