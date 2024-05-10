@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -21,26 +24,41 @@ namespace Entities.Npc.Friendly.Horse
 
         [Header("Movement")] public bool disableRandomMovement;
 
+        [Tooltip("Movement type the horse will use when walking to a specific location.")]
+        public Options movementType;
+
+        public List<Transform> destinations;
+
+        public enum Options
+        {
+            Walk,
+            Trot,
+            Run,
+        }
+
         public float minimumCooldown = 4f;
         public float maximumCooldown = 6f;
-        
+
         public float maxTargetDistance = 7.5f;
         public float minTargetDistance = 3f;
 
         [Header("Rider")] public GameObject rider;
         public Transform ridingPosition;
 
-        // Animation: using hash instead of string for performance, setA
         private NavMeshAgent _agent;
         private Animator _animator;
 
         private int _currentAnimation;
 
         private Vector3 _destination;
+        private bool _movingToDestination;
 
         // _maxDistance and _minDistance are used to increase distance when running/trotting, walking uses default values
         private float _maxDistance;
         private float _minDistance;
+
+        private bool _hasDestination;
+        private int _sampledPositions;
 
         private void Start()
         {
@@ -48,17 +66,72 @@ namespace Entities.Npc.Friendly.Horse
             _maxDistance = maxTargetDistance;
             _agent = GetComponent<NavMeshAgent>();
             _animator = GetComponent<Animator>();
-            
+
+            foreach (var dest in destinations.ToList())
+            {
+                if (NavMesh.SamplePosition(dest.position, out var hit, 4, 1))
+                {
+                    dest.position = hit.position;
+                    _sampledPositions++;
+                }
+                else
+                {
+                    Debug.LogWarning($"Destination {dest.name} is not close to the navmesh. Removing it.");
+                    destinations.Remove(dest);
+                }
+            }
+
+            if (destinations[0])
+            {
+                _agent.destination = destinations[0].position;
+                PlayCorrectAnimation();
+            }
+
             InvokeRepeating(nameof(RandomAction), 0, Random.Range(minimumCooldown, maximumCooldown));
         }
 
         private void Update()
         {
-            if (Vector3.Distance(_agent.destination, transform.position) < 0.3)
-                SetAnimation(Idle);
             if (rider)
             {
                 rider.transform.position = ridingPosition.position;
+            }
+
+            if (_sampledPositions < destinations.Count)
+            {
+                foreach (var dest in destinations.ToList())
+                {
+                    if (NavMesh.SamplePosition(dest.position, out var hit, 4, 1))
+                    {
+                        dest.position = hit.position;
+                        _sampledPositions++;
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Destination {dest.name} is not close to the navmesh. Removing it.");
+                        destinations.Remove(dest);
+                    }
+                }
+            }
+
+            if (Vector3.Distance(_agent.destination, transform.position) < 0.4)
+            {
+
+                _hasDestination = false;
+                if (destinations.Count > 0)
+                {
+                    destinations.RemoveAt(0);
+                }
+                else SetAnimation(Idle);
+
+                _agent.ResetPath();
+            }
+
+            if (destinations.Count > 0 && !_hasDestination)
+            {
+                _agent.SetDestination(destinations[0].position);
+                PlayCorrectAnimation();
+                _hasDestination = true;
             }
         }
 
@@ -67,6 +140,27 @@ namespace Entities.Npc.Friendly.Horse
             if (collision.gameObject.CompareTag("Player") == rider)
             {
                 Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+            }
+        }
+
+        private void PlayCorrectAnimation()
+        {
+            switch (movementType)
+            {
+                case Options.Walk:
+                    _animator.Play(WalkForward);
+                    _currentAnimation = WalkForward;
+                    break;
+                case Options.Trot:
+                    _animator.Play(TrotForward);
+                    _currentAnimation = TrotForward;
+                    break;
+                case Options.Run:
+                    _animator.Play(RunForward);
+                    _currentAnimation = RunForward;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -121,14 +215,13 @@ namespace Entities.Npc.Friendly.Horse
             yield return new WaitForSeconds(1f);
 
             _agent.SetDestination(_destination);
-            // _agent.angularSpeed = 45f;
             SetAnimation(animationName);
         }
 
         private void RandomAction()
         {
-            if (disableRandomMovement) return;
-            var random = Random.Range(0, 3);
+            if (disableRandomMovement || destinations.Count > 0) return;
+            var random = Random.Range(0, 2);
             switch (random)
             {
                 case 0:
