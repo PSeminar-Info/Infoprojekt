@@ -8,12 +8,13 @@ public class PlayerHealth : MonoBehaviour
     public Text TextHealth;
     public Slider ManaBar;
     public Text TextMana;
-    public int Health = 10;
+    public int Health = 100;
     public float mana;
     public bool animationn;
     public GameObject Panel;
     public bool dead;
     private Animator animator;
+    public LayerMask layerToCheck; // Layer, den du überprüfen möchtest
 
     private void Start()
     {
@@ -51,6 +52,11 @@ public class PlayerHealth : MonoBehaviour
             animator.SetBool("die", true);
             dead = true;
         }
+        if(Health >= 100)
+        {
+            Health = 100;
+        }
+        
     }
 
     // public void TakeDamage()
@@ -67,4 +73,6 @@ public class PlayerHealth : MonoBehaviour
         HealtBar.value = Health;
         TextHealth.text = "" + Health;
     }
+
+   
 }

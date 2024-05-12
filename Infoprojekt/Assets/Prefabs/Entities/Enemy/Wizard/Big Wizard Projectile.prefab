@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -8032124301801651806}
   m_Layer: 6
   m_Name: Big Wizard Projectile
-  m_TagString: Untagged
+  m_TagString: attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,6 +54,7 @@ MonoBehaviour:
   isHoming: 0
   rotationSpeed: 0.05
   speed: 10
+  despawnDistance: 75
 --- !u!135 &1279231124588227114
 SphereCollider:
   m_ObjectHideFlags: 0

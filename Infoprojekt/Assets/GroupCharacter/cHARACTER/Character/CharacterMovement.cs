@@ -174,7 +174,17 @@ public class CharacterMovement : MonoBehaviour
             var script = other.gameObject.GetComponent<ItemPickUp>();
             script.EPressed = true;
         }
+        
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "attack")
+        {
+            Debug.Log("getroofen");
+            plhe.Health -= 5;
+        }
+    }
+
 
     private void onRotationInput(InputAction.CallbackContext context)
     {

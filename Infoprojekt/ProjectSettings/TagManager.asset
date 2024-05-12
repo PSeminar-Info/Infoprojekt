@@ -12,6 +12,8 @@ TagManager:
   - forest
   - graveyard
   - castle
+  - sword
+  - attack
   layers:
   - Default
   - TransparentFX

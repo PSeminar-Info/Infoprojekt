@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2220952096008172060}
   m_Layer: 6
   m_Name: Big Wizard Attack
-  m_TagString: Untagged
+  m_TagString: attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
