@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class CharacterMovement : MonoBehaviour
 {
     public CharacterController charact;
     public GameObject cam;
     public bool haus = true;
-    public PlayableDirector cutsceneDirector;
-
+    public string sceneName;
     public bool jumpPressed;
     public bool sneakPressed;
     public float walkpace;
@@ -188,6 +188,7 @@ public class CharacterMovement : MonoBehaviour
         if(other.gameObject.tag == "storyone")
         {
             Debug.Log("story");
+            SceneManager.LoadScene(sceneName);
 
         }
     }
