@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class CharacterMovement : MonoBehaviour
 {
     public CharacterController charact;
     public GameObject cam;
     public bool haus = true;
+    public PlayableDirector cutsceneDirector;
 
     public bool jumpPressed;
     public bool sneakPressed;
@@ -182,6 +184,11 @@ public class CharacterMovement : MonoBehaviour
         {
             Debug.Log("getroofen");
             plhe.Health -= 5;
+        }
+        if(other.gameObject.tag == "storyone")
+        {
+            Debug.Log("story");
+
         }
     }
 

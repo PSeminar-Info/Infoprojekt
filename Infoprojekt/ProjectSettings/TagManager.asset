@@ -14,6 +14,7 @@ TagManager:
   - castle
   - sword
   - attack
+  - storyone
   layers:
   - Default
   - TransparentFX
