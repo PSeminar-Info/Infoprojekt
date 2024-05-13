@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -80,6 +81,10 @@ public class CharacterMovement : MonoBehaviour
     private float velocity;
     private float velocityX;
 
+    private bool opendings;
+    public GameObject panelDings;
+    public GameObject PanelNormal;
+
     private float velocityZ;
 
     private void Awake()
@@ -101,6 +106,8 @@ public class CharacterMovement : MonoBehaviour
         input.CharacterControls.BookFirst.performed += ctx => firstbook = ctx.ReadValueAsButton();
         input.CharacterControls.BookSecond.performed += ctx => secondbook = ctx.ReadValueAsButton();
         input.CharacterControls.BookThird.performed += ctx => thirdbook = ctx.ReadValueAsButton();
+
+        input.CharacterControls.OpenDings.performed += ctx => opendings = ctx.ReadValueAsButton();
 
 
         input.CharacterControls.Rotate.started += onRotationInput;
@@ -127,6 +134,25 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(opendings)
+        {
+            
+            panelDings.SetActive(true);
+            PanelNormal.SetActive(false);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+
+
+
+        }
+        if(PanelNormal.active)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
+        }
+
         var horizontalInput = Input.GetAxis("Horizontal");
 
 

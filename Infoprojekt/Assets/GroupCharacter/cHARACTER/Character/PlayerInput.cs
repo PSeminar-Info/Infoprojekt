@@ -152,6 +152,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenDings"",
+                    ""type"": ""Button"",
+                    ""id"": ""3878ef37-9e35-46f2-a97f-8be8da0c05d0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -407,6 +416,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""BookThird"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb2782f6-5a33-4ea8-8f88-10a30d8388a1"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenDings"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -429,6 +449,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControls_BookFirst = m_CharacterControls.FindAction("BookFirst", throwIfNotFound: true);
         m_CharacterControls_BookSecond = m_CharacterControls.FindAction("BookSecond", throwIfNotFound: true);
         m_CharacterControls_BookThird = m_CharacterControls.FindAction("BookThird", throwIfNotFound: true);
+        m_CharacterControls_OpenDings = m_CharacterControls.FindAction("OpenDings", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -504,6 +525,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_BookFirst;
     private readonly InputAction m_CharacterControls_BookSecond;
     private readonly InputAction m_CharacterControls_BookThird;
+    private readonly InputAction m_CharacterControls_OpenDings;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -522,6 +544,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @BookFirst => m_Wrapper.m_CharacterControls_BookFirst;
         public InputAction @BookSecond => m_Wrapper.m_CharacterControls_BookSecond;
         public InputAction @BookThird => m_Wrapper.m_CharacterControls_BookThird;
+        public InputAction @OpenDings => m_Wrapper.m_CharacterControls_OpenDings;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -573,6 +596,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @BookThird.started += instance.OnBookThird;
             @BookThird.performed += instance.OnBookThird;
             @BookThird.canceled += instance.OnBookThird;
+            @OpenDings.started += instance.OnOpenDings;
+            @OpenDings.performed += instance.OnOpenDings;
+            @OpenDings.canceled += instance.OnOpenDings;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
@@ -619,6 +645,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @BookThird.started -= instance.OnBookThird;
             @BookThird.performed -= instance.OnBookThird;
             @BookThird.canceled -= instance.OnBookThird;
+            @OpenDings.started -= instance.OnOpenDings;
+            @OpenDings.performed -= instance.OnOpenDings;
+            @OpenDings.canceled -= instance.OnOpenDings;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -652,5 +681,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnBookFirst(InputAction.CallbackContext context);
         void OnBookSecond(InputAction.CallbackContext context);
         void OnBookThird(InputAction.CallbackContext context);
+        void OnOpenDings(InputAction.CallbackContext context);
     }
 }

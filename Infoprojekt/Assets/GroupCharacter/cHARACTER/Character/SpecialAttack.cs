@@ -4,7 +4,7 @@ public class SpecialAttack : MonoBehaviour
 {
     public float explosionRadius = 5f;
     public float explosionForce = 1000000f;
-    private readonly int damageAmount = 50;
+    public  int damageAmount = 40;
 
     private void Start()
     {

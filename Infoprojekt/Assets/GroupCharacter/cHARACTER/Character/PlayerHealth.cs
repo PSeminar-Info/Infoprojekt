@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (mana < 100)
         {
-            mana += 0.01f;
+            mana += 0.001f;
             ManaBar.value = mana;
             TextMana.text = "" + ManaBar.value;
         }
