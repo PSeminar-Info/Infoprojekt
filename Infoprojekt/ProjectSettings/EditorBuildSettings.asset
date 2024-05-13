@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/StoryMaps/StartMap.unity
     guid: 3f36185c752dffc47aa067021874dfe1
   - enabled: 1
-    path: Assets/Scenes/StoryMaps/LakeTundra.unity
+    path: Assets/Scenes/StoryMaps/Story2.unity
     guid: 146147501bb60f044aa84be0d63bb25b
   - enabled: 1
     path: Assets/Scenes/StoryMaps/Story1/StoryOne.unity
