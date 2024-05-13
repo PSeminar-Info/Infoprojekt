@@ -215,7 +215,7 @@ public class CharacterMovement : MonoBehaviour
         {
             Debug.Log("story");
             SceneManager.LoadScene(sceneName);
-
+            Destroy(other.gameObject);
         }
     }
 
