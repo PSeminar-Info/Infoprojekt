@@ -15,6 +15,9 @@ TagManager:
   - sword
   - attack
   - storyone
+  - LazyLake
+  - StartMap
+  - TundraLake
   layers:
   - Default
   - TransparentFX

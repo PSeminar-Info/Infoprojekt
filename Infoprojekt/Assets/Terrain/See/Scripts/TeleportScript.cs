@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,27 +9,49 @@ public class TeleportScript : MonoBehaviour
     public GameObject Canvas;
     public ToggleManager togglemanager;
     public MapDiscover mapdiscover;
+    public GameObject Player;
+    public GameObject LazyLake;
+    public GameObject StartMap;
+    public GameObject TundraLake;
 
     public ToggleGroup ToggleGroup;
     private bool enter;
 
     private bool showGUI;
 
+    private Dictionary<string, (GameObject activeMap, Vector3 position)> teleportLocations;
+
     private void Start()
     {
         Canvas.SetActive(false);
+
+        teleportLocations = new Dictionary<string, (GameObject, Vector3)>
+        {
+            { "lazylake", (LazyLake, new Vector3(-154, 15, -19)) },
+            { "fisherslake", (TundraLake, new Vector3(223, 31, 201)) },
+            { "village", (StartMap, new Vector3(861, 68, -147)) },
+            { "tundracastle", (TundraLake, new Vector3(493, 56, 219)) },
+            { "forest", (StartMap, new Vector3(423, 41, -309)) },
+            { "graveyard", (StartMap, new Vector3(345, 27, -564)) },
+            { "castle", (StartMap, new Vector3(156, 16, -205)) }
+        };
     }
 
     private void Update()
     {
-        //Öffnet des Canvas
         if (Input.GetKeyDown(KeyCode.F) && enter && Canvas != null)
         {
-            Canvas.SetActive(true);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0.0f;
+            OpenCanvas();
         }
+    }
+
+    private void OpenCanvas()
+    {
+        Canvas.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0.0f;
+        Player.SetActive(false);
     }
 
     private void OnGUI()
@@ -53,37 +76,25 @@ public class TeleportScript : MonoBehaviour
 
     public void Teleport()
     {
-        if (togglemanager.GetMap().Equals("lazylake"))
+        string mapName = togglemanager.GetMap();
+        if (teleportLocations.TryGetValue(mapName, out var location))
         {
-            SceneManager.LoadScene("LazyLake");
-            //Player.transform.position = new Vector3(2,-1,0);
-        } 
-        else if (togglemanager.GetMap().Equals("fisherslake"))
-        {
-            SceneManager.LoadScene("LakeTundra");
-            //GameObject.FindWithTag("Player").transform.position = new Vector3(220, 34, 205);
+            ActivateLocation(location.activeMap);
+            Player.transform.position = location.position;
         }
-        else if(togglemanager.GetMap().Equals("village"))
+        else
         {
-            SceneManager.LoadScene("StartMap");
-            //GameObject.FindWithTag("Player").transform.position = new Vector3(860, 70, -150);
+            StartCoroutine(Wait());
         }
-        else if(togglemanager.GetMap().Equals("tundracastle"))
-        {
-            SceneManager.LoadScene("LakeTundra");
-        }
-        else if (togglemanager.GetMap().Equals("forest"))
-        {
-            SceneManager.LoadScene("StartMap");
-        }
-        else if (togglemanager.GetMap().Equals("graveyard"))
-        {
-            SceneManager.LoadScene("StartMap");
-        }
-        else if (togglemanager.GetMap().Equals("castle"))
-        {
-            SceneManager.LoadScene("StartMap");
-        }
+
+        Cancel();
+    }
+
+    private void ActivateLocation(GameObject activeLocation)
+    {
+        LazyLake.SetActive(activeLocation == LazyLake);
+        StartMap.SetActive(activeLocation == StartMap);
+        TundraLake.SetActive(activeLocation == TundraLake);
     }
 
 
@@ -93,6 +104,7 @@ public class TeleportScript : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
+        Player.SetActive(true);
     }
 
     //ja leck eier ich weiß der code ist scuffed
