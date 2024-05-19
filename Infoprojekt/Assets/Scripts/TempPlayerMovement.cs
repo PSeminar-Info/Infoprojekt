@@ -55,6 +55,14 @@ public class PlayerMovement : MonoBehaviour
             _rb.drag = 0;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("BearHit"))
+        {
+            Debug.Log("Hit from bear!");
+        }
+    }
+
     private void FixedUpdate()
     {
         MovePlayer();

@@ -18,6 +18,7 @@ TagManager:
   - LazyLake
   - StartMap
   - TundraLake
+  - BearHit
   layers:
   - Default
   - TransparentFX
