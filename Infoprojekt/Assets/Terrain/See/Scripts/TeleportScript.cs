@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TeleportScript : MonoBehaviour
 {
     public GameObject Canvas;
+    public GameObject PlayerCanvas;
     public ToggleManager togglemanager;
     public MapDiscover mapdiscover;
     public GameObject Player;
@@ -48,6 +49,7 @@ public class TeleportScript : MonoBehaviour
     private void OpenCanvas()
     {
         Canvas.SetActive(true);
+        PlayerCanvas.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0.0f;
@@ -101,6 +103,7 @@ public class TeleportScript : MonoBehaviour
     public void Cancel()
     {
         Canvas.SetActive(false);
+        PlayerCanvas.SetActive(true);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
