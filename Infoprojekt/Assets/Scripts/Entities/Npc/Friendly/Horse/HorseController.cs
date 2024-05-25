@@ -137,7 +137,7 @@ namespace Entities.Npc.Friendly.Horse
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Player") == rider)
+            if (collision.gameObject == rider.gameObject)
             {
                 Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
             }
