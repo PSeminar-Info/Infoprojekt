@@ -19,19 +19,23 @@ public class Trigger : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) Triggeractive = true;
+        if (other.CompareTag("Player"))
+        { Triggeractive = true;
+          
+        }
     }
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")) Triggeractive = false;
+        if (other.CompareTag("Player")) { Triggeractive = false; }
 
-        if (Chestopen) CloseChest();
+        if (Chestopen) { CloseChest(); }
     }
 
     private void OpenChest()
     {
-        transform.GetChild(1).RotateAround(transform.GetChild(3).position, Vector3.left, 60);
+        transform.GetChild(1).Rotate(new Vector3(-60, 0, 0), Space.Self);
+        transform.GetChild(1).Translate(new Vector4(0, 0.2f, 0f));
         Chestopen = true;
 
         // Inventar öffnen
@@ -39,7 +43,8 @@ public class Trigger : MonoBehaviour
 
     private void CloseChest()
     {
-        transform.GetChild(1).RotateAround(transform.GetChild(3).position, Vector3.left, -60);
+        transform.GetChild(1).Rotate(new Vector3(60, 0, 0), Space.Self);
+        transform.GetChild(1).Translate(new Vector4(0, -0.1f, 0.17f));
         Chestopen = false;
         // Inventar schließen
     }
