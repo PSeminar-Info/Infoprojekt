@@ -19,6 +19,11 @@ TagManager:
   - StartMap
   - TundraLake
   - BearHit
+  - HausUnten
+  - "HausGro\xDF"
+  - HausBerg
+  - HausGrau
+  - HausBerg2
   layers:
   - Default
   - TransparentFX
