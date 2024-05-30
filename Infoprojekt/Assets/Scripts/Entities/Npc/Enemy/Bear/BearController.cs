@@ -90,8 +90,6 @@ namespace Entities.Npc.Enemy.Bear
 
         private void Update()
         {
-            
-            Debug.Log(gameObject.transform.position + "" + _agent.destination);
             if (isDead)
             {
                 return;
@@ -166,7 +164,6 @@ namespace Entities.Npc.Enemy.Bear
                     float distanceToTarget = Vector3.Distance(transform.position, _agent.destination);
                     if (distanceToTarget < 0.5)
                     {
-                        Debug.Log("Stop Move");
                         SetAnimation(Idle);
                         _isMoving = false;
                     }
@@ -184,10 +181,8 @@ namespace Entities.Npc.Enemy.Bear
         // move to random location on navmesh
         private void MoveToRandomLocation()
         {
-            Debug.Log("Start move");
             _isMoving = true;
             _agent.SetDestination(RandomNavmeshLocation(maxMoveDistance, minMoveDistance));
-            Debug.Log(gameObject.transform.position + "" + _agent.destination);
             SetAnimation(WalkForward);
         }
 
@@ -249,7 +244,6 @@ namespace Entities.Npc.Enemy.Bear
             switch (attackType)
             {
                 case 0:// Sit down
-                    Debug.Log("Sit");
                     _isSitting = true;
                     _isSleeping = false;
                     _isMoving = false;
@@ -257,7 +251,6 @@ namespace Entities.Npc.Enemy.Bear
                     SetAnimation(Sit);
                     break;
                 case 1:// Stand up
-                    Debug.Log("Stand");
                     _isSitting = false;
                     _isSleeping = false;
                     _isMoving = false;
@@ -265,7 +258,6 @@ namespace Entities.Npc.Enemy.Bear
                     SetAnimation(Idle);
                     break;
                 case 2:// sleep
-                    Debug.Log("Sleep");
                     _isSitting = false;
                     _isSleeping = true;
                     _isMoving = false;
@@ -273,21 +265,18 @@ namespace Entities.Npc.Enemy.Bear
                     SetAnimation(Sleep_A);
                     break;
                 case 3:// Walk to random location
-                    Debug.Log("Walk");
                     _isSitting = false;
                     _isSleeping = false;
                     _isMoving = true;
                     MoveToRandomLocation();
                     break;
                 case 4:// Walk to random location
-                    Debug.Log("Walk");
                     _isSitting = false;
                     _isSleeping = false;
                     _isMoving = true;
                     MoveToRandomLocation();
                     break;
                 case 5:// Walk to random location
-                    Debug.Log("Walk");
                     _isSitting = false;
                     _isSleeping = false;
                     _isMoving = true;
