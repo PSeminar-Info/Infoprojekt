@@ -178,7 +178,6 @@ namespace Entities.Npc.Friendly.Horse
 
         private void OnHit()
         {
-            // hit_reaction has a separate layer in the animation controller so it can be played on top of other animations
             _animator.SetTrigger(HitReaction);
         }
 
