@@ -2,9 +2,12 @@ using System.Collections;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 namespace Entities.Npc.Enemy.Bear
 {
+    // Bear is great! Bear walks, bear stands, bear sleeps, bear sits, bear attacks. Bear very powerful.
+    // @author Bjoern
     public class BearController : Npc
     {
         // Animations
@@ -32,43 +35,41 @@ namespace Entities.Npc.Enemy.Bear
         public GameObject player;
         public int Health;
 
-        [Header("Movement")]
-        public float moveCooldown = 12f;
+        [Header("Movement & Cooldowns")]
+        // variables responsible for movement and general behaviour 
+        public float actionCooldown = 20f;
         public float minMoveDistance = 4f;
         public float maxMoveDistance = 70f;
         public float combatMoveDistance = 10f;
-        private float _lastMoveTime;
-        private float _lastSitTime;
-        private float _lastSleepTime;
-        public float sittingCooldown = 15f;
-        public float sleepCooldown = 20f;
-        public float awakeCooldown = 13f;
+        private float _lastActionTime;
+        private bool _isSleeping = false;
+        private bool _isSitting = false;
+        private bool _isMoving = false;
 
         [Header("Attack Prefab")]
         public GameObject bearHit;
 
         private NavMeshAgent _agent;
         private Animator _animator;
-
-        private float _lastActionTime;
         private Vector3 _spawnPosition;
 
-        private bool _isSleeping = false;
-        private bool _isSitting = false;
-        private bool _isDead = false;
+        // attack and general bools
+        public bool isNotActive = false;
+        private bool _isActive = false;
+        public bool isDead = false;
         private bool _isAttacking = false;
-        private bool _isMoving = false;
         private bool _isBuff = false;
-        private bool _isRunning = false;
 
         [Header("Audio")]
 
+        // this audio thing should work some work to be done on the range etc but very scary when bear running and screaming
         public AudioSource audiSource;
         public AudioClip audiClip;
 
 
         private void Start()
         {
+            isNotActive = true;
             _agent = GetComponent<NavMeshAgent>();
             _animator = GetComponentInChildren<Animator>();
             if (_animator == null)
@@ -78,9 +79,7 @@ namespace Entities.Npc.Enemy.Bear
             }
             _spawnPosition = transform.position;
             Health = 50;
-            _lastMoveTime = Time.time;
-            _lastSitTime = Time.time;
-            _lastSleepTime = Time.time;
+            _lastActionTime = Time.time;
 
             if (player == null)
             {
@@ -91,19 +90,49 @@ namespace Entities.Npc.Enemy.Bear
 
         private void Update()
         {
-            // if player in range: Attack stuff
+            
+            Debug.Log(gameObject.transform.position + "" + _agent.destination);
+            if (isDead)
+            {
+                return;
+            }
+            // ich habe keine Ahnung, warum hier zweimal isactive steht, habe ich heute um 3:00 Uhr gemacht lol wenn ich eins wegmache gehts nicht mehr
+            if (isNotActive)
+            {
+                if (!_isActive)
+                {
+                    SetAnimation(Idle);
+                    isDead = false;
+                    Health = 50;
+                    _lastActionTime = Time.time;
+                    Debug.Log("Bear set to active");
+                    _isActive = true;
+                    SetAnimation(Idle);
+                    return;
+                }
+            }
+            if (!isNotActive && _isActive)
+            {
+                Debug.Log("Bear set to inactive");
+                SetAnimation(Idle);
+                isDead = false;
+                Health = 50;
+                _lastActionTime = Time.time;
+                return;
+            }
+
+            // ATTACK
+            // if player is in range for activation
             if (IsInRange(player, activationRange))
             {
-                Debug.Log("In range");
                 _agent.speed = 7f;
                 if (_isAttacking)
                 {
-                    Debug.Log(_isRunning);
                     _agent.SetDestination(player.transform.position);
-                    if (Time.time - _lastActionTime > attackCooldown && IsInRange(player, attackRange))
+                    if (Time.time - _lastActionTime > attackCooldown && IsInRange(player, attackRange))// player in attack range: in hit distance
                     {
-                        StartCoroutine(ExecuteRandomAttack());
                         _lastActionTime = Time.time;
+                        StartCoroutine(ExecuteRandomAttack());
                     }
                 }
                 else
@@ -116,18 +145,22 @@ namespace Entities.Npc.Enemy.Bear
 
                 }
             }
-            // if player !in range: stop attack stuff, start normal
+            // NORMAL BEHAVIOUR 
+            // if player not in range
+            // also stops the attack mode
+            // randomly chooses normal behaviour after a cooldown 
             else
             {
-                Debug.Log("else");
                 _agent.speed = 2f;
                 _isAttacking = false;
-                if (Time.time - _lastMoveTime > moveCooldown)
+
+                if (Time.time - _lastActionTime > actionCooldown)
                 {
-                    Debug.Log("Move");
-                    _lastMoveTime = Time.time;
-                    MoveToRandomLocation();
+                    _lastActionTime = Time.time;
+                    StartCoroutine(StartRandomBehaviour());
                 }
+
+                // if the bear is in very close distance to the target of the agent destination, stop, Idle animation
                 if (_isMoving)
                 {
                     float distanceToTarget = Vector3.Distance(transform.position, _agent.destination);
@@ -136,37 +169,6 @@ namespace Entities.Npc.Enemy.Bear
                         Debug.Log("Stop Move");
                         SetAnimation(Idle);
                         _isMoving = false;
-                    }
-                }
-                if (Time.time - _lastMoveTime < moveCooldown && !_isMoving)
-                {
-                    Debug.Log("Test");
-                    if (Time.time - _lastSitTime > sittingCooldown)
-                    {
-                        if (_isSitting)
-                        {
-                            StandUp();
-                        }
-                        else
-                        {
-                            SitDown();
-                        }
-                    }
-                    else if (Time.time - _lastSleepTime > sleepCooldown)
-                    {
-                        if (_isSleeping)
-                        {
-
-                            Awake();
-                        }
-                        else
-                        {
-                            Sleep();
-                        }
-                    }
-                    else
-                    {
-                        SetAnimation(Idle);
                     }
                 }
             }
@@ -179,21 +181,26 @@ namespace Entities.Npc.Enemy.Bear
             _currentAnimation = animationName;
         }
 
+        // move to random location on navmesh
         private void MoveToRandomLocation()
         {
+            Debug.Log("Start move");
             _isMoving = true;
             _agent.SetDestination(RandomNavmeshLocation(maxMoveDistance, minMoveDistance));
+            Debug.Log(gameObject.transform.position + "" + _agent.destination);
             SetAnimation(WalkForward);
         }
 
+        // this method is for when the player group tells me what thing hits the bear when he should take damage
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Weapon"))
             {
-                Health -= 1;
+                TakeDamage(2);
             }
         }
 
+        // here the bear turns to player and screams at him, after that he attacks
         private IEnumerator Buff()
         {
             _isBuff = true;
@@ -209,6 +216,7 @@ namespace Entities.Npc.Enemy.Bear
             _isBuff = false;
         }
 
+        // choses a attack randomly, instantiates a prefab that is for the player to check if he is being hit
         private IEnumerator ExecuteRandomAttack()
         {
             int attackType = UnityEngine.Random.Range(0, 4);
@@ -234,40 +242,90 @@ namespace Entities.Npc.Enemy.Bear
             yield return null;
         }
 
-        private void SitDown()
+        // The following randomly chooses a normal, non attack behavioure to execute:
+        private IEnumerator StartRandomBehaviour()
         {
-            _lastSitTime = Time.time;
-            _isSitting = true;
-            SetAnimation(Sit);
+            int attackType = UnityEngine.Random.Range(0, 6);
+            switch (attackType)
+            {
+                case 0:// Sit down
+                    Debug.Log("Sit");
+                    _isSitting = true;
+                    _isSleeping = false;
+                    _isMoving = false;
+                    _agent.isStopped = true;
+                    SetAnimation(Sit);
+                    break;
+                case 1:// Stand up
+                    Debug.Log("Stand");
+                    _isSitting = false;
+                    _isSleeping = false;
+                    _isMoving = false;
+                    _agent.isStopped = true;
+                    SetAnimation(Idle);
+                    break;
+                case 2:// sleep
+                    Debug.Log("Sleep");
+                    _isSitting = false;
+                    _isSleeping = true;
+                    _isMoving = false;
+                    _agent.isStopped = true;
+                    SetAnimation(Sleep_A);
+                    break;
+                case 3:// Walk to random location
+                    Debug.Log("Walk");
+                    _isSitting = false;
+                    _isSleeping = false;
+                    _isMoving = true;
+                    MoveToRandomLocation();
+                    break;
+                case 4:// Walk to random location
+                    Debug.Log("Walk");
+                    _isSitting = false;
+                    _isSleeping = false;
+                    _isMoving = true;
+                    MoveToRandomLocation();
+                    break;
+                case 5:// Walk to random location
+                    Debug.Log("Walk");
+                    _isSitting = false;
+                    _isSleeping = false;
+                    _isMoving = true;
+                    MoveToRandomLocation();
+                    break;
+            }
+            yield return null;
         }
 
-        private void StandUp()
+        public bool IsHeDead()
         {
-            _lastSitTime = Time.time;
-            _isSitting = false;
-            SetAnimation(Stand);
-        }
-
-        private void Sleep()
-        {
-            _lastSleepTime = Time.time;
-            _isSleeping = true;
-            SetAnimation(Sleep_A);
-        }
-
-        private void Awake()
-        {
-            _lastSleepTime = Time.time;
-            _isSleeping = false;
-            SetAnimation(Idle);
+            if (Health <= 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void Die()
         {
-            if (_isDead) return;
-            _isDead = true;
+            if (isDead) return;
+            isDead = true;
             SetAnimation(Death);
             _agent.isStopped = true;
+        }
+
+        // no real usage for this yet, because I'm waiting for the player group to tell me their collider
+        public int TakeDamage(int amount)
+        {
+            Health -= amount;
+            if (IsHeDead())
+            {
+                Die();
+            }
+            return Health;
         }
     }
 }

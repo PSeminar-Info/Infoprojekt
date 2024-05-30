@@ -2276,22 +2276,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
   isInvincible: 0
-  health: 1
-  maxHealth: 1
-  attackCooldown: 1
+  health: 50
+  maxHealth: 50
+  attackCooldown: 4
   attackRange: 5
   activationRange: 60
   rotationSpeed: 5
   player: {fileID: 0}
-  Health: 0
-  moveCooldown: 12
-  minMoveDistance: 4
+  Health: 50
+  actionCooldown: 20
+  minMoveDistance: 1
   maxMoveDistance: 70
   combatMoveDistance: 10
-  sittingCooldown: 15
-  sleepCooldown: 20
-  awakeCooldown: 13
   bearHit: {fileID: 5672304954272133288, guid: a28e068d818d2624aa3b0a72bfed7b4b, type: 3}
+  isNotActive: 0
+  isDead: 0
   audiSource: {fileID: 5620209226058068073}
   audiClip: {fileID: 8300000, guid: bba54a683491b434484eebf1b72c34d4, type: 3}
 --- !u!195 &8665936709541584741
