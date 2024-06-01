@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
@@ -123,7 +124,7 @@ namespace Entities.Npc.Enemy.Bear
             // if player is in range for activation
             if (IsInRange(player, activationRange))
             {
-                _agent.speed = 7f;
+                _agent.speed = 3f;
                 if (_isAttacking)
                 {
                     _agent.SetDestination(player.transform.position);
@@ -189,10 +190,31 @@ namespace Entities.Npc.Enemy.Bear
         // this method is for when the player group tells me what thing hits the bear when he should take damage
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Weapon"))
+            if (other.gameObject.tag == "sword")
             {
-                TakeDamage(2);
+                TakeDamage(7);
+                Debug.Log("SWORD" + Health);
             }
+            if (other.gameObject.tag == "arrow")
+            {
+                TakeDamage(3);
+                Debug.Log("ARROW" + Health);
+            }
+        }
+
+        private void OnCollisionEnter(Collision col)
+        {
+            if (col.gameObject.tag == "sword")
+            {
+                TakeDamage(7);
+                Debug.Log("SWORD2" + Health);
+            }
+            if (col.gameObject.tag == "arrow")
+            {
+                TakeDamage(3);
+                Debug.Log("ARROW2  " + Health);
+            }
+            Debug.Log(col.gameObject.tag + " " + col.gameObject.name);
         }
 
         // here the bear turns to player and screams at him, after that he attacks
