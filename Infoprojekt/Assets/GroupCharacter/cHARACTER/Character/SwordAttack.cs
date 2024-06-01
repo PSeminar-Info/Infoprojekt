@@ -45,7 +45,6 @@ public class SwordAttack : MonoBehaviour
             // Überprüfe, ob das getroffene Objekt den Tag "enemy" hat
             if (hitCollider.CompareTag("enemy"))
             {
-                Debug.Log("treffer mit schwert ig");
                 ApplyDamageAndKnockback(hitCollider.gameObject, damageAmount);
                 if (hitCollider.gameObject.name == "Bear") 
                 {
