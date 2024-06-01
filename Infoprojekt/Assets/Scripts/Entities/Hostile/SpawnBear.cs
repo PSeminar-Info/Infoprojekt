@@ -24,7 +24,6 @@ public class SpawnBear : MonoBehaviour
     {
         if (BearController.isDead)
         {
-            print("geh zum friedhof");
             info.text = "Suche den Friedhof";
         }
     }
