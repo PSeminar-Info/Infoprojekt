@@ -211,7 +211,7 @@ namespace Entities.Npc.Enemy.Bear
             }
             if (col.gameObject.tag == "arrow")
             {
-                TakeDamage(3);
+                TakeDamage(5);
                 Debug.Log("ARROW2  " + Health);
             }
             Debug.Log(col.gameObject.tag + " " + col.gameObject.name);

@@ -1,3 +1,4 @@
+using Entities.Npc.Enemy.Bear;
 using Entities.Npc.Enemy.Wizard;
 using UnityEngine;
 
@@ -44,9 +45,13 @@ public class SwordAttack : MonoBehaviour
             // Überprüfe, ob das getroffene Objekt den Tag "enemy" hat
             if (hitCollider.CompareTag("enemy"))
             {
-                Debug.Log("müsstegehen");
-
+                Debug.Log("treffer mit schwert ig");
                 ApplyDamageAndKnockback(hitCollider.gameObject, damageAmount);
+                if (hitCollider.gameObject.name == "Bear") 
+                {
+                    var enemybear = hitCollider.gameObject.GetComponent<BearController>();
+                    enemybear.TakeDamage(13);
+                }
             }
     }
 
