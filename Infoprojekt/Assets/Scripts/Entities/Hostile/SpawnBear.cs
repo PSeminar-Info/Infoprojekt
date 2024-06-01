@@ -9,6 +9,7 @@ public class SpawnBear : MonoBehaviour
     public GameObject Bear;
     BearController BearController;
     public Text info;
+    private bool retu = false;
 
     public void Start()
     {
@@ -22,9 +23,10 @@ public class SpawnBear : MonoBehaviour
 
     public void Update()
     {
-        if (BearController.isDead)
+        if (BearController.isDead && retu == false) // also check that this only executes once beacuse otherwise you could change text in the future
         {
             info.text = "Suche den Friedhof";
+            retu = true;
         }
     }
 }
