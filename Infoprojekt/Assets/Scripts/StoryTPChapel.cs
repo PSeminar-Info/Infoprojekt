@@ -6,16 +6,17 @@ public class NewBehaviourScript : MonoBehaviour
 {
     public GameObject LazyLake;
     public GameObject StartMap;
+    public GameObject Player;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            GameObject.FindWithTag("Player").SetActive(false);
+            Player.SetActive(false);
             LazyLake.SetActive(true);
-            GameObject.FindWithTag("Player").transform.position = new Vector3(-154, 15, -19);
-            StartMap.SetActive(true);
-            GameObject.FindWithTag("Player").SetActive(true);
+            Player.transform.position = new Vector3(-154, 15, -19);
+            StartMap.SetActive(false);
+            Player.SetActive(true);
         }
     }
 }
