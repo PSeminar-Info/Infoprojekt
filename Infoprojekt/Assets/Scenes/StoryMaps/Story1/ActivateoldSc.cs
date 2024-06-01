@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class ActivateoldSc : MonoBehaviour
 {
+    Scene JoinedMaps;
+
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.LoadScene("AfterLazyLake");
+        SceneManager.LoadScene("JoinedMap");
+       //hier muss noch hin das er zu fisherslake teleportiert wird bitte
 
     }
 

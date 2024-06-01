@@ -90,6 +90,7 @@ public class TeleportScript : MonoBehaviour
         }
 
         Cancel();
+        enter = false;
     }
 
     private void ActivateLocation(GameObject activeLocation)
