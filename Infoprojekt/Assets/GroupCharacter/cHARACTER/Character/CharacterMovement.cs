@@ -134,9 +134,9 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(opendings)
+        if (opendings)
         {
-            
+
             panelDings.SetActive(true);
             PanelNormal.SetActive(false);
             Cursor.visible = true;
@@ -146,7 +146,7 @@ public class CharacterMovement : MonoBehaviour
 
 
         }
-        if(PanelNormal.active)
+        if (PanelNormal.active)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -193,6 +193,7 @@ public class CharacterMovement : MonoBehaviour
         input.CharacterControls.Disable();
     }
 
+    // was macht das???
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Collectable" && pickUpPressed)
@@ -202,20 +203,22 @@ public class CharacterMovement : MonoBehaviour
             var script = other.gameObject.GetComponent<ItemPickUp>();
             script.EPressed = true;
         }
-        
+
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "attack")
         {
-            Debug.Log("getroofen");
             plhe.Health -= 5;
         }
-        if(other.gameObject.tag == "storyone")
+        if (other.gameObject.tag == "storyone")
         {
-            Debug.Log("story");
             SceneManager.LoadScene(sceneName);
             Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "BearHit")//Bear macht mehr schaden
+        {
+            plhe.Health -= 10;
         }
     }
 
