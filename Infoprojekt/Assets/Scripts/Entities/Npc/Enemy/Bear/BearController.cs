@@ -24,48 +24,53 @@ namespace Entities.Npc.Enemy.Bear
         private static readonly int Sit = Animator.StringToHash("Sit");
         private static readonly int Stand = Animator.StringToHash("Idle");
         private static readonly int SleepA = Animator.StringToHash("Sleep");
-        private int _currentAnimation = Idle;
 
-        [Header("Combat")]
-        public float attackCooldown = 1f;
+        [Header("Combat")] public float attackCooldown = 1f;
+
         public float attackRange = 5f;
         public float activationRange = 60f;
         public float rotationSpeed = 10f;
+
         public GameObject player;
+
         // Entity Class already assigns a health value, don't get the point of this
         [FormerlySerializedAs("Health")] public int hp;
 
         [Header("Movement & Cooldowns")]
         // variables responsible for movement and general behaviour 
         public float actionCooldown = 20f;
+
         public float minMoveDistance = 4f;
         public float maxMoveDistance = 70f;
         public float combatMoveDistance = 10f;
-        private float _lastActionTime;
-        private bool _isSleeping;
-        private bool _isSitting;
-        private bool _isMoving;
 
-        [Header("Attack Prefab")]
-        public GameObject bearHit;
-
-        private NavMeshAgent _agent;
-        private Animator _animator;
-        // unused
-        private Vector3 _spawnPosition;
+        [Header("Attack Prefab")] public GameObject bearHit;
 
         // attack and general bools
         public bool isNotActive;
-        private bool _isActive;
         public bool isDead;
-        private bool _isAttacking;
-        private bool _isBuff;
 
         [Header("Audio")]
 
         // this audio thing should work some work to be done on the range etc. but very scary when bear running and screaming
         public AudioSource audiSource;
+
         public AudioClip audiClip;
+
+        private NavMeshAgent _agent;
+        private Animator _animator;
+        private int _currentAnimation = Idle;
+        private bool _isActive;
+        private bool _isAttacking;
+        private bool _isBuff;
+        private bool _isMoving;
+        private bool _isSitting;
+        private bool _isSleeping;
+
+        private float _lastActionTime;
+
+        // unused
+        private Vector3 _spawnPosition;
 
 
         private void Start()
@@ -78,6 +83,7 @@ namespace Entities.Npc.Enemy.Bear
                 Debug.LogError("Animator not found on " + gameObject.name);
                 return;
             }
+
             _spawnPosition = transform.position;
             hp = 50;
             _lastActionTime = Time.time;
@@ -91,13 +97,9 @@ namespace Entities.Npc.Enemy.Bear
 
         private void Update()
         {
-            if (isDead)
-            {
-                return;
-            }
+            if (isDead) return;
             // ich habe keine Ahnung, warum hier zweimal isactive steht, habe ich heute um 3:00 Uhr gemacht lol, wenn ich eins wegmache gehts nicht mehr
             if (isNotActive)
-            {
                 if (!_isActive)
                 {
                     SetAnimation(Idle);
@@ -109,7 +111,7 @@ namespace Entities.Npc.Enemy.Bear
                     SetAnimation(Idle);
                     return;
                 }
-            }
+
             if (!isNotActive && _isActive)
             {
                 Debug.Log("Bear set to inactive");
@@ -128,7 +130,8 @@ namespace Entities.Npc.Enemy.Bear
                 if (_isAttacking)
                 {
                     _agent.SetDestination(player.transform.position);
-                    if (Time.time - _lastActionTime > attackCooldown && IsInRange(player, attackRange))// player in attack range: in hit distance
+                    if (Time.time - _lastActionTime > attackCooldown &&
+                        IsInRange(player, attackRange)) // player in attack range: in hit distance
                     {
                         _lastActionTime = Time.time;
                         StartCoroutine(ExecuteRandomAttack());
@@ -141,7 +144,6 @@ namespace Entities.Npc.Enemy.Bear
                         _isMoving = false;
                         StartCoroutine(Buff());
                     }
-
                 }
             }
             // NORMAL BEHAVIOUR 
@@ -172,6 +174,41 @@ namespace Entities.Npc.Enemy.Bear
             }
         }
 
+        private void OnCollisionEnter(Collision col)
+        {
+            if (col.gameObject.CompareTag("sword"))
+            {
+                TakeDamage(7);
+                Debug.Log("SWORD2" + hp);
+            }
+
+            // TODO The tag is not defined in the 'Tags & Layers'. Expression will return false.
+            if (col.gameObject.CompareTag("arrow"))
+            {
+                TakeDamage(5);
+                Debug.Log("ARROW2  " + hp);
+            }
+
+            Debug.Log(col.gameObject.tag + " " + col.gameObject.name);
+        }
+
+        // this method is for when the player group tells me what thing hits the bear when he should take damage
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("sword"))
+            {
+                TakeDamage(7);
+                Debug.Log("SWORD" + hp);
+            }
+
+            // TODO The tag is not defined in the 'Tags & Layers'. Expression will return false.
+            if (other.gameObject.CompareTag("arrow"))
+            {
+                TakeDamage(3);
+                Debug.Log("ARROW" + hp);
+            }
+        }
+
         private void SetAnimation(int animationName)
         {
             if (_currentAnimation == animationName) return;
@@ -185,38 +222,6 @@ namespace Entities.Npc.Enemy.Bear
             _isMoving = true;
             _agent.SetDestination(RandomNavmeshLocation(maxMoveDistance, minMoveDistance));
             SetAnimation(WalkForward);
-        }
-
-        // this method is for when the player group tells me what thing hits the bear when he should take damage
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.CompareTag("sword"))
-            {
-                TakeDamage(7);
-                Debug.Log("SWORD" + hp);
-            }
-            // TODO The tag is not defined in the 'Tags & Layers'. Expression will return false.
-            if (other.gameObject.CompareTag("arrow"))
-            {
-                TakeDamage(3);
-                Debug.Log("ARROW" + hp);
-            }
-        }
-
-        private void OnCollisionEnter(Collision col)
-        {
-            if (col.gameObject.CompareTag("sword"))
-            {
-                TakeDamage(7);
-                Debug.Log("SWORD2" + hp);
-            }
-            // TODO The tag is not defined in the 'Tags & Layers'. Expression will return false.
-            if (col.gameObject.CompareTag("arrow"))
-            {
-                TakeDamage(5);
-                Debug.Log("ARROW2  " + hp);
-            }
-            Debug.Log(col.gameObject.tag + " " + col.gameObject.name);
         }
 
         // here the bear turns to player and screams at him, after that he attacks
@@ -257,6 +262,7 @@ namespace Entities.Npc.Enemy.Bear
                     Instantiate(bearHit, transform.position, transform.rotation);
                     break;
             }
+
             yield return null;
         }
 
@@ -266,46 +272,47 @@ namespace Entities.Npc.Enemy.Bear
             var attackType = Random.Range(0, 6);
             switch (attackType)
             {
-                case 0:// Sit down
+                case 0: // Sit down
                     _isSitting = true;
                     _isSleeping = false;
                     _isMoving = false;
                     _agent.isStopped = true;
                     SetAnimation(Sit);
                     break;
-                case 1:// Stand up
+                case 1: // Stand up
                     _isSitting = false;
                     _isSleeping = false;
                     _isMoving = false;
                     _agent.isStopped = true;
                     SetAnimation(Idle);
                     break;
-                case 2:// sleep
+                case 2: // sleep
                     _isSitting = false;
                     _isSleeping = true;
                     _isMoving = false;
                     _agent.isStopped = true;
                     SetAnimation(SleepA);
                     break;
-                case 3:// Walk to random location
+                case 3: // Walk to random location
                     _isSitting = false;
                     _isSleeping = false;
                     _isMoving = true;
                     MoveToRandomLocation();
                     break;
-                case 4:// Walk to random location
+                case 4: // Walk to random location
                     _isSitting = false;
                     _isSleeping = false;
                     _isMoving = true;
                     MoveToRandomLocation();
                     break;
-                case 5:// Walk to random location
+                case 5: // Walk to random location
                     _isSitting = false;
                     _isSleeping = false;
                     _isMoving = true;
                     MoveToRandomLocation();
                     break;
             }
+
             yield return null;
         }
 
@@ -326,10 +333,7 @@ namespace Entities.Npc.Enemy.Bear
         public int TakeDamage(int amount)
         {
             hp -= amount;
-            if (IsHeDead())
-            {
-                Die();
-            }
+            if (IsHeDead()) Die();
             return hp;
         }
     }

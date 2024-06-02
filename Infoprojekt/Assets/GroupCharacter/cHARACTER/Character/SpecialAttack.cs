@@ -6,7 +6,7 @@ namespace GroupCharacter.cHARACTER.Character
     {
         public float explosionRadius = 5f;
         public float explosionForce = 1000000f;
-        public  int damageAmount = 40;
+        public int damageAmount = 40;
 
         private void Start()
         {

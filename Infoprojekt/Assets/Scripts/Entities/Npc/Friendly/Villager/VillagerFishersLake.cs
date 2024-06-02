@@ -9,7 +9,7 @@ namespace Entities.Npc.Friendly.Villager
 
         public void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))  info.text = "Gehe zur Burg";
+            if (other.CompareTag("Player")) info.text = "Gehe zur Burg";
         }
     }
 }

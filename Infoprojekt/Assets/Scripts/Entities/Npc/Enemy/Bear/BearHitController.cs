@@ -14,10 +14,7 @@ namespace Entities.Npc.Enemy.Bear
 
         private void Update()
         {
-            if (Time.time - _lastActionTime > DespawnTime)
-            {
-                Destroy(gameObject);
-            }
+            if (Time.time - _lastActionTime > DespawnTime) Destroy(gameObject);
         }
     }
 }

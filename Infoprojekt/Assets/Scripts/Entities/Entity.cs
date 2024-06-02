@@ -18,10 +18,7 @@ namespace Entities
 
         private void Update()
         {
-            if (health <= 0)
-            {
-                OnDeath();
-            }
+            if (health <= 0) OnDeath();
         }
 
         private void OnDeath()

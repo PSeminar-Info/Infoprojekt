@@ -6,16 +6,14 @@ namespace Scenes.StoryMaps.Story1
     {
         // Start is called before the first frame update
         public string scenename;
-        void Start()
-        {
 
+        private void Start()
+        {
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
-
         }
-    
     }
 }

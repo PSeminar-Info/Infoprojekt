@@ -9,7 +9,10 @@ namespace Terrain.See.Scripts
     {
         [FormerlySerializedAs("Canvas")] public GameObject canvas;
         [FormerlySerializedAs("PlayerCanvas")] public GameObject playerCanvas;
-        [FormerlySerializedAs("togglemanager")] public ToggleManager toggleManager;
+
+        [FormerlySerializedAs("togglemanager")]
+        public ToggleManager toggleManager;
+
         public MapDiscover mapdiscover;
         [FormerlySerializedAs("Player")] public GameObject player;
         [FormerlySerializedAs("LazyLake")] public GameObject lazyLake;
@@ -44,27 +47,11 @@ namespace Terrain.See.Scripts
         private void Update()
         {
             if (teleportText && _enter)
-            {
                 teleportText.gameObject.SetActive(true);
-            } else
-            {
+            else
                 teleportText.gameObject.SetActive(false);
-            }
 
-            if (Input.GetKeyDown(KeyCode.F) && _enter && canvas)
-            {
-                OpenCanvas();
-            }
-        }
-
-        private void OpenCanvas()
-        {
-            canvas.SetActive(true);
-            playerCanvas.SetActive(false);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0.0f;
-            player.SetActive(false);
+            if (Input.GetKeyDown(KeyCode.F) && _enter && canvas) OpenCanvas();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -75,6 +62,16 @@ namespace Terrain.See.Scripts
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player")) _enter = false;
+        }
+
+        private void OpenCanvas()
+        {
+            canvas.SetActive(true);
+            playerCanvas.SetActive(false);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0.0f;
+            player.SetActive(false);
         }
 
         public void Teleport()
@@ -89,6 +86,7 @@ namespace Terrain.See.Scripts
             {
                 Debug.Log("Fehler");
             }
+
             Cancel();
             _enter = false;
         }

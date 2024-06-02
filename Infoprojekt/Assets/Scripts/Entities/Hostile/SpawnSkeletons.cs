@@ -12,7 +12,9 @@ namespace Entities.Hostile
         private void OnTriggerEnter(Collider other)
         {
             skeletonArmy.SetActive(true);
-            if (other.CompareTag("Player")) info.text = "Bleibe auf dem Weg und halte dich fern von den Skeletten ... vielleicht kannst du dich ja irgendwo verstecken";
+            if (other.CompareTag("Player"))
+                info.text =
+                    "Bleibe auf dem Weg und halte dich fern von den Skeletten ... vielleicht kannst du dich ja irgendwo verstecken";
         }
     }
 }

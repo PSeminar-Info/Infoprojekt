@@ -5,9 +5,8 @@ namespace Terrain.See.Scripts
 {
     public class MapDiscover : MonoBehaviour
     {
-
         public bool forest;
-        public bool graveyard; 
+        public bool graveyard;
         public bool castle;
         [FormerlySerializedAs("lazylake")] public bool lazyLake;
 
