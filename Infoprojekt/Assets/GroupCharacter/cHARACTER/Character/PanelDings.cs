@@ -1,22 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace GroupCharacter.cHARACTER.Character
+public class PanelDings : MonoBehaviour
 {
-    public class PanelDings : MonoBehaviour
+    // Start is called before the first frame update
+    public GameObject panelSettings;
+    public GameObject panelInfos;
+    public GameObject panelCredits;
+    public GameObject texte;
+    void Start()
     {
-        // Start is called before the first frame update
-        public GameObject panelSettings;
-        public GameObject panelInfos;
-        public GameObject panelCredits;
-
-        public void OpenPanel(GameObject abc)
-        {
-            abc.SetActive(true);
-        }
-
-        public void ClosePanel(GameObject abc)
-        {
-            abc.SetActive(false);
-        }
+        
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    public void OpenPanel(GameObject abc)
+    {
+        abc.SetActive(true);
+    }
+    public void ClosePanel(GameObject abc)
+    {
+        abc.SetActive(false);
+        texte.SetActive(true);
+    }
+
+
 }
