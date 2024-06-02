@@ -7776,6 +7776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1708412540}
+  canvas2: {fileID: 1287636408}
   playerCanvas: {fileID: 213663179}
   toggleManager: {fileID: 216684060}
   mapdiscover: {fileID: 216684059}
@@ -9457,6 +9458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1708412540}
+  canvas2: {fileID: 1287636408}
   playerCanvas: {fileID: 213663179}
   toggleManager: {fileID: 253206066}
   mapdiscover: {fileID: 253206065}
@@ -10573,6 +10575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1708412540}
+  canvas2: {fileID: 1287636408}
   playerCanvas: {fileID: 213663179}
   toggleManager: {fileID: 290310387}
   mapdiscover: {fileID: 290310388}
@@ -14393,7 +14396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15955,6 +15958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1708412540}
+  canvas2: {fileID: 1287636408}
   playerCanvas: {fileID: 213663179}
   toggleManager: {fileID: 437664766}
   mapdiscover: {fileID: 437664765}
@@ -27104,7 +27108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736508510}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25669873, y: 0.17152336, z: -0.04634623, w: 0.9500198}
+  m_LocalRotation: {x: 0.25669873, y: 0.17152333, z: -0.04634622, w: 0.9500198}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -33088,6 +33092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1708412540}
+  canvas2: {fileID: 1287636408}
   playerCanvas: {fileID: 213663179}
   toggleManager: {fileID: 972093532}
   mapdiscover: {fileID: 972093531}
@@ -34733,6 +34738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1708412540}
+  canvas2: {fileID: 1287636408}
   playerCanvas: {fileID: 213663179}
   toggleManager: {fileID: 1024884189}
   mapdiscover: {fileID: 1024884188}
@@ -44965,7 +44971,7 @@ GameObject:
   - component: {fileID: 1287636409}
   m_Layer: 5
   m_Name: Teleport
-  m_TagString: Untagged
+  m_TagString: Teleport
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49172,7 +49178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -56474,6 +56480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1708412540}
+  canvas2: {fileID: 1287636408}
   playerCanvas: {fileID: 213663179}
   toggleManager: {fileID: 1633124050}
   mapdiscover: {fileID: 1633124049}
@@ -58910,7 +58917,7 @@ GameObject:
   - component: {fileID: 1708412541}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Teleport
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61128,7 +61135,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770432348}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2730149, y: 0.18741448, z: -0.05431661, w: 0.94201297}
+  m_LocalRotation: {x: 0.27301487, y: 0.1874145, z: -0.054316595, w: 0.94201297}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -61441,73 +61448,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
---- !u!1 &1781394107
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1781394110}
-  - component: {fileID: 1781394109}
-  - component: {fileID: 1781394108}
-  m_Layer: 0
-  m_Name: TriggerTextStory2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1781394108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781394107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 347de99cf7bc04543951d3cc76123f23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  info: {fileID: 2034096675}
---- !u!135 &1781394109
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781394107}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 10
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &1781394110
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781394107}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 484.38, y: 53.6, z: 231.85}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1781648797
 GameObject:
   m_ObjectHideFlags: 0
@@ -63771,7 +63711,7 @@ GameObject:
   - component: {fileID: 1844123603}
   - component: {fileID: 1844123606}
   m_Layer: 0
-  m_Name: TriggerTextStory2
+  m_Name: Sphere
   m_TagString: storytwo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67100,7 +67040,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906348857}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25669873, y: 0.17152338, z: -0.04634623, w: 0.9500198}
+  m_LocalRotation: {x: 0.25669873, y: 0.17152333, z: -0.046346217, w: 0.9500198}
   m_LocalPosition: {x: 862.97, y: 82.95, z: -202.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -72579,7 +72519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -79202,4 +79142,3 @@ SceneRoots:
   - {fileID: 1420307282}
   - {fileID: 1166989404}
   - {fileID: 1123774649}
-  - {fileID: 1781394110}

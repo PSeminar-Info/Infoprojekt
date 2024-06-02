@@ -8,6 +8,7 @@ namespace Terrain.See.Scripts
     public class TeleportScript : MonoBehaviour
     {
         [FormerlySerializedAs("Canvas")] public GameObject canvas;
+        public GameObject canvas2;
         [FormerlySerializedAs("PlayerCanvas")] public GameObject playerCanvas;
 
         [FormerlySerializedAs("togglemanager")]
@@ -67,6 +68,7 @@ namespace Terrain.See.Scripts
         private void OpenCanvas()
         {
             canvas.SetActive(true);
+            canvas2.SetActive(true);
             playerCanvas.SetActive(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

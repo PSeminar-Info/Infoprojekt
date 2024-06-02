@@ -27,12 +27,12 @@ EditorBuildSettings:
     path: Assets/Scenes/StoryMaps/StartMap.unity
     guid: 3f36185c752dffc47aa067021874dfe1
   - enabled: 1
+    path: Assets/Scenes/StoryMaps/JoinedMap.unity
+    guid: c3f2475fe2985054fa7814c1cb4e2536
+  - enabled: 1
     path: Assets/Scenes/StoryMaps/Story2.unity
     guid: 146147501bb60f044aa84be0d63bb25b
   - enabled: 1
     path: Assets/Scenes/StoryMaps/Story1/StoryOne.unity
     guid: f6a2ad2d1d9b0fe4987457d7da91ed4d
-  - enabled: 1
-    path: Assets/Scenes/StoryMaps/JoinedMap.unity
-    guid: c3f2475fe2985054fa7814c1cb4e2536
   m_configObjects: {}
