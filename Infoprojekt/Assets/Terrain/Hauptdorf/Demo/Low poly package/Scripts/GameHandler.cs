@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 
-public class GameHandler : MonoBehaviour
+namespace Terrain.Hauptdorf.Demo.Low_poly_package.Scripts
 {
-    private void Start()
+    public class GameHandler : MonoBehaviour
     {
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) ScreenshotHandler.TakeScreenshot_Static(1024, 768);
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space)) ScreenshotHandler.TakeScreenshot_Static(1024, 768);
+        }
     }
 }

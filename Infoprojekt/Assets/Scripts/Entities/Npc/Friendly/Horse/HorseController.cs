@@ -33,7 +33,7 @@ namespace Entities.Npc.Friendly.Horse
         {
             Walk,
             Trot,
-            Run,
+            Run
         }
 
         public float minimumCooldown = 4f;

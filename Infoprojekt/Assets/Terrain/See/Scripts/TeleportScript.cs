@@ -1,112 +1,114 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class TeleportScript : MonoBehaviour
+namespace Terrain.See.Scripts
 {
-    public GameObject Canvas;
-    public GameObject PlayerCanvas;
-    public ToggleManager togglemanager;
-    public MapDiscover mapdiscover;
-    public GameObject Player;
-    public GameObject LazyLake;
-    public GameObject StartMap;
-    public GameObject TundraLake;
-
-    public ToggleGroup ToggleGroup;
-    public Text TeleportText;
-
-    private bool enter;
-
-    private bool showGUI;
-
-    private Dictionary<string, (GameObject activeMap, Vector3 position)> teleportLocations;
-
-    private void Start()
+    public class TeleportScript : MonoBehaviour
     {
-        Canvas.SetActive(false);
+        [FormerlySerializedAs("Canvas")] public GameObject canvas;
+        [FormerlySerializedAs("PlayerCanvas")] public GameObject playerCanvas;
+        [FormerlySerializedAs("togglemanager")] public ToggleManager toggleManager;
+        public MapDiscover mapdiscover;
+        [FormerlySerializedAs("Player")] public GameObject player;
+        [FormerlySerializedAs("LazyLake")] public GameObject lazyLake;
+        [FormerlySerializedAs("StartMap")] public GameObject startMap;
+        [FormerlySerializedAs("TundraLake")] public GameObject tundraLake;
 
-        teleportLocations = new Dictionary<string, (GameObject, Vector3)>
-        {
-            { "lazylake", (LazyLake, new Vector3(-154, 15, -19)) },
-            { "fisherslake", (TundraLake, new Vector3(223, 31, 201)) },
-            { "village", (StartMap, new Vector3(861, 68, -147)) },
-            { "tundracastle", (TundraLake, new Vector3(493, 56, 219)) },
-            { "forest", (StartMap, new Vector3(423, 41, -309)) },
-            { "graveyard", (StartMap, new Vector3(345, 27, -564)) },
-            { "castle", (StartMap, new Vector3(156, 16, -205)) }
-        };
-    }
+        [FormerlySerializedAs("ToggleGroup")] public ToggleGroup toggleGroup;
+        [FormerlySerializedAs("TeleportText")] public Text teleportText;
 
-    private void Update()
-    {
-        if (TeleportText != null && enter)
+        private bool _enter;
+
+        private bool _showGUI;
+
+        private Dictionary<string, (GameObject activeMap, Vector3 position)> _teleportLocations;
+
+        private void Start()
         {
-            TeleportText.gameObject.SetActive(true);
-        } else
-        {
-            TeleportText.gameObject.SetActive(false);
+            canvas.SetActive(false);
+
+            _teleportLocations = new Dictionary<string, (GameObject, Vector3)>
+            {
+                { "lazylake", (lazyLake, new Vector3(-154, 15, -19)) },
+                { "fisherslake", (tundraLake, new Vector3(223, 31, 201)) },
+                { "village", (startMap, new Vector3(861, 68, -147)) },
+                { "tundracastle", (tundraLake, new Vector3(493, 56, 219)) },
+                { "forest", (startMap, new Vector3(423, 41, -309)) },
+                { "graveyard", (startMap, new Vector3(345, 27, -564)) },
+                { "castle", (startMap, new Vector3(156, 16, -205)) }
+            };
         }
 
-        if (Input.GetKeyDown(KeyCode.F) && enter && Canvas != null)
+        private void Update()
         {
-            OpenCanvas();
+            if (teleportText && _enter)
+            {
+                teleportText.gameObject.SetActive(true);
+            } else
+            {
+                teleportText.gameObject.SetActive(false);
+            }
+
+            if (Input.GetKeyDown(KeyCode.F) && _enter && canvas)
+            {
+                OpenCanvas();
+            }
         }
-    }
 
-    private void OpenCanvas()
-    {
-        Canvas.SetActive(true);
-        PlayerCanvas.SetActive(false);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        Time.timeScale = 0.0f;
-        Player.SetActive(false);
-    }
+        private void OpenCanvas()
+        {
+            canvas.SetActive(true);
+            playerCanvas.SetActive(false);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0.0f;
+            player.SetActive(false);
+        }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player")) enter = true;
-    }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player")) _enter = true;
+        }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player")) enter = false;
-    }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player")) _enter = false;
+        }
 
-    public void Teleport()
-    {
-            string mapName = togglemanager.GetMap();
-            if (teleportLocations.TryGetValue(mapName, out var location))
+        public void Teleport()
+        {
+            var mapName = toggleManager.GetMap();
+            if (_teleportLocations.TryGetValue(mapName, out var location))
             {
                 ActivateLocation(location.activeMap);
-                Player.transform.position = location.position;
+                player.transform.position = location.position;
             }
             else
             {
-            Debug.Log("Fehler");
+                Debug.Log("Fehler");
             }
             Cancel();
-            enter = false;
-    }
+            _enter = false;
+        }
 
-    private void ActivateLocation(GameObject activeLocation)
-    {
-        LazyLake.SetActive(activeLocation == LazyLake);
-        StartMap.SetActive(activeLocation == StartMap);
-        TundraLake.SetActive(activeLocation == TundraLake);
-    }
+        private void ActivateLocation(GameObject activeLocation)
+        {
+            lazyLake.SetActive(activeLocation == lazyLake);
+            startMap.SetActive(activeLocation == startMap);
+            tundraLake.SetActive(activeLocation == tundraLake);
+        }
 
 
-    public void Cancel()
-    {
-        Canvas.SetActive(false);
-        PlayerCanvas.SetActive(true);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1f;
-        Player.SetActive(true);
+        public void Cancel()
+        {
+            canvas.SetActive(false);
+            playerCanvas.SetActive(true);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1f;
+            player.SetActive(true);
+        }
     }
 }

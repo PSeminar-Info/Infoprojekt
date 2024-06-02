@@ -1777,7 +1777,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 290310387}
         m_TargetAssemblyTypeName: ToggleManager, Assembly-CSharp
-        m_MethodName: changefisherslake
+        m_MethodName: Changefisherslake
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5944,7 +5944,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 290310387}
         m_TargetAssemblyTypeName: ToggleManager, Assembly-CSharp
-        m_MethodName: changeforest
+        m_MethodName: Changeforest
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8555,7 +8555,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 290310387}
         m_TargetAssemblyTypeName: ToggleManager, Assembly-CSharp
-        m_MethodName: changegraveyard
+        m_MethodName: Changegraveyard
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9230,7 +9230,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 290310387}
         m_TargetAssemblyTypeName: ToggleManager, Assembly-CSharp
-        m_MethodName: changevillage
+        m_MethodName: Changevillage
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11066,7 +11066,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 290310387}
         m_TargetAssemblyTypeName: ToggleManager, Assembly-CSharp
-        m_MethodName: changecastle
+        m_MethodName: Changecastle
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11768,7 +11768,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 290310387}
         m_TargetAssemblyTypeName: ToggleManager, Assembly-CSharp
-        m_MethodName: changetundracastle
+        m_MethodName: Changetundracastle
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14434,7 +14434,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 290310387}
         m_TargetAssemblyTypeName: ToggleManager, Assembly-CSharp
-        m_MethodName: changelazylake
+        m_MethodName: Changelazylake
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

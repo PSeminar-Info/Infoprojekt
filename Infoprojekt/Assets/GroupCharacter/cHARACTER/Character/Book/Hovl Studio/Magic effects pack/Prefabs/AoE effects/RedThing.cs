@@ -1,37 +1,40 @@
 using UnityEngine;
 
-public class RedThing : MonoBehaviour
+namespace GroupCharacter.cHARACTER.Character.Book.Hovl_Studio.Magic_effects_pack.Prefabs.AoE_effects
 {
-    public GameObject player;
-    public float damage;
-    private bool h = true;
-
-    private SwordAttack swordattack;
-
-    // Start is called before the first frame update
-    private float timer;
-
-    private void Start()
+    public class RedThing : MonoBehaviour
     {
-        player = GameObject.FindWithTag("sword");
-        swordattack = player.GetComponent<SwordAttack>();
-    }
+        public GameObject player;
+        public float damage;
+        private bool _h = true;
 
-    // Update is called once per frame
-    private void Update()
-    {
-        if (h) timer += Time.deltaTime;
-    }
+        private SwordAttack _swordattack;
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag == "enemy")
-            if (timer >= 1)
-            {
-                Debug.Log("abchabddei");
-                timer = 0;
-                h = false;
-                swordattack.ApplyDamageAndKnockback(other.gameObject, damage);
-            }
+        // Start is called before the first frame update
+        private float _timer;
+
+        private void Start()
+        {
+            player = GameObject.FindWithTag("sword");
+            _swordattack = player.GetComponent<SwordAttack>();
+        }
+
+        // Update is called once per frame
+        private void Update()
+        {
+            if (_h) _timer += Time.deltaTime;
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.CompareTag("enemy"))
+                if (_timer >= 1)
+                {
+                    Debug.Log("abchabddei");
+                    _timer = 0;
+                    _h = false;
+                    _swordattack.ApplyDamageAndKnockback(other.gameObject, damage);
+                }
+        }
     }
 }

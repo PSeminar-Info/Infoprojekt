@@ -1,44 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class MapDiscover : MonoBehaviour
+namespace Terrain.See.Scripts
 {
-
-    public bool forest = false;
-    public bool graveyard = false; 
-    public bool castle = false;
-    public bool lazylake = false;
-
-    private void OnTriggerEnter(Collider other)
+    public class MapDiscover : MonoBehaviour
     {
-        //checkt den Tag des Colliders und setzt dann die discover bool auf true
-        switch (this.tag)
-        {
-            case "forest":
-                forest = true;
-                break;
-            case "graveyard":
-                graveyard = true;
-                break;
-            case "castle":
-                castle = true;
-                break;
-        }
-    }
 
-    public bool ReturnDiscover(string map)
-    {
-        switch (map)
+        public bool forest;
+        public bool graveyard; 
+        public bool castle;
+        [FormerlySerializedAs("lazylake")] public bool lazyLake;
+
+        private void OnTriggerEnter(Collider other)
         {
-            case "forest":
-                return forest;
-            case "graveyard":
-                return graveyard;
-            case "castle":
-                return castle;
+            //checkt den Tag des Colliders und setzt dann die discover bool auf true
+            switch (tag)
+            {
+                case "forest":
+                    forest = true;
+                    break;
+                case "graveyard":
+                    graveyard = true;
+                    break;
+                case "castle":
+                    castle = true;
+                    break;
+            }
         }
 
-        return false;
+        public bool ReturnDiscover(string map)
+        {
+            return map switch
+            {
+                "forest" => forest,
+                "graveyard" => graveyard,
+                "castle" => castle,
+                _ => false
+            };
+        }
     }
 }

@@ -1,78 +1,83 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+namespace GroupCharacter.cHARACTER.Character
 {
-    // Start is called before the first frame update
-    public Slider HealtBar;
-    public Text TextHealth;
-    public Slider ManaBar;
-    public Text TextMana;
-    public int Health = 100;
-    public float mana;
-    public bool animationn;
-    public GameObject Panel;
-    public bool dead;
-    private Animator animator;
-    public LayerMask layerToCheck; // Layer, den du überprüfen möchtest
-
-    private void Start()
+    public class PlayerHealth : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-    }
+        // Start is called before the first frame update
+        [FormerlySerializedAs("HealtBar")] public Slider healtBar;
+        [FormerlySerializedAs("TextHealth")] public Text textHealth;
+        [FormerlySerializedAs("ManaBar")] public Slider manaBar;
+        [FormerlySerializedAs("TextMana")] public Text textMana;
+        [FormerlySerializedAs("Health")] public int health = 100;
+        public float mana;
+        public bool animationn;
+        [FormerlySerializedAs("Panel")] public GameObject panel;
+        public bool dead;
+        private Animator _animator;
+        public LayerMask layerToCheck; // Layer, den du Ã¼berprÃ¼fen mÃ¶chtest
+        private static readonly int Die = Animator.StringToHash("die");
 
-    // Update is called once per frame
-    private void Update()
-    {
-        if (mana < 100)
+        private void Start()
         {
-            mana += 0.001f;
-            ManaBar.value = mana;
-            TextMana.text = "" + ManaBar.value;
-        }
-        else
-        {
-            mana = 100;
-            ManaBar.value = mana;
-            TextMana.text = "" + mana;
-        }
-
-
-        if (animationn)
-        {
-            //  animator.SetBool("Trank", true);
-            Panel.SetActive(false);
-            animationn = false;
+            _animator = GetComponent<Animator>();
         }
 
-        //animator.SetBool("Trank", false);
-        UpdateHealthBar();
-        if (Health <= 0)
+        // Update is called once per frame
+        private void Update()
         {
-            animator.SetBool("die", true);
-            dead = true;
-        }
-        if(Health >= 100)
-        {
-            Health = 100;
-        }
+            if (mana < 100)
+            {
+                mana += 0.001f;
+                manaBar.value = mana;
+                textMana.text = "" + manaBar.value;
+            }
+            else
+            {
+                mana = 100;
+                manaBar.value = mana;
+                textMana.text = "" + mana;
+            }
+
+
+            if (animationn)
+            {
+                //  animator.SetBool("Trank", true);
+                panel.SetActive(false);
+                animationn = false;
+            }
+
+            //animator.SetBool("Trank", false);
+            UpdateHealthBar();
+            if (health <= 0)
+            {
+                _animator.SetBool(Die, true);
+                dead = true;
+            }
+            if(health >= 100)
+            {
+                health = 100;
+            }
         
-    }
+        }
 
-    // public void TakeDamage()
-    // {
-    //     Health -= 20;
-    //     if(Health < 0 )
-    //     {
-    //         Health = 0;
-    //     }  
-    //     UpdateHealthBar();
-    // }
-    public void UpdateHealthBar()
-    {
-        HealtBar.value = Health;
-        TextHealth.text = "" + Health;
-    }
+        // public void TakeDamage()
+        // {
+        //     Health -= 20;
+        //     if(Health < 0 )
+        //     {
+        //         Health = 0;
+        //     }  
+        //     UpdateHealthBar();
+        // }
+        public void UpdateHealthBar()
+        {
+            healtBar.value = health;
+            textHealth.text = "" + health;
+        }
 
    
+    }
 }

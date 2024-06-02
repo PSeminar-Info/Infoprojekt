@@ -1,102 +1,105 @@
 using System.Collections;
 using UnityEngine;
 
-public class Lighting : MonoBehaviour
+namespace GroupCharacter.KY_effects.Script
 {
-    public float lighting = 1;
-    public Light lightPower;
-    public bool flashFlg;
-    public float flashTimer = 0.3f;
-    public float revOnTime;
-    public float keepOnTime;
-    public float keepTime;
-
-    public bool flashingFlg;
-    public float minLight;
-    public float maxLight = 1;
-    public float flashingOff;
-    public float flashingOffPower;
-    public float flashingOffIntensity = 1;
-
-    private bool lightKeepFlg;
-    private bool lightOffFlg;
-
-    private void Start()
+    public class Lighting : MonoBehaviour
     {
-        lightPower = GetComponent<Light>();
+        public float lighting = 1;
+        public Light lightPower;
+        public bool flashFlg;
+        public float flashTimer = 0.3f;
+        public float revOnTime;
+        public float keepOnTime;
+        public float keepTime;
 
-        flash();
-        setRev();
-        keepOn();
-        setFlashingOff();
-    }
+        public bool flashingFlg;
+        public float minLight;
+        public float maxLight = 1;
+        public float flashingOff;
+        public float flashingOffPower;
+        public float flashingOffIntensity = 1;
 
-    private void Update()
-    {
-        if (flashingFlg)
+        private bool _lightKeepFlg;
+        private bool _lightOffFlg;
+
+        private void Start()
         {
-            if (lightOffFlg)
+            lightPower = GetComponent<Light>();
+
+            Flash();
+            SetRev();
+            keepOn();
+            SetFlashingOff();
+        }
+
+        private void Update()
+        {
+            if (flashingFlg)
+            {
+                if (_lightOffFlg)
+                {
+                    lightPower.intensity -= lighting * Time.deltaTime;
+                    if (lightPower.intensity <= minLight) _lightOffFlg = false;
+                }
+                else
+                {
+                    lightPower.intensity += lighting * Time.deltaTime;
+                    if (lightPower.intensity > maxLight) _lightOffFlg = true;
+                }
+            }
+            else if (lightPower.intensity > 0 && lightPower.enabled && !_lightKeepFlg)
             {
                 lightPower.intensity -= lighting * Time.deltaTime;
-                if (lightPower.intensity <= minLight) lightOffFlg = false;
             }
-            else
+
+            if (_lightKeepFlg && keepTime > 0)
             {
-                lightPower.intensity += lighting * Time.deltaTime;
-                if (lightPower.intensity > maxLight) lightOffFlg = true;
+                keepTime -= Time.deltaTime;
+                if (keepTime <= 0) _lightKeepFlg = false;
             }
         }
-        else if (lightPower.intensity > 0 && lightPower.enabled && !lightKeepFlg)
-        {
-            lightPower.intensity -= lighting * Time.deltaTime;
-        }
-
-        if (lightKeepFlg && keepTime > 0)
-        {
-            keepTime -= Time.deltaTime;
-            if (keepTime <= 0) lightKeepFlg = false;
-        }
-    }
 
 
-    private IEnumerator flash()
-    {
-        if (flashFlg)
+        private IEnumerator Flash()
         {
-            lightPower.enabled = false;
-            yield return new WaitForSeconds(flashTimer);
-            lightPower.enabled = true;
-        }
-    }
-
-    private IEnumerator setRev()
-    {
-        if (revOnTime > 0)
-        {
-            yield return new WaitForSeconds(revOnTime);
-            lighting *= -1;
-        }
-    }
-
-    private IEnumerator keepOn()
-    {
-        if (keepOnTime > 0)
-        {
-            yield return new WaitForSeconds(keepOnTime);
-            lightKeepFlg = true;
-        }
-    }
-
-    private IEnumerator setFlashingOff()
-    {
-        if (flashingOff > 0)
-        {
-            yield return new WaitForSeconds(flashingOff);
-            flashingFlg = false;
-            if (flashingOffPower > 0)
+            if (flashFlg)
             {
-                lightPower.intensity = flashingOffIntensity;
-                lighting = flashingOffPower;
+                lightPower.enabled = false;
+                yield return new WaitForSeconds(flashTimer);
+                lightPower.enabled = true;
+            }
+        }
+
+        private IEnumerator SetRev()
+        {
+            if (revOnTime > 0)
+            {
+                yield return new WaitForSeconds(revOnTime);
+                lighting *= -1;
+            }
+        }
+
+        private IEnumerator keepOn()
+        {
+            if (keepOnTime > 0)
+            {
+                yield return new WaitForSeconds(keepOnTime);
+                _lightKeepFlg = true;
+            }
+        }
+
+        private IEnumerator SetFlashingOff()
+        {
+            if (flashingOff > 0)
+            {
+                yield return new WaitForSeconds(flashingOff);
+                flashingFlg = false;
+                if (flashingOffPower > 0)
+                {
+                    lightPower.intensity = flashingOffIntensity;
+                    lighting = flashingOffPower;
+                }
             }
         }
     }

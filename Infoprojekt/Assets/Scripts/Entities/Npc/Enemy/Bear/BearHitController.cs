@@ -1,24 +1,23 @@
-using System.Collections;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class BearHitController : MonoBehaviour
+namespace Entities.Npc.Enemy.Bear
 {
-
-    private float _despawnTime = 0.1f;
-    private float _lastActionTime;
-
-    void Start()
+    public class BearHitController : MonoBehaviour
     {
-        _lastActionTime = Time.time;
-    }
+        private const float DespawnTime = 0.1f;
+        private float _lastActionTime;
 
-    void Update()
-    {
-        if (Time.time - _lastActionTime > _despawnTime)
+        private void Start()
         {
-            Destroy(gameObject);
+            _lastActionTime = Time.time;
+        }
+
+        private void Update()
+        {
+            if (Time.time - _lastActionTime > DespawnTime)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

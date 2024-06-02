@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VillagerFishersLake : MonoBehaviour
+namespace Entities.Npc.Friendly.Villager
 {
-    public Text info;
-
-    public void OnTriggerEnter(Collider other)
+    public class VillagerFishersLake : MonoBehaviour
     {
-        if (other.CompareTag("Player"))  info.text = "Gehe zur Burg";
+        public Text info;
+
+        public void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))  info.text = "Gehe zur Burg";
+        }
     }
 }

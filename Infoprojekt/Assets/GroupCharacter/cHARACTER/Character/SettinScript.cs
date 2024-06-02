@@ -1,35 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettinScript : MonoBehaviour
+namespace GroupCharacter.cHARACTER.Character
 {
-    // Start is called before the first frame update
-    public Slider sliderSound;
-    private float sound;
-    private float oldsound = 1;
-    public AudioSource audioSource;
-
-    void Start()
+    public class SettinScript : MonoBehaviour
     {
+        // Start is called before the first frame update
+        public Slider sliderSound;
+        private float _sound;
+        private float _oldsound = 1;
+        public AudioSource audioSource;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        sound = sliderSound.value;
+        // Update is called once per frame
+        void Update()
+        {
+            _sound = sliderSound.value;
        
-    }
-    public void UpdateSound()
-    {
-        oldsound = sound;
-        audioSource.volume = sound;
-    }
-    public void dontupdateSound()
-    {
-        sound = oldsound;
-        sliderSound.value = sound;
+        }
+        public void UpdateSound()
+        {
+            _oldsound = _sound;
+            audioSource.volume = _sound;
+        }
+        public void DontupdateSound()
+        {
+            _sound = _oldsound;
+            sliderSound.value = _sound;
+        }
     }
 }

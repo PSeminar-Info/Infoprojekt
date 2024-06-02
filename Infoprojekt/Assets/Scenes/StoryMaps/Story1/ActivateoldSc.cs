@@ -1,23 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ActivateoldSc : MonoBehaviour
+namespace Scenes.StoryMaps.Story1
 {
-    Scene JoinedMaps;
-
-    // Start is called before the first frame update
-    void Start()
+    public class ActivateoldSc : MonoBehaviour
     {
-        SceneManager.LoadScene("JoinedMap");
-       //hier muss noch hin das er zu fisherslake teleportiert wird bitte
+        private Scene _joinedMaps;
 
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            SceneManager.LoadScene("JoinedMap");
+            //hier muss noch hin das er zu fisherslake teleportiert wird bitte
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
     }
 }
