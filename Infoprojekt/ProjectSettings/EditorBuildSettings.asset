@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Mountains.unity
     guid: 7883034813997864f8f35362d39fb751
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StoryMaps/StartMap.unity
     guid: 3f36185c752dffc47aa067021874dfe1
   - enabled: 1

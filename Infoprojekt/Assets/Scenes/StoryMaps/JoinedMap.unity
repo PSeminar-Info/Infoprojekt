@@ -6284,7 +6284,7 @@ GameObject:
   - component: {fileID: 171978814}
   m_Layer: 0
   m_Name: StartMap
-  m_TagString: StartMap
+  m_TagString: Teleport
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14413,7 +14413,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press 'E' to teleport
+  m_Text: Press 'F' to teleport
 --- !u!222 &395441557
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27104,7 +27104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736508510}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2589368, y: 0.11667909, z: -0.03152711, w: 0.95830256}
+  m_LocalRotation: {x: 0.25669873, y: 0.17152333, z: -0.04634622, w: 0.9500198}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32980,7 +32980,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968103245}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.032106504, y: 0.1586159, z: 0.005160699, w: 0.9868047}
+  m_LocalRotation: {x: -0.031653743, y: 0.22898251, z: 0.0074501475, w: 0.9728872}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -49249,6 +49249,7 @@ MonoBehaviour:
   LazyLake: {fileID: 908365932}
   StartMap: {fileID: 171978813}
   Player: {fileID: 487192795}
+  info: {fileID: 2034096675}
 --- !u!135 &1419447145
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -61115,8 +61116,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770432348}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18954647, y: 0.13101844, z: -0.025529606, w: 0.9727562}
-  m_LocalPosition: {x: 0, y: -1.3912735, z: 1.0005646}
+  m_LocalRotation: {x: 0.2730149, y: 0.18741448, z: -0.05431661, w: 0.94201297}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -61428,6 +61429,73 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!1 &1781394107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1781394110}
+  - component: {fileID: 1781394109}
+  - component: {fileID: 1781394108}
+  m_Layer: 0
+  m_Name: TriggerTextStory2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1781394108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781394107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347de99cf7bc04543951d3cc76123f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info: {fileID: 2034096675}
+--- !u!135 &1781394109
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781394107}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1781394110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781394107}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 484.38, y: 53.6, z: 231.85}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1781648797
 GameObject:
   m_ObjectHideFlags: 0
@@ -67006,7 +67074,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906348857}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2589368, y: 0.11667909, z: -0.031527106, w: 0.95830256}
+  m_LocalRotation: {x: 0.25669873, y: 0.17152333, z: -0.046346217, w: 0.9500198}
   m_LocalPosition: {x: 862.97, y: 82.95, z: -202.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -79108,3 +79176,4 @@ SceneRoots:
   - {fileID: 1420307282}
   - {fileID: 1166989404}
   - {fileID: 1123774649}
+  - {fileID: 1781394110}

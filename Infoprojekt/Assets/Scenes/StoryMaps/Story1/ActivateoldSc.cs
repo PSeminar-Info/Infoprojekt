@@ -34,6 +34,7 @@ public class ActivateoldSc : MonoBehaviour
             {
                 go.SetActive(true);
             }
+            GameObject.FindWithTag("Teleport").SetActive(false);
         }
         else
         {
