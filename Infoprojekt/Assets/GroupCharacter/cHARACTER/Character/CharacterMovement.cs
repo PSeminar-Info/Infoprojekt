@@ -87,6 +87,13 @@ public class CharacterMovement : MonoBehaviour
 
     private float velocityZ;
 
+    public bool sceneonefinished;
+    public GameObject storeone;
+    public GameObject storetwo;
+
+    public PlayableDirector playableDirector; // Referenz zur PlayableDirector-Komponente
+    public Camera cammm;
+    public GameObject texte;
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -134,6 +141,8 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+       
+
         if (opendings)
         {
 
@@ -141,7 +150,7 @@ public class CharacterMovement : MonoBehaviour
             PanelNormal.SetActive(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-
+            texte.SetActive(false);
 
 
 
@@ -152,6 +161,7 @@ public class CharacterMovement : MonoBehaviour
             Cursor.visible = false;
 
         }
+       
 
         var horizontalInput = Input.GetAxis("Horizontal");
 
@@ -198,7 +208,6 @@ public class CharacterMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "Collectable" && pickUpPressed)
         {
-            Debug.Log("kurva");
 
             var script = other.gameObject.GetComponent<ItemPickUp>();
             script.EPressed = true;
@@ -213,8 +222,18 @@ public class CharacterMovement : MonoBehaviour
         }
         if (other.gameObject.tag == "storyone")
         {
-            SceneManager.LoadScene(sceneName);
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
             Destroy(other.gameObject);
+            transform.position = storeone.transform.position;
+
+            DeactivateAllGameObjects("JoinedMap");
+        }
+        if (other.gameObject.tag == "storytwo")
+        {
+            SceneManager.LoadScene("Story2", LoadSceneMode.Additive);
+            Destroy(other.gameObject);
+
+            DeactivateAllGameObjects("JoinedMap");
         }
         if (other.gameObject.tag == "BearHit")//Bear macht mehr schaden
         {
@@ -455,6 +474,25 @@ public class CharacterMovement : MonoBehaviour
             book.attackFinished = false;
             plhe.mana -= price3;
             book.AttackBook(book3);
+        }
+    }
+    public void DeactivateAllGameObjects(string sceneName)
+    {
+        // Hole die Szene anhand des Namens
+        Scene sceneToDeactivate = SceneManager.GetSceneByName(sceneName);
+
+        // Überprüfe, ob die Szene geladen ist
+        if (sceneToDeactivate.isLoaded)
+        {
+            // Iteriere über alle Root-GameObjects in der Szene und deaktiviere sie
+            foreach (GameObject go in sceneToDeactivate.GetRootGameObjects())
+            {
+                go.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Szene " + sceneName + " ist nicht geladen.");
         }
     }
 }

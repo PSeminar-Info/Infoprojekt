@@ -850,9 +850,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Canvas: {fileID: 1682905893}
+  PlayerCanvas: {fileID: 0}
   togglemanager: {fileID: 279165308}
   mapdiscover: {fileID: 279165307}
+  Player: {fileID: 0}
+  LazyLake: {fileID: 0}
+  StartMap: {fileID: 0}
+  TundraLake: {fileID: 0}
   ToggleGroup: {fileID: 1190414192}
+  TeleportText: {fileID: 0}
 --- !u!135 &279165310
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2195,6 +2201,8 @@ PlayableDirector:
     value: {fileID: 11100799}
   - key: {fileID: 1593454810720472840, guid: e5e7780e8ccd0af4194b97a54d735ee1, type: 2}
     value: {fileID: 1347783168}
+  - key: {fileID: 4078461900531964006, guid: e5e7780e8ccd0af4194b97a54d735ee1, type: 2}
+    value: {fileID: 1118596355}
   m_ExposedReferences:
     m_References:
     - 3ad55798c5e3c4940b51f49bc42197b4: {fileID: 11100797}
@@ -3152,6 +3160,51 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 934686772185891148, guid: 0beae829dca1567478c989988cd8a944, type: 3}
+--- !u!1 &1118596355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1118596357}
+  - component: {fileID: 1118596356}
+  m_Layer: 0
+  m_Name: ActivateOldScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1118596356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118596355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568426f1e14d248469a71c62ec5551b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: Story2
+--- !u!4 &1118596357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118596355}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -124.079765, y: 21.430294, z: 21.167076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1146409974
 GameObject:
   m_ObjectHideFlags: 0
@@ -3398,9 +3451,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Canvas: {fileID: 1682905893}
+  PlayerCanvas: {fileID: 0}
   togglemanager: {fileID: 1184795043}
   mapdiscover: {fileID: 1184795042}
+  Player: {fileID: 0}
+  LazyLake: {fileID: 0}
+  StartMap: {fileID: 0}
+  TundraLake: {fileID: 0}
   ToggleGroup: {fileID: 1190414192}
+  TeleportText: {fileID: 0}
 --- !u!135 &1184795045
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7921,3 +7980,4 @@ SceneRoots:
   - {fileID: 631639183}
   - {fileID: 1753519802}
   - {fileID: 751583329}
+  - {fileID: 1118596357}

@@ -223,7 +223,6 @@ namespace Entities.Npc.Enemy.Bear
             _isBuff = true;
             gameObject.transform.LookAt(player.transform.position);
             SetAnimation(Roar);
-            audiSource.PlayOneShot(audiClip);
             yield return new WaitForSeconds(2);
             gameObject.transform.LookAt(player.transform.position);
             SetAnimation(Roar);

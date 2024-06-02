@@ -8,7 +8,7 @@ public class PanelDings : MonoBehaviour
     public GameObject panelSettings;
     public GameObject panelInfos;
     public GameObject panelCredits;
-
+    public GameObject texte;
     void Start()
     {
         
@@ -26,6 +26,7 @@ public class PanelDings : MonoBehaviour
     public void ClosePanel(GameObject abc)
     {
         abc.SetActive(false);
+        texte.SetActive(true);
     }
 
 
