@@ -14,17 +14,22 @@ namespace Entities
         private void Start()
         {
             health = maxHealth;
-            // TODO: spawn animation
         }
 
-        private static void OnDeath()
+        private void Update()
+        {
+            if (health <= 0) OnDeath();
+        }
+
+        private void OnDeath()
         {
             // implement in child class
+            Destroy(gameObject);
         }
 
         public void OnDespawn()
         {
-            // TODO: despawn behaviour
+            // implement in child class
         }
 
         private void Die()
@@ -42,7 +47,7 @@ namespace Entities
         public void TakeDamage(float amount)
         {
             if (isInvincible) return;
-            // TODO: damage animation
+            // implement damage animation in child class
 
             health -= amount;
             if (health <= 0) Die();

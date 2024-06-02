@@ -1,54 +1,61 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class InventoryManager : MonoBehaviour
+namespace GroupCharacter.Inventory
 {
-    public static InventoryManager Instance;
-    public List<Item> Items = new();
-
-    public Transform ItemContent;
-    public GameObject InventoryItem;
-
-    public InventoryItemController[] InventoryItems;
-
-    private void Awake()
+    public class InventoryManager : MonoBehaviour
     {
-        Instance = this;
-    }
+        public static InventoryManager Instance;
+        [FormerlySerializedAs("Items")] public List<Item> items = new();
 
-    public void Add(Item item)
-    {
-        Items.Add(item);
-    }
+        [FormerlySerializedAs("ItemContent")] public Transform itemContent;
 
-    public void Remove(Item item)
-    {
-        Debug.Log(item);
-        Items.Remove(item);
-    }
+        [FormerlySerializedAs("InventoryItem")]
+        public GameObject inventoryItem;
 
-    public void ListItems()
-    {
-        foreach (Transform item in ItemContent) Destroy(item.gameObject);
+        [FormerlySerializedAs("InventoryItems")]
+        public InventoryItemController[] inventoryItems;
 
-        foreach (var item in Items)
+        private void Awake()
         {
-            var obj = Instantiate(InventoryItem, ItemContent);
-            var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
-            var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-
-            itemName.text = item.itemName;
-            itemIcon.sprite = item.Icon;
+            Instance = this;
         }
 
-        SetInventoryItems();
-    }
+        public void Add(Item item)
+        {
+            items.Add(item);
+        }
 
-    public void SetInventoryItems()
-    {
-        InventoryItems = ItemContent.GetComponentsInChildren<InventoryItemController>();
+        public void Remove(Item item)
+        {
+            Debug.Log(item);
+            items.Remove(item);
+        }
 
-        for (var i = 0; i < Items.Count; i++) InventoryItems[i].AddItem(Items[i]);
+        public void ListItems()
+        {
+            foreach (Transform item in itemContent) Destroy(item.gameObject);
+
+            foreach (var item in items)
+            {
+                var obj = Instantiate(inventoryItem, itemContent);
+                var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
+                var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+
+                itemName.text = item.itemName;
+                itemIcon.sprite = item.icon;
+            }
+
+            SetInventoryItems();
+        }
+
+        public void SetInventoryItems()
+        {
+            inventoryItems = itemContent.GetComponentsInChildren<InventoryItemController>();
+
+            for (var i = 0; i < items.Count; i++) inventoryItems[i].AddItem(items[i]);
+        }
     }
 }

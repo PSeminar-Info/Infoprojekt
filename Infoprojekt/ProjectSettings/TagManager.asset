@@ -9,6 +9,24 @@ TagManager:
   - floor
   - door
   - Effect
+  - forest
+  - graveyard
+  - castle
+  - sword
+  - attack
+  - storyone
+  - LazyLake
+  - StartMap
+  - TundraLake
+  - BearHit
+  - HausUnten
+  - "HausGro\xDF"
+  - HausBerg
+  - HausGrau
+  - HausBerg2
+  - arrow
+  - storytwo
+  - Teleport
   layers:
   - Default
   - TransparentFX

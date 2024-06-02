@@ -1,24 +1,62 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class ToggleManager : MonoBehaviour
+namespace Terrain.See.Scripts
 {
-    public GameObject toggleMountain;
-    public GameObject toggleLake;
-    public bool mountain;
-    public bool lake;
-
-    public void changemountain(bool change)
+    public class ToggleManager : MonoBehaviour
     {
-        mountain = change;
-    }
+        public bool village;
+        public bool forest;
+        public bool graveyard;
+        public bool castle;
+        [FormerlySerializedAs("lazylake")] public bool lazyLake;
+        [FormerlySerializedAs("fisherslake")] public bool fishersLake;
+        [FormerlySerializedAs("tundracastle")] public bool tundraCastle;
 
-    public void changelake(bool change)
-    {
-        lake = change;
-    }
+        public void Changevillage(bool change)
+        {
+            village = change;
+        }
 
-    public string GetMap()
-    {
-        return mountain ? "mountain" : lake ? "lake" : "Error";
+        public void Changeforest(bool change)
+        {
+            forest = change;
+        }
+
+        public void Changegraveyard(bool change)
+        {
+            graveyard = change;
+        }
+
+        public void Changecastle(bool change)
+        {
+            castle = change;
+        }
+
+        public void Changelazylake(bool change)
+        {
+            lazyLake = change;
+        }
+
+        public void Changefisherslake(bool change)
+        {
+            fishersLake = change;
+        }
+
+        public void Changetundracastle(bool change)
+        {
+            tundraCastle = change;
+        }
+
+        public string GetMap()
+        {
+            return village ? "village" :
+                forest ? "forest" :
+                graveyard ? "graveyard" :
+                castle ? "castle" :
+                lazyLake ? "lazylake" :
+                fishersLake ? "fisherslake" :
+                tundraCastle ? "tundracastle" : "Error";
+        }
     }
 }

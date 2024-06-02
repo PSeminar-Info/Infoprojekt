@@ -61,6 +61,11 @@ public class PlayerMovement : MonoBehaviour
         _rb.AddForce(Vector3.down * 100);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("BearHit")) Debug.Log("Hit from bear!");
+    }
+
     private void MyInput()
     {
         _horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -84,13 +89,17 @@ public class PlayerMovement : MonoBehaviour
         // calculate movement direction
         _moveDirection = orientation.forward * _verticalInput + orientation.right * _horizontalInput;
 
-        // on ground
-        if (_grounded)
-            _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f), ForceMode.Force);
-
-        // in air
-        else if (!_grounded)
-            _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f * airMultiplier), ForceMode.Force);
+        switch (_grounded)
+        {
+            // on ground
+            case true:
+                _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f), ForceMode.Force);
+                break;
+            // in air
+            case false:
+                _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f * airMultiplier), ForceMode.Force);
+                break;
+        }
     }
 
     private void SpeedControl()
@@ -98,11 +107,9 @@ public class PlayerMovement : MonoBehaviour
         var flatVel = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
 
         // limit velocity if needed
-        if (flatVel.magnitude > moveSpeed)
-        {
-            var limitedVel = flatVel.normalized * moveSpeed;
-            _rb.velocity = new Vector3(limitedVel.x, _rb.velocity.y, limitedVel.z);
-        }
+        if (!(flatVel.magnitude > moveSpeed)) return;
+        var limitedVel = flatVel.normalized * moveSpeed;
+        _rb.velocity = new Vector3(limitedVel.x, _rb.velocity.y, limitedVel.z);
     }
 
     private void Jump()

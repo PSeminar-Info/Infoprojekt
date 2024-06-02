@@ -130,6 +130,15 @@
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OpenDings",
+                    "type": "Button",
+                    "id": "3878ef37-9e35-46f2-a97f-8be8da0c05d0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -383,6 +392,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "BookThird",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bb2782f6-5a33-4ea8-8f88-10a30d8388a1",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenDings",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

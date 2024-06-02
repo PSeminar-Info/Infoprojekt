@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SzeneLader : MonoBehaviour
+namespace GroupCharacter.SceneMenu
 {
-    public void LadeAndereSzene()
+    public class SzeneLader : MonoBehaviour
     {
-        // Lade die Szene mit dem Namen "MeineAndereSzene".
-        SceneManager.LoadScene("SceneNow");
+        public void LadeAndereSzene()
+        {
+            // Lade die Szene mit dem Namen "MeineAndereSzene".
+            // TODO The scene is missing in the Unity build settings
+            SceneManager.LoadScene("SceneNow");
+        }
     }
 }

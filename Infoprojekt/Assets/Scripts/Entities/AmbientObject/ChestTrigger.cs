@@ -1,46 +1,51 @@
 using UnityEngine;
 
-public class Trigger : MonoBehaviour
+namespace Entities.AmbientObject
 {
-    private bool Chestopen;
-
-    private bool Triggeractive;
-
-    // Update is called once per frame
-    private void Update()
+    public class Trigger : MonoBehaviour
     {
-        if (Triggeractive && Input.GetKeyDown(KeyCode.E))
+        private bool _chestOpen;
+
+        private bool _triggerActive;
+
+        // Update is called once per frame
+        private void Update()
         {
-            OpenChest();
-            Triggeractive = false;
+            if (_triggerActive && Input.GetKeyDown(KeyCode.E))
+            {
+                OpenChest();
+                _triggerActive = false;
+            }
         }
-    }
 
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player")) Triggeractive = true;
-    }
+        public void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player")) _triggerActive = true;
+        }
 
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player")) Triggeractive = false;
+        public void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player")) _triggerActive = false;
 
-        if (Chestopen) CloseChest();
-    }
+            if (_chestOpen) CloseChest();
+        }
 
-    private void OpenChest()
-    {
-        transform.GetChild(1).RotateAround(transform.GetChild(3).position, Vector3.left, 60);
-        Chestopen = true;
+        private void OpenChest()
+        {
+            transform.GetChild(1).Rotate(new Vector3(-60, 0, 0), Space.Self);
+            transform.GetChild(1).Translate(new Vector4(0, 0.2f, 0f));
+            _chestOpen = true;
 
-        // Inventar öffnen
-    }
+            // Inventar öffnen
+        }
 
-    private void CloseChest()
-    {
-        transform.GetChild(1).RotateAround(transform.GetChild(3).position, Vector3.left, -60);
-        Chestopen = false;
-        // Inventar schließen
+        private void CloseChest()
+        {
+            transform.GetChild(1).Rotate(new Vector3(60, 0, 0), Space.Self);
+            transform.GetChild(1).Translate(new Vector4(0, -0.1f, 0.17f));
+            _chestOpen = false;
+            // Inventar schließen
+        }
     }
 }

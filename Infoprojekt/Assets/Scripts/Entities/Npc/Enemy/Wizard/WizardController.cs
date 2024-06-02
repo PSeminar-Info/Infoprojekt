@@ -59,14 +59,12 @@ namespace Entities.Npc.Enemy.Wizard
 
         private float _lastActionTime;
         private float _lastShootTime;
-        private Vector3 _spawnPosition;
 
         private void Start()
         {
             _lastActionTime = Time.time - 100;
             _lastShootTime = Time.time - 100;
             _agent = GetComponent<NavMeshAgent>();
-            _spawnPosition = transform.position;
             _animator = transform.GetComponentInChildren<WizardAnimationScript>().animator;
             if (player.IsUnityNull())
             {
@@ -103,14 +101,13 @@ namespace Entities.Npc.Enemy.Wizard
         {
             gameObject.transform.LookAt(player.transform);
 
-            // will need to balance between performance and looks
             if (Vector3.Distance(player.transform.position, transform.position) >
                 playerDistance + maxTeleportDistance - 10)
                 yield break;
 
             // wizard will need to face the target so the portal is facing the right direction
             var destination = RandomNavmeshLocation(maxTeleportDistance, minTeleportDistance);
-            var telLocation = GetTeleportLocation(); //temp, all destination switched with tellocation
+            var telLocation = GetTeleportLocation();
             var playerPos = player.transform.position;
             var destinationDirection = (playerPos - telLocation).normalized;
             var position = transform.position;
@@ -119,7 +116,6 @@ namespace Entities.Npc.Enemy.Wizard
             // using static duration for simplicity, needs to be changed if the portal duration changes
             Destroy(Instantiate(portal, telLocation, Quaternion.LookRotation(destinationDirection)), 5);
             yield return new WaitForSeconds(0.25f);
-            // rotation switched with quaternion
             Destroy(Instantiate(portal, position, Quaternion.LookRotation(directionToPlayer)), 5);
             yield return new WaitForSeconds(1f);
             _agent.Warp(telLocation);
@@ -131,7 +127,7 @@ namespace Entities.Npc.Enemy.Wizard
         {
             if (inCombat)
             {
-                _agent.destination = RandomNavmeshLocation(combatMoveDistance, 0);
+                _agent.destination = RandomNavmeshLocation(combatMoveDistance);
                 return;
             }
 

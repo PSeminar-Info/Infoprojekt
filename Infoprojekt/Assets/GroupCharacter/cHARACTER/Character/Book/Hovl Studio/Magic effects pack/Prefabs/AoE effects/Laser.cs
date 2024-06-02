@@ -1,30 +1,26 @@
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+namespace GroupCharacter.cHARACTER.Character.Book.Hovl_Studio.Magic_effects_pack.Prefabs.AoE_effects
 {
-    // Start is called before the first frame update
-    public GameObject player;
-    public float damage;
-    private SwordAttack swordattack;
-
-    private void Start()
+    public class Laser : MonoBehaviour
     {
-        player = GameObject.FindWithTag("sword");
+        // Start is called before the first frame update
+        public GameObject player;
+        public float damage;
+        private SwordAttack _swordattack;
 
-        swordattack = player.GetComponent<SwordAttack>();
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-    }
-
-    private void OnTriggerStay(Collider col)
-    {
-        if (col.gameObject.tag == "enemy")
+        private void Start()
         {
+            player = GameObject.FindWithTag("sword");
+
+            _swordattack = player.GetComponent<SwordAttack>();
+        }
+
+        private void OnTriggerStay(Collider col)
+        {
+            if (!col.gameObject.CompareTag("enemy")) return;
             Debug.Log("abcd");
-            swordattack.ApplyDamageAndKnockback(col.gameObject, damage);
+            _swordattack.ApplyDamageAndKnockback(col.gameObject, damage);
         }
     }
 }
