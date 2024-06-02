@@ -50,7 +50,7 @@ public class TeleportScript : MonoBehaviour
             TeleportText.gameObject.SetActive(false);
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && enter && Canvas != null)
+        if (Input.GetKeyDown(KeyCode.F) && enter && Canvas != null)
         {
             OpenCanvas();
         }
