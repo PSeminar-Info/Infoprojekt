@@ -56,7 +56,7 @@ namespace GroupCharacter.cHARACTER.Character
         private bool _attackPressed;
 
         private bool _attackReleased;
-        //Swords and Bows for activation and deacivation
+        //Swords and Bows for activation and deactivation
 
         private bool _backPressed;
         private Book.Book _book;
@@ -217,14 +217,14 @@ namespace GroupCharacter.cHARACTER.Character
         {
             if (!other.gameObject.CompareTag("Collectable") || !pickUpPressed) return;
             var script = other.gameObject.GetComponent<ItemPickUp>();
-            script.EPressed = true;
+            script.ePressed = true;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("attack"))
             {
-                _plhe.Health -= 5;
+                _plhe.health -= 5;
             }
 
             if (other.gameObject.CompareTag("storyone"))
@@ -246,7 +246,7 @@ namespace GroupCharacter.cHARACTER.Character
 
             if (other.gameObject.CompareTag("BearHit")) //Bear macht mehr schaden
             {
-                _plhe.Health -= 10;
+                _plhe.health -= 10;
             }
         }
 
