@@ -1,19 +1,17 @@
 using UnityEngine;
 
-public class GeneralEffectScript : MonoBehaviour
+namespace GroupCharacter.cHARACTER.Character.Book
 {
-    public float distance;
-
-    public float timetilldeath;
-
-    // Start is called before the first frame update
-    private void Start()
+    public class GeneralEffectScript : MonoBehaviour
     {
-    }
+        public float distance;
 
-    // Update is called once per frame
-    private void Update()
-    {
-        Destroy(gameObject, timetilldeath);
+        public float timetilldeath;
+
+        // Update is called once per frame
+        private void Update()
+        {
+            Destroy(gameObject, timetilldeath);
+        }
     }
 }

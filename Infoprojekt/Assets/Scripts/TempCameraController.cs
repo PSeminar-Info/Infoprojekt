@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
     {
         if (defaultCamera != null)
         {
-            Camera.main.enabled = false; // Deaktiviere die vorherige Hauptkamera
+            if (Camera.main != null) Camera.main.enabled = false; // Deaktiviere die vorherige Hauptkamera
             defaultCamera.enabled = true; // Aktiviere die neue Standardkamera
         }
         else

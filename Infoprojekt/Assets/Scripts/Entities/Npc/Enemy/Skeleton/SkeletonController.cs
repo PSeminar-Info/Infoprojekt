@@ -6,14 +6,14 @@ namespace Entities.Npc.Enemy.Skeleton
     public class SkeletonController : Npc
     {
         private NavMeshAgent _nav;
-        private readonly float maxmove = 30f;
-        private readonly float minmove = 10f;
-        private string state = "Idle";
+        private const float MaxMove = 30f;
+        private const float MinMove = 10f;
+        private string _state = "Idle";
 
         // Update is called once per frame
         private void Update()
         {
-            switch (state)
+            switch (_state)
             {
                 case "Idle":
                     Patrolling();
@@ -23,12 +23,12 @@ namespace Entities.Npc.Enemy.Skeleton
 
         public void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player")) state = "Pursuit";
+            if (other.CompareTag("Player")) _state = "Pursuit";
         }
 
         private void Patrolling()
         {
-            _nav.SetDestination(RandomNavmeshLocation(minmove, maxmove));
+            _nav.SetDestination(RandomNavmeshLocation(MinMove, MaxMove));
         }
     }
 }

@@ -1,58 +1,52 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class Healing : MonoBehaviour
+namespace GroupCharacter.cHARACTER.Character.Book.Hovl_Studio.Magic_effects_pack.Prefabs.Magic_circles
 {
-    public GameObject HealAnimation;
-
-    private GameObject currentHealAnimation; // Speichert das aktuelle HealAnimation-Objekt
-
-    // Start is called before the first frame update
-    private PlayerHealth playerhealth;
-    private float timer;
-
-    private void Start()
+    public class Healing : MonoBehaviour
     {
-        timer = 0;
-    }
+        [FormerlySerializedAs("HealAnimation")] public GameObject healAnimation;
 
-    // Update is called once per frame
-    private void Update()
-    {
-    }
+        private GameObject _currentHealAnimation; // Speichert das aktuelle HealAnimation-Objekt
+        
+        private PlayerHealth _playerhealth;
+        private float _timer;
 
-    private void OnTriggerEnter(Collider collider)
-    {
-        if (currentHealAnimation != null)
+        private void Start()
         {
-            currentHealAnimation.gameObject.transform.SetParent(null); // Oder: transform.parent = null;
-            Destroy(currentHealAnimation.gameObject);
+            _timer = 0;
         }
 
-        currentHealAnimation = Instantiate(HealAnimation, collider.gameObject.transform.position, Quaternion.identity);
-        currentHealAnimation.gameObject.transform.SetParent(collider.gameObject.transform);
-    }
-
-    private void OnTriggerExit(Collider collider)
-    {
-        timer = 0;
-        if (currentHealAnimation != null)
+        private void OnTriggerEnter(Collider collider)
         {
-            currentHealAnimation.gameObject.transform.SetParent(null); // Oder: transform.parent = null;
-            Destroy(currentHealAnimation.gameObject);
-        }
-    }
-
-    private void OnTriggerStay(Collider collider)
-    {
-        if (collider.gameObject.tag == "Player")
-        {
-            timer += Time.deltaTime;
-            if (timer >= 1)
+            if (_currentHealAnimation != null)
             {
-                playerhealth = collider.GetComponent<PlayerHealth>();
-                playerhealth.Health += 2;
-                timer = 0;
+                _currentHealAnimation.gameObject.transform.SetParent(null); // Oder: transform.parent = null;
+                Destroy(_currentHealAnimation.gameObject);
             }
+
+            _currentHealAnimation = Instantiate(healAnimation, collider.gameObject.transform.position, Quaternion.identity);
+            _currentHealAnimation.gameObject.transform.SetParent(collider.gameObject.transform);
+        }
+
+        private void OnTriggerExit(Collider collider)
+        {
+            _timer = 0;
+            if (_currentHealAnimation != null)
+            {
+                _currentHealAnimation.gameObject.transform.SetParent(null); // Oder: transform.parent = null;
+                Destroy(_currentHealAnimation.gameObject);
+            }
+        }
+
+        private void OnTriggerStay(Collider collider)
+        {
+            if (!collider.gameObject.CompareTag("Player")) return;
+            _timer += Time.deltaTime;
+            if (!(_timer >= 1)) return;
+            _playerhealth = collider.GetComponent<PlayerHealth>();
+            _playerhealth.health += 2;
+            _timer = 0;
         }
     }
 }

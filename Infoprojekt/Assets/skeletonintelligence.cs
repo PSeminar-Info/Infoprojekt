@@ -14,12 +14,12 @@ public class Skeleton : MonoBehaviour
     public LayerMask groundLevel, playerLevel;
 
     public Vector3 patrolPoint;
-    bool patrolPointSet;
+    private bool _patrolPointSet;
     public float patrolRange;
 
 
     public float attackCooldown;
-    bool alreadyAttacked;
+    private bool _alreadyAttacked;
 
 
     public float chaseRange, attackRange;
@@ -44,21 +44,21 @@ public class Skeleton : MonoBehaviour
 
     private void Patroling() 
     {
-        if (!patrolPointSet) SearchPatrolPoint();
+        if (!_patrolPointSet) SearchPatrolPoint();
 
-        if (patrolPointSet)
+        if (_patrolPointSet)
             agent.SetDestination(patrolPoint);
 
-        Vector3 distanceToPatrolPoint = transform.position - patrolPoint;
+        var distanceToPatrolPoint = transform.position - patrolPoint;
 
         if (distanceToPatrolPoint.magnitude < 1f)
-            patrolPointSet = false;
+            _patrolPointSet = false;
     }
 
     private void SearchPatrolPoint()
     {
-        float randomZ = Random.Range(-patrolRange, patrolRange);
-        float randomX = Random.Range(-patrolRange, patrolRange);
+        var randomZ = Random.Range(-patrolRange, patrolRange);
+        var randomX = Random.Range(-patrolRange, patrolRange);
 
         patrolPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
              
@@ -74,21 +74,17 @@ public class Skeleton : MonoBehaviour
 
         transform.LookAt(player);
 
-        if(!alreadyAttacked)
-        {
-
-            //Instantiate(attack, transform);
+        if (_alreadyAttacked) return;
+        //Instantiate(attack, transform);
 
 
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack),attackCooldown);
-
-        }
+        _alreadyAttacked = true;
+        Invoke(nameof(ResetAttack),attackCooldown);
     }
 
     private void ResetAttack() 
     {
-        alreadyAttacked = false;
+        _alreadyAttacked = false;
     }
 
     public void Ouch(float damage)

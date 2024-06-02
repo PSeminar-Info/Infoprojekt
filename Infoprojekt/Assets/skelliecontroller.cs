@@ -16,10 +16,13 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public ParticleSystem hitEffect;
 
-    private Vector3 walkPoint;
-    private bool walkPointSet;
-    private bool alreadyAttacked;
-    private bool takeDamage;
+    private Vector3 _walkPoint;
+    private bool _walkPointSet;
+    private bool _alreadyAttacked;
+    private bool _takeDamage;
+    private static readonly int Dead = Animator.StringToHash("Dead");
+    private static readonly int Attack = Animator.StringToHash("Attack");
+    private static readonly int Velocity = Animator.StringToHash("Velocity");
 
     private void Awake()
     {
@@ -30,64 +33,70 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        bool playerInSightRange = Physics.CheckSphere(transform.position, sightRange, playerLayer);
-        bool playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLayer);
+        var playerInSightRange = Physics.CheckSphere(transform.position, sightRange, playerLayer);
+        var playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLayer);
 
-        if (!playerInSightRange && !playerInAttackRange)
+        switch (playerInSightRange)
         {
-            Patroling();
-        }
-        else if (playerInSightRange && !playerInAttackRange)
-        {
-            ChasePlayer();
-        }
-        else if (playerInAttackRange && playerInSightRange)
-        {
-            AttackPlayer();
-        }
-        else if (!playerInSightRange && takeDamage)
-        {
-            ChasePlayer();
+            case false when !playerInAttackRange:
+                Patrolling();
+                break;
+            case true when !playerInAttackRange:
+                ChasePlayer();
+                break;
+            default:
+            {
+                if (playerInSightRange)
+                {
+                    AttackPlayer();
+                }
+                else if (_takeDamage)
+                {
+                    ChasePlayer();
+                }
+
+                break;
+            }
         }
     }
 
-    private void Patroling()
+    private void Patrolling()
     {
-        if (!walkPointSet)
+        if (!_walkPointSet)
         {
             SearchWalkPoint();
         }
 
-        if (walkPointSet)
+        if (_walkPointSet)
         {
-            navAgent.SetDestination(walkPoint);
+            navAgent.SetDestination(_walkPoint);
         }
 
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        animator.SetFloat("Velocity", 0.2f);
+        var distanceToWalkPoint = transform.position - _walkPoint;
+        animator.SetFloat(Velocity, 0.2f);
 
         if (distanceToWalkPoint.magnitude < 1f)
         {
-            walkPointSet = false;
+            _walkPointSet = false;
         }
     }
 
     private void SearchWalkPoint()
     {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        var randomZ = Random.Range(-walkPointRange, walkPointRange);
+        var randomX = Random.Range(-walkPointRange, walkPointRange);
+        _walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, groundLayer))
+        if (Physics.Raycast(_walkPoint, -transform.up, 2f, groundLayer))
         {
-            walkPointSet = true;
+            _walkPointSet = true;
         }
     }
 
     private void ChasePlayer()
     {
         navAgent.SetDestination(player.position);
-        animator.SetFloat("Velocity", 0.6f);
+        animator.SetFloat(Velocity, 0.6f);
         navAgent.isStopped = false; // Add this line
     }
 
@@ -96,17 +105,16 @@ public class Enemy : MonoBehaviour
     {
         navAgent.SetDestination(transform.position);
 
-        if (!alreadyAttacked)
-        {
-            transform.LookAt(player.position);
-            alreadyAttacked = true;
-            animator.SetBool("Attack", true);
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        if (_alreadyAttacked) return;
+        transform.LookAt(player.position);
+        _alreadyAttacked = true;
+        animator.SetBool(Attack, true);
+        Invoke(nameof(ResetAttack), timeBetweenAttacks);
 
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange))
-            {
-                /*
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange))
+        {
+            /*
                     YOU CAN USE THIS TO GET THE PLAYER HUD AND CALL THE TAKE DAMAGE FUNCTION
 
                 PlayerHUD playerHUD = hit.transform.GetComponent<PlayerHUD>();
@@ -115,15 +123,14 @@ public class Enemy : MonoBehaviour
                    playerHUD.takeDamage(damage);
                 }
                  */
-            }
         }
     }
 
 
     private void ResetAttack()
     {
-        alreadyAttacked = false;
-        animator.SetBool("Attack", false);
+        _alreadyAttacked = false;
+        animator.SetBool(Attack, false);
     }
 
     public void TakeDamage(float damage)
@@ -140,9 +147,9 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator TakeDamageCoroutine()
     {
-        takeDamage = true;
+        _takeDamage = true;
         yield return new WaitForSeconds(2f);
-        takeDamage = false;
+        _takeDamage = false;
     }
 
     private void DestroyEnemy()
@@ -152,7 +159,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator DestroyEnemyCoroutine()
     {
-        animator.SetBool("Dead", true);
+        animator.SetBool(Dead, true);
         yield return new WaitForSeconds(1.8f);
         Destroy(gameObject);
     }

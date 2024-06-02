@@ -1,19 +1,12 @@
 using UnityEngine;
 
-public class OnItemClick : MonoBehaviour
+namespace GroupCharacter.Inventory
 {
-    // Start is called before the first frame update
-    private void Start()
+    public class OnItemClick : MonoBehaviour
     {
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-    }
-
-    public void man()
-    {
-        Debug.Log("a");
+        public void Man()
+        {
+            Debug.Log("a");
+        }
     }
 }

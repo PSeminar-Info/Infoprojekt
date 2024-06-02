@@ -127,7 +127,7 @@ namespace Entities.Npc.Enemy.Wizard
         {
             if (inCombat)
             {
-                _agent.destination = RandomNavmeshLocation(combatMoveDistance, 0);
+                _agent.destination = RandomNavmeshLocation(combatMoveDistance);
                 return;
             }
 

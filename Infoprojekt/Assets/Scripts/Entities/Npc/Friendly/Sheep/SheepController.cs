@@ -97,11 +97,16 @@ namespace Entities.Npc.Friendly.Sheep
             _destination = RandomNavmeshLocation(_maxDistance, _minDistance);
             var targetRotation = Quaternion.LookRotation(_destination - transform.position);
 
-            // doesn't work yet, but can't be bothered to fix it
-            if (targetRotation.eulerAngles.y is > 45 and < 180)
-                SetAnimation(Turn90R);
-            else if (targetRotation.eulerAngles.y is > 180 and < 315)
-                SetAnimation(Turn90L);
+            switch (targetRotation.eulerAngles.y)
+            {
+                // doesn't work yet, but can't be bothered to fix it
+                case > 45 and < 180:
+                    SetAnimation(Turn90R);
+                    break;
+                case > 180 and < 315:
+                    SetAnimation(Turn90L);
+                    break;
+            }
 
             StartCoroutine(StartWalkingAfterRotation(animationName));
         }

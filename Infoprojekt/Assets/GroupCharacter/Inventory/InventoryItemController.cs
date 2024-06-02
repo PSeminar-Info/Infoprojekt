@@ -1,17 +1,20 @@
 using UnityEngine;
 
-public class InventoryItemController : MonoBehaviour
+namespace GroupCharacter.Inventory
 {
-    private Item item;
-
-    public void Removeitem()
+    public class InventoryItemController : MonoBehaviour
     {
-        InventoryManager.Instance.Remove(item);
-        Destroy(gameObject);
-    }
+        private Item _item;
 
-    public void AddItem(Item newItem)
-    {
-        item = newItem;
+        public void Removeitem()
+        {
+            InventoryManager.Instance.Remove(_item);
+            Destroy(gameObject);
+        }
+
+        public void AddItem(Item newItem)
+        {
+            _item = newItem;
+        }
     }
 }

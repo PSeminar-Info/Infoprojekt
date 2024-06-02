@@ -1,53 +1,57 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class ToggleManager : MonoBehaviour
+namespace Terrain.See.Scripts
 {
-
-    public bool village;
-    public bool forest;
-    public bool graveyard;
-    public bool castle;
-    public bool lazylake;
-    public bool fisherslake;
-    public bool tundracastle;
-
-    public void changevillage(bool change)
+    public class ToggleManager : MonoBehaviour
     {
-        village = change;
-    }
 
-    public void changeforest(bool change)
-    {
-        forest = change;
-    }
+        public bool village;
+        public bool forest;
+        public bool graveyard;
+        public bool castle;
+        [FormerlySerializedAs("lazylake")] public bool lazyLake;
+        [FormerlySerializedAs("fisherslake")] public bool fishersLake;
+        [FormerlySerializedAs("tundracastle")] public bool tundraCastle;
 
-    public void changegraveyard(bool change)
-    {
-        graveyard = change;
-    }
+        public void Changevillage(bool change)
+        {
+            village = change;
+        }
 
-    public void changecastle(bool change)
-    {
-        castle = change;
-    }
+        public void Changeforest(bool change)
+        {
+            forest = change;
+        }
 
-    public void changelazylake(bool change)
-    {
-        lazylake = change;
-    }
+        public void Changegraveyard(bool change)
+        {
+            graveyard = change;
+        }
 
-    public void changefisherslake(bool change)
-    {
-        fisherslake = change;
-    }
+        public void Changecastle(bool change)
+        {
+            castle = change;
+        }
 
-    public void changetundracastle(bool change)
-    {
-        tundracastle = change;
-    }
+        public void Changelazylake(bool change)
+        {
+            lazyLake = change;
+        }
 
-    public string GetMap()
-    {
-        return village ? "village" : forest ? "forest" : graveyard ? "graveyard" : castle ? "castle" : lazylake ? "lazylake" : fisherslake ? "fisherslake" : tundracastle ? "tundracastle" : "Error";
+        public void Changefisherslake(bool change)
+        {
+            fishersLake = change;
+        }
+
+        public void Changetundracastle(bool change)
+        {
+            tundraCastle = change;
+        }
+
+        public string GetMap()
+        {
+            return village ? "village" : forest ? "forest" : graveyard ? "graveyard" : castle ? "castle" : lazyLake ? "lazylake" : fishersLake ? "fisherslake" : tundraCastle ? "tundracastle" : "Error";
+        }
     }
 }

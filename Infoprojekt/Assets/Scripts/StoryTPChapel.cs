@@ -1,25 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Serialization;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    public GameObject LazyLake;
-    public GameObject StartMap;
-    public GameObject Player;
-    public Text info;
+    [FormerlySerializedAs("LazyLake")] public GameObject lazyLake;
+    [FormerlySerializedAs("StartMap")] public GameObject startMap;
+    [FormerlySerializedAs("Player")] public GameObject player;
+    public GameObject info;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            Player.SetActive(false);
-            LazyLake.SetActive(true);
-            Player.transform.position = new Vector3(-154, 15, -19);
-            StartMap.SetActive(false);
-            Player.SetActive(true);
-            info.text = "Gehe zum Villager am Haus";
-        }
+        if (!other.CompareTag("Player")) return;
+        player.SetActive(false);
+        lazyLake.SetActive(true);
+        player.transform.position = new Vector3(-154, 15, -19);
+        startMap.SetActive(false);
+        player.SetActive(true);
+        info.text = "Gehe zum Villager am Haus";
     }
 }

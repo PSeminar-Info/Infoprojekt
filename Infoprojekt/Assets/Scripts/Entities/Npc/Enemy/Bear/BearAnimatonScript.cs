@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Entities.Npc.Enemy.Bear.Animatoion
+namespace Entities.Npc.Enemy.Bear
 {
     public class BearAnimationScript : MonoBehaviour
     {
