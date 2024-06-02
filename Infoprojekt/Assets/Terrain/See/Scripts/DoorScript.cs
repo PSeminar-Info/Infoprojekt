@@ -36,7 +36,7 @@ public class DoorScript : MonoBehaviour
             Mathf.LerpAngle(currentRotationAngle, defaultRotationAngle + (open ? doorOpenAngle : 0), openTime),
             transform.localEulerAngles.z);
 
-        if (Input.GetKeyDown(KeyCode.F) && enter)
+        if (Input.GetKeyDown(KeyCode.E) && enter)
         {
             open = !open;
             currentRotationAngle = transform.localEulerAngles.y;
@@ -49,7 +49,7 @@ public class DoorScript : MonoBehaviour
     {
         if (enter)
             GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 155, 30),
-                "Press 'F' to " + (open ? "close" : "open") + " the door");
+                "Press 'E' to " + (open ? "close" : "open") + " the door");
     }
 
     //
