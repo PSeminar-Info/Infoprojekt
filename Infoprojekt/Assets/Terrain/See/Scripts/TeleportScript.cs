@@ -16,6 +16,8 @@ public class TeleportScript : MonoBehaviour
     public GameObject TundraLake;
 
     public ToggleGroup ToggleGroup;
+    public Text TeleportText;
+
     private bool enter;
 
     private bool showGUI;
@@ -40,7 +42,15 @@ public class TeleportScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && enter && Canvas != null)
+        if (TeleportText != null && enter)
+        {
+            TeleportText.gameObject.SetActive(true);
+        } else
+        {
+            TeleportText.gameObject.SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && enter && Canvas != null)
         {
             OpenCanvas();
         }
@@ -56,16 +66,6 @@ public class TeleportScript : MonoBehaviour
         Player.SetActive(false);
     }
 
-    private void OnGUI()
-    {
-        if (enter) GUI.Label(new Rect(Screen.width / 2 - 75, Screen.height - 100, 155, 30), "Press 'F' to teleport");
-
-        //das geht sicher schöner juckt aber
-        if (showGUI)
-            GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - 300, 250, 30),
-                "Du hast dieses Gebiet noch nicht erkundet");
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) enter = true;
@@ -78,19 +78,18 @@ public class TeleportScript : MonoBehaviour
 
     public void Teleport()
     {
-        string mapName = togglemanager.GetMap();
-        if (teleportLocations.TryGetValue(mapName, out var location))
-        {
-            ActivateLocation(location.activeMap);
-            Player.transform.position = location.position;
-        }
-        else
-        {
-            StartCoroutine(Wait());
-        }
-
-        Cancel();
-        enter = false;
+            string mapName = togglemanager.GetMap();
+            if (teleportLocations.TryGetValue(mapName, out var location))
+            {
+                ActivateLocation(location.activeMap);
+                Player.transform.position = location.position;
+            }
+            else
+            {
+            Debug.Log("Fehler");
+            }
+            Cancel();
+            enter = false;
     }
 
     private void ActivateLocation(GameObject activeLocation)
@@ -109,14 +108,5 @@ public class TeleportScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
         Player.SetActive(true);
-    }
-
-    //ja leck eier ich weiß der code ist scuffed
-    private IEnumerator Wait()
-    {
-        //zeigt dass man des Gebiet noch nicht unlocked hat
-        showGUI = true;
-        yield return new WaitForSeconds(5);
-        showGUI = false;
     }
 }

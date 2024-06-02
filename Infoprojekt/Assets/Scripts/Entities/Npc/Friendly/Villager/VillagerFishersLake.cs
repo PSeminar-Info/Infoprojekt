@@ -9,6 +9,6 @@ public class VillagerFishersLake : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        info.text = "Gehe zur Burg";
+        if (other.CompareTag("Player"))  info.text = "Gehe zur Burg";
     }
 }
