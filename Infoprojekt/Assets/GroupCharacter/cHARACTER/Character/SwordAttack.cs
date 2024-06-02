@@ -48,7 +48,7 @@ namespace GroupCharacter.cHARACTER.Character
                 if (hitCollider.CompareTag("enemy"))
                 {
                     ApplyDamageAndKnockback(hitCollider.gameObject, damageAmount);
-                    if (hitCollider.gameObject.name == "Bear") 
+                    if (hitCollider.gameObject.name == "Bear")
                     {
                         var enemybear = hitCollider.gameObject.GetComponent<BearController>();
                         enemybear.TakeDamage(13);

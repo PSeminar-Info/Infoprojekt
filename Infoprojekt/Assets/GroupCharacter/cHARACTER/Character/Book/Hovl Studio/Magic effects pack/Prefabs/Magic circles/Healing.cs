@@ -5,10 +5,11 @@ namespace GroupCharacter.cHARACTER.Character.Book.Hovl_Studio.Magic_effects_pack
 {
     public class Healing : MonoBehaviour
     {
-        [FormerlySerializedAs("HealAnimation")] public GameObject healAnimation;
+        [FormerlySerializedAs("HealAnimation")]
+        public GameObject healAnimation;
 
         private GameObject _currentHealAnimation; // Speichert das aktuelle HealAnimation-Objekt
-        
+
         private PlayerHealth _playerhealth;
         private float _timer;
 
@@ -25,7 +26,8 @@ namespace GroupCharacter.cHARACTER.Character.Book.Hovl_Studio.Magic_effects_pack
                 Destroy(_currentHealAnimation.gameObject);
             }
 
-            _currentHealAnimation = Instantiate(healAnimation, collider.gameObject.transform.position, Quaternion.identity);
+            _currentHealAnimation =
+                Instantiate(healAnimation, collider.gameObject.transform.position, Quaternion.identity);
             _currentHealAnimation.gameObject.transform.SetParent(collider.gameObject.transform);
         }
 

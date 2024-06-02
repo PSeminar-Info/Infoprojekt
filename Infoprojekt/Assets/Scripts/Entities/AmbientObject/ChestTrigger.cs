@@ -21,17 +21,14 @@ namespace Entities.AmbientObject
 
         public void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
-            { _triggerActive = true;
-          
-            }
+            if (other.CompareTag("Player")) _triggerActive = true;
         }
 
         public void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player")) { _triggerActive = false; }
+            if (other.CompareTag("Player")) _triggerActive = false;
 
-            if (_chestOpen) { CloseChest(); }
+            if (_chestOpen) CloseChest();
         }
 
         private void OpenChest()

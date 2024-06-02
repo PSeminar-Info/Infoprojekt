@@ -11,9 +11,12 @@ namespace GroupCharacter.Inventory
         [FormerlySerializedAs("Items")] public List<Item> items = new();
 
         [FormerlySerializedAs("ItemContent")] public Transform itemContent;
-        [FormerlySerializedAs("InventoryItem")] public GameObject inventoryItem;
 
-        [FormerlySerializedAs("InventoryItems")] public InventoryItemController[] inventoryItems;
+        [FormerlySerializedAs("InventoryItem")]
+        public GameObject inventoryItem;
+
+        [FormerlySerializedAs("InventoryItems")]
+        public InventoryItemController[] inventoryItems;
 
         private void Awake()
         {

@@ -1,9 +1,12 @@
 using System.Collections;
-using UnityEngine.AI;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    private static readonly int Dead = Animator.StringToHash("Dead");
+    private static readonly int Attack = Animator.StringToHash("Attack");
+    private static readonly int Velocity = Animator.StringToHash("Velocity");
     public NavMeshAgent navAgent;
     public Transform player;
     public LayerMask groundLayer, playerLayer;
@@ -15,14 +18,11 @@ public class Enemy : MonoBehaviour
     public int damage;
     public Animator animator;
     public ParticleSystem hitEffect;
+    private bool _alreadyAttacked;
+    private bool _takeDamage;
 
     private Vector3 _walkPoint;
     private bool _walkPointSet;
-    private bool _alreadyAttacked;
-    private bool _takeDamage;
-    private static readonly int Dead = Animator.StringToHash("Dead");
-    private static readonly int Attack = Animator.StringToHash("Attack");
-    private static readonly int Velocity = Animator.StringToHash("Velocity");
 
     private void Awake()
     {
@@ -47,38 +47,32 @@ public class Enemy : MonoBehaviour
             default:
             {
                 if (playerInSightRange)
-                {
                     AttackPlayer();
-                }
-                else if (_takeDamage)
-                {
-                    ChasePlayer();
-                }
+                else if (_takeDamage) ChasePlayer();
 
                 break;
             }
         }
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
+    }
+
     private void Patrolling()
     {
-        if (!_walkPointSet)
-        {
-            SearchWalkPoint();
-        }
+        if (!_walkPointSet) SearchWalkPoint();
 
-        if (_walkPointSet)
-        {
-            navAgent.SetDestination(_walkPoint);
-        }
+        if (_walkPointSet) navAgent.SetDestination(_walkPoint);
 
         var distanceToWalkPoint = transform.position - _walkPoint;
         animator.SetFloat(Velocity, 0.2f);
 
-        if (distanceToWalkPoint.magnitude < 1f)
-        {
-            _walkPointSet = false;
-        }
+        if (distanceToWalkPoint.magnitude < 1f) _walkPointSet = false;
     }
 
     private void SearchWalkPoint()
@@ -87,10 +81,7 @@ public class Enemy : MonoBehaviour
         var randomX = Random.Range(-walkPointRange, walkPointRange);
         _walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if (Physics.Raycast(_walkPoint, -transform.up, 2f, groundLayer))
-        {
-            _walkPointSet = true;
-        }
+        if (Physics.Raycast(_walkPoint, -transform.up, 2f, groundLayer)) _walkPointSet = true;
     }
 
     private void ChasePlayer()
@@ -139,10 +130,7 @@ public class Enemy : MonoBehaviour
         hitEffect.Play();
         StartCoroutine(TakeDamageCoroutine());
 
-        if (health <= 0)
-        {
-            Invoke(nameof(DestroyEnemy), 0.5f);
-        }
+        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
     }
 
     private IEnumerator TakeDamageCoroutine()
@@ -162,13 +150,5 @@ public class Enemy : MonoBehaviour
         animator.SetBool(Dead, true);
         yield return new WaitForSeconds(1.8f);
         Destroy(gameObject);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
     }
 }

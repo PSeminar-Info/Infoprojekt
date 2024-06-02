@@ -5,9 +5,9 @@ namespace Entities.Npc.Enemy.Skeleton
 {
     public class SkeletonController : Npc
     {
-        private NavMeshAgent _nav;
         private const float MaxMove = 30f;
         private const float MinMove = 10f;
+        private NavMeshAgent _nav;
         private string _state = "Idle";
 
         // Update is called once per frame

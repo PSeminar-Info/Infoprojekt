@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-
 public class Skeleton : MonoBehaviour
 {
     public NavMeshAgent agent;
-   // public GameObject attack;
+    // public GameObject attack;
 
     public float hitPoints;
 
@@ -14,16 +13,16 @@ public class Skeleton : MonoBehaviour
     public LayerMask groundLevel, playerLevel;
 
     public Vector3 patrolPoint;
-    private bool _patrolPointSet;
     public float patrolRange;
 
 
     public float attackCooldown;
-    private bool _alreadyAttacked;
 
 
     public float chaseRange, attackRange;
     public bool playerInChaseRange, playerInAttackRange;
+    private bool _alreadyAttacked;
+    private bool _patrolPointSet;
 
     private void Awake()
     {
@@ -42,7 +41,7 @@ public class Skeleton : MonoBehaviour
         if (playerInChaseRange && playerInAttackRange) Attacking();
     }
 
-    private void Patroling() 
+    private void Patroling()
     {
         if (!_patrolPointSet) SearchPatrolPoint();
 
@@ -61,14 +60,14 @@ public class Skeleton : MonoBehaviour
         var randomX = Random.Range(-patrolRange, patrolRange);
 
         patrolPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-             
-            
     }
-    private void Chasing() 
+
+    private void Chasing()
     {
         agent.SetDestination(player.position);
     }
-    private void Attacking() 
+
+    private void Attacking()
     {
         agent.SetDestination(transform.position);
 
@@ -79,10 +78,10 @@ public class Skeleton : MonoBehaviour
 
 
         _alreadyAttacked = true;
-        Invoke(nameof(ResetAttack),attackCooldown);
+        Invoke(nameof(ResetAttack), attackCooldown);
     }
 
-    private void ResetAttack() 
+    private void ResetAttack()
     {
         _alreadyAttacked = false;
     }
@@ -92,7 +91,6 @@ public class Skeleton : MonoBehaviour
         hitPoints -= damage;
 
         if (hitPoints <= 0) Death();
-
     }
 
     private void Death()
@@ -100,4 +98,3 @@ public class Skeleton : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 }
-

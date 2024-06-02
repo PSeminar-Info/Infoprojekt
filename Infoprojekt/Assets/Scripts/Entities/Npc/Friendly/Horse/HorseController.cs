@@ -10,6 +10,13 @@ namespace Entities.Npc.Friendly.Horse
 {
     public class Horse : Npc
     {
+        public enum Options
+        {
+            Walk,
+            Trot,
+            Run
+        }
+
         private static readonly int Death = Animator.StringToHash("death");
         private static readonly int HitReaction = Animator.StringToHash("hit_reaction");
         private static readonly int Idle = Animator.StringToHash("idle");
@@ -29,13 +36,6 @@ namespace Entities.Npc.Friendly.Horse
 
         public List<Transform> destinations;
 
-        public enum Options
-        {
-            Walk,
-            Trot,
-            Run
-        }
-
         public float minimumCooldown = 4f;
         public float maximumCooldown = 6f;
 
@@ -51,13 +51,13 @@ namespace Entities.Npc.Friendly.Horse
         private int _currentAnimation;
 
         private Vector3 _destination;
-        private bool _movingToDestination;
+
+        private bool _hasDestination;
 
         // _maxDistance and _minDistance are used to increase distance when running/trotting, walking uses default values
         private float _maxDistance;
         private float _minDistance;
-
-        private bool _hasDestination;
+        private bool _movingToDestination;
         private int _sampledPositions;
 
         private void Start()
@@ -68,7 +68,6 @@ namespace Entities.Npc.Friendly.Horse
             _animator = GetComponent<Animator>();
 
             foreach (var dest in destinations.ToList())
-            {
                 if (NavMesh.SamplePosition(dest.position, out var hit, 4, 1))
                 {
                     dest.position = hit.position;
@@ -79,7 +78,6 @@ namespace Entities.Npc.Friendly.Horse
                     Debug.LogWarning($"Destination {dest.name} is not close to the navmesh. Removing it.");
                     destinations.Remove(dest);
                 }
-            }
 
             if (destinations[0])
             {
@@ -92,15 +90,10 @@ namespace Entities.Npc.Friendly.Horse
 
         private void Update()
         {
-            if (rider)
-            {
-                rider.transform.position = ridingPosition.position;
-            }
+            if (rider) rider.transform.position = ridingPosition.position;
 
             if (_sampledPositions < destinations.Count)
-            {
                 foreach (var dest in destinations.ToList())
-                {
                     if (NavMesh.SamplePosition(dest.position, out var hit, 4, 1))
                     {
                         dest.position = hit.position;
@@ -111,17 +104,12 @@ namespace Entities.Npc.Friendly.Horse
                         Debug.LogWarning($"Destination {dest.name} is not close to the navmesh. Removing it.");
                         destinations.Remove(dest);
                     }
-                }
-            }
 
             if (Vector3.Distance(_agent.destination, transform.position) < 0.4)
             {
-
                 _hasDestination = false;
                 if (destinations.Count > 0)
-                {
                     destinations.RemoveAt(0);
-                }
                 else SetAnimation(Idle);
 
                 _agent.ResetPath();
@@ -138,9 +126,7 @@ namespace Entities.Npc.Friendly.Horse
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject == rider.gameObject)
-            {
                 Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
-            }
         }
 
         private void PlayCorrectAnimation()

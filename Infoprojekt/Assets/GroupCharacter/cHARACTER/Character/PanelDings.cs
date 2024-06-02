@@ -9,26 +9,25 @@ namespace GroupCharacter.cHARACTER.Character
         public GameObject panelInfos;
         public GameObject panelCredits;
         public GameObject texte;
-        void Start()
+
+        private void Start()
         {
-        
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
-        
         }
+
         public void OpenPanel(GameObject abc)
         {
             abc.SetActive(true);
         }
+
         public void ClosePanel(GameObject abc)
         {
             abc.SetActive(false);
             texte.SetActive(true);
         }
-
-
     }
 }

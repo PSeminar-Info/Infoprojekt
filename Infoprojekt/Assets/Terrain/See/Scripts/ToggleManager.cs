@@ -5,7 +5,6 @@ namespace Terrain.See.Scripts
 {
     public class ToggleManager : MonoBehaviour
     {
-
         public bool village;
         public bool forest;
         public bool graveyard;
@@ -51,7 +50,13 @@ namespace Terrain.See.Scripts
 
         public string GetMap()
         {
-            return village ? "village" : forest ? "forest" : graveyard ? "graveyard" : castle ? "castle" : lazyLake ? "lazylake" : fishersLake ? "fisherslake" : tundraCastle ? "tundracastle" : "Error";
+            return village ? "village" :
+                forest ? "forest" :
+                graveyard ? "graveyard" :
+                castle ? "castle" :
+                lazyLake ? "lazylake" :
+                fishersLake ? "fisherslake" :
+                tundraCastle ? "tundracastle" : "Error";
         }
     }
 }

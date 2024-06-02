@@ -100,7 +100,7 @@ namespace Entities.Npc.Enemy.Wizard
         private IEnumerator TeleportToRandomLocation()
         {
             gameObject.transform.LookAt(player.transform);
-            
+
             if (Vector3.Distance(player.transform.position, transform.position) >
                 playerDistance + maxTeleportDistance - 10)
                 yield break;

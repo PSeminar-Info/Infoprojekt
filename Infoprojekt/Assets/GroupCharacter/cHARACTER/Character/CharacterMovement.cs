@@ -10,6 +10,15 @@ namespace GroupCharacter.cHARACTER.Character
 {
     public class CharacterMovement : MonoBehaviour
     {
+        private const float MaximumWalkVelocity = 0.5f;
+        private const float MaximumRunVelocity = 2.0f;
+        private static readonly int VelocityZ = Animator.StringToHash("VelocityZ");
+        private static readonly int VelocityX = Animator.StringToHash("VelocityX");
+        private static readonly int Shoot = Animator.StringToHash("shoot");
+        private static readonly int ArrowStand = Animator.StringToHash("arrowStand");
+        private static readonly int Jump = Animator.StringToHash("jump");
+        private static readonly int Sneak = Animator.StringToHash("sneak");
+        private static readonly int Idle = Animator.StringToHash("Idle");
         public CharacterController charact;
         public GameObject cam;
         public bool haus = true;
@@ -47,6 +56,16 @@ namespace GroupCharacter.cHARACTER.Character
         public float price1;
         public float price2;
         public float price3;
+        public GameObject panelDings;
+        [FormerlySerializedAs("PanelNormal")] public GameObject panelNormal;
+
+        public bool sceneonefinished;
+        public GameObject storeone;
+        public GameObject storetwo;
+
+        public PlayableDirector playableDirector; // Referenz zur PlayableDirector-Komponente
+        public Camera cammm;
+        public GameObject texte;
         private Animator _animator;
         private GameObject _arr;
         private Arrow _arrow;
@@ -72,9 +91,9 @@ namespace GroupCharacter.cHARACTER.Character
         private bool _isRotationPressed;
         private int _isRunningHash;
         private int _isWalkingHash;
-        private const float MaximumWalkVelocity = 0.5f;
-        private const float MaximumRunVelocity = 2.0f;
         private bool _movementPressed;
+
+        private bool _openDings;
         private PlayerAttack _playerattack;
         private PlayerHealth _plhe;
         private Rigidbody _rb;
@@ -85,26 +104,7 @@ namespace GroupCharacter.cHARACTER.Character
         private float _velocity;
         private float _velocityX;
 
-        private bool _openDings;
-        public GameObject panelDings;
-        [FormerlySerializedAs("PanelNormal")] public GameObject panelNormal;
-
         private float _velocityZ;
-
-        public bool sceneonefinished;
-        public GameObject storeone;
-        public GameObject storetwo;
-
-        public PlayableDirector playableDirector; // Referenz zur PlayableDirector-Komponente
-        public Camera cammm;
-        public GameObject texte;
-        private static readonly int VelocityZ = Animator.StringToHash("VelocityZ");
-        private static readonly int VelocityX = Animator.StringToHash("VelocityX");
-        private static readonly int Shoot = Animator.StringToHash("shoot");
-        private static readonly int ArrowStand = Animator.StringToHash("arrowStand");
-        private static readonly int Jump = Animator.StringToHash("jump");
-        private static readonly int Sneak = Animator.StringToHash("sneak");
-        private static readonly int Idle = Animator.StringToHash("Idle");
 
         private void Awake()
         {
@@ -214,21 +214,9 @@ namespace GroupCharacter.cHARACTER.Character
             _input.CharacterControls.Disable();
         }
 
-        // was macht das???
-        // OnTriggerStay is called once per physics update for every Collider other that is touching the trigger. This function can be a coroutine.
-        private void OnTriggerStay(Collider other)
-        {
-            if (!other.gameObject.CompareTag("Collectable") || !pickUpPressed) return;
-            var script = other.gameObject.GetComponent<ItemPickUp>();
-            script.ePressed = true;
-        }
-
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("attack"))
-            {
-                _plhe.health -= 5;
-            }
+            if (other.gameObject.CompareTag("attack")) _plhe.health -= 5;
 
             if (other.gameObject.CompareTag("storyone"))
             {
@@ -248,9 +236,16 @@ namespace GroupCharacter.cHARACTER.Character
             }
 
             if (other.gameObject.CompareTag("BearHit")) //Bear macht mehr schaden
-            {
                 _plhe.health -= 10;
-            }
+        }
+
+        // was macht das???
+        // OnTriggerStay is called once per physics update for every Collider other that is touching the trigger. This function can be a coroutine.
+        private void OnTriggerStay(Collider other)
+        {
+            if (!other.gameObject.CompareTag("Collectable") || !pickUpPressed) return;
+            var script = other.gameObject.GetComponent<ItemPickUp>();
+            script.ePressed = true;
         }
 
 
@@ -505,17 +500,11 @@ namespace GroupCharacter.cHARACTER.Character
 
             // Überprüfe, ob die Szene geladen ist
             if (sceneToDeactivate.isLoaded)
-            {
                 // Iteriere über alle Root-GameObjects in der Szene und deaktiviere sie
                 foreach (var go in sceneToDeactivate.GetRootGameObjects())
-                {
                     go.SetActive(false);
-                }
-            }
             else
-            {
                 Debug.LogWarning("Szene " + sceneName + " ist nicht geladen.");
-            }
         }
     }
 }

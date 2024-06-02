@@ -23,7 +23,8 @@ namespace Terrain.Hauptdorf.Demo.Low_poly_package.Scripts
                 _takeScreenshotOnNextFrame = false;
                 var renderTexture = _myCamera.targetTexture;
 
-                var renderResult = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.ARGB32, false);
+                var renderResult =
+                    new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.ARGB32, false);
                 var rect = new Rect(0, 0, renderTexture.width, renderTexture.height);
                 renderResult.ReadPixels(rect, 0, 0);
 

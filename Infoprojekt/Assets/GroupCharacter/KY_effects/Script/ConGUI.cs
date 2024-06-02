@@ -9,9 +9,9 @@ namespace GroupCharacter.KY_effects.Script
         public int rotSpeed = 20;
         public GameObject[] effectObj;
         public GameObject[] effectObProj;
+        private readonly string[] _cameraState = { "Camera move", "Camera stop" };
         private int _arrayNo;
         private int _cameraRotCon = 1;
-        private readonly string[] _cameraState = { "Camera move", "Camera stop" };
 
         private bool _haveProFlg;
         private Vector3 _initPos;
@@ -92,9 +92,7 @@ namespace GroupCharacter.KY_effects.Script
 
 
             if (GUI.Button(new Rect(300, 0, 200, 30), _cameraState[_cameraRotCon]))
-            {
                 _cameraRotCon = _cameraRotCon == 1 ? 0 : 1;
-            }
 
             _num = GUI.VerticalSlider(new Rect(30, 100, 20, 200), _num, 0, 20);
         }

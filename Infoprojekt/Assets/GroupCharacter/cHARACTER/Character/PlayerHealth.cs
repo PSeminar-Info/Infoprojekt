@@ -6,6 +6,8 @@ namespace GroupCharacter.cHARACTER.Character
 {
     public class PlayerHealth : MonoBehaviour
     {
+        private static readonly int Die = Animator.StringToHash("die");
+
         // Start is called before the first frame update
         [FormerlySerializedAs("HealtBar")] public Slider healtBar;
         [FormerlySerializedAs("TextHealth")] public Text textHealth;
@@ -16,9 +18,8 @@ namespace GroupCharacter.cHARACTER.Character
         public bool animationn;
         [FormerlySerializedAs("Panel")] public GameObject panel;
         public bool dead;
-        private Animator _animator;
         public LayerMask layerToCheck; // Layer, den du überprüfen möchtest
-        private static readonly int Die = Animator.StringToHash("die");
+        private Animator _animator;
 
         private void Start()
         {
@@ -56,11 +57,8 @@ namespace GroupCharacter.cHARACTER.Character
                 _animator.SetBool(Die, true);
                 dead = true;
             }
-            if(health >= 100)
-            {
-                health = 100;
-            }
-        
+
+            if (health >= 100) health = 100;
         }
 
         // public void TakeDamage()
@@ -77,7 +75,5 @@ namespace GroupCharacter.cHARACTER.Character
             healtBar.value = health;
             textHealth.text = "" + health;
         }
-
-   
     }
 }
