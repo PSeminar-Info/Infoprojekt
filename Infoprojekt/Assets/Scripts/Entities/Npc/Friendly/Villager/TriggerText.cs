@@ -28,7 +28,7 @@ namespace Entities.Npc.Friendly.Villager
 
         public void Update()
         {
-            if (_countTillNextPart > 3) info.text = "Begib dich in den Wald. Du kannst dich am Starthaus teleportieren";
+            if (_countTillNextPart > 3) info.text = "Begib dich in den Wald und laufe alle Wege ab um den Bären zu finden. Du kannst dich am Starthaus teleportieren";
         }
 
 
