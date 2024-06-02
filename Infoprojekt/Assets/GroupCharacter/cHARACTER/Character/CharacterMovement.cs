@@ -1,3 +1,4 @@
+using System;
 using GroupCharacter.Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -150,6 +151,7 @@ namespace GroupCharacter.cHARACTER.Character
         }
 
         // Update is called once per frame
+        [Obsolete("Obsolete")]
         private void Update()
         {
             if (_openDings)
@@ -213,6 +215,7 @@ namespace GroupCharacter.cHARACTER.Character
         }
 
         // was macht das???
+        // OnTriggerStay is called once per physics update for every Collider other that is touching the trigger. This function can be a coroutine.
         private void OnTriggerStay(Collider other)
         {
             if (!other.gameObject.CompareTag("Collectable") || !pickUpPressed) return;
