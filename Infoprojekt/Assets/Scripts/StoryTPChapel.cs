@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class NewBehaviourScript : MonoBehaviour
 {
     [FormerlySerializedAs("LazyLake")] public GameObject lazyLake;
     [FormerlySerializedAs("StartMap")] public GameObject startMap;
     [FormerlySerializedAs("Player")] public GameObject player;
-    public GameObject info;
+    public Text info;
 
     private void OnTriggerEnter(Collider other)
     {

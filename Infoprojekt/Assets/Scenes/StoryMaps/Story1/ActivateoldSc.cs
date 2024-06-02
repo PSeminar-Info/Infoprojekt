@@ -23,10 +23,13 @@ namespace Scenes.StoryMaps.Story1
 
             // �berpr�fe, ob die Szene geladen ist
             if (sceneToDeactivate.isLoaded)
+            {
                 // Iteriere �ber alle Root-GameObjects in der Szene und deaktiviere sie
                 foreach (var go in sceneToDeactivate.GetRootGameObjects())
                     go.SetActive(true);
+            }
             else
+            {
                 Debug.LogWarning("Szene " + sceneName + " ist nicht geladen.");
             }
             GameObject.FindWithTag("Teleport").SetActive(false);

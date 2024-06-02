@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4449778, g: 0.49455965, b: 0.57368827, a: 1}
+  m_IndirectSpecularColor: {r: 0.43826026, g: 0.48629194, b: 0.5665713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7743,7 +7743,7 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
+  lazyLake: 0
 --- !u!114 &216684060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7760,9 +7760,9 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
-  fisherslake: 0
-  tundracastle: 0
+  lazyLake: 0
+  fishersLake: 0
+  tundraCastle: 0
 --- !u!114 &216684061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7775,16 +7775,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2629116109a8d464a9ebd80e6afc4c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Canvas: {fileID: 1708412540}
-  PlayerCanvas: {fileID: 213663179}
-  togglemanager: {fileID: 216684060}
+  canvas: {fileID: 1708412540}
+  playerCanvas: {fileID: 213663179}
+  toggleManager: {fileID: 216684060}
   mapdiscover: {fileID: 216684059}
-  Player: {fileID: 487192795}
-  LazyLake: {fileID: 908365932}
-  StartMap: {fileID: 171978813}
-  TundraLake: {fileID: 1420307281}
-  ToggleGroup: {fileID: 1078810746}
-  TeleportText: {fileID: 395441556}
+  player: {fileID: 487192795}
+  lazyLake: {fileID: 908365932}
+  startMap: {fileID: 171978813}
+  tundraLake: {fileID: 1420307281}
+  toggleGroup: {fileID: 1078810746}
+  teleportText: {fileID: 395441556}
 --- !u!135 &216684062
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9424,7 +9424,7 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
+  lazyLake: 0
 --- !u!114 &253206066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9441,9 +9441,9 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
-  fisherslake: 0
-  tundracastle: 0
+  lazyLake: 0
+  fishersLake: 0
+  tundraCastle: 0
 --- !u!114 &253206067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9456,16 +9456,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2629116109a8d464a9ebd80e6afc4c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Canvas: {fileID: 1708412540}
-  PlayerCanvas: {fileID: 213663179}
-  togglemanager: {fileID: 253206066}
+  canvas: {fileID: 1708412540}
+  playerCanvas: {fileID: 213663179}
+  toggleManager: {fileID: 253206066}
   mapdiscover: {fileID: 253206065}
-  Player: {fileID: 487192795}
-  LazyLake: {fileID: 908365932}
-  StartMap: {fileID: 171978813}
-  TundraLake: {fileID: 1420307281}
-  ToggleGroup: {fileID: 1078810746}
-  TeleportText: {fileID: 395441556}
+  player: {fileID: 487192795}
+  lazyLake: {fileID: 908365932}
+  startMap: {fileID: 171978813}
+  tundraLake: {fileID: 1420307281}
+  toggleGroup: {fileID: 1078810746}
+  teleportText: {fileID: 395441556}
 --- !u!135 &253206068
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10572,16 +10572,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2629116109a8d464a9ebd80e6afc4c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Canvas: {fileID: 1708412540}
-  PlayerCanvas: {fileID: 213663179}
-  togglemanager: {fileID: 290310387}
+  canvas: {fileID: 1708412540}
+  playerCanvas: {fileID: 213663179}
+  toggleManager: {fileID: 290310387}
   mapdiscover: {fileID: 290310388}
-  Player: {fileID: 487192795}
-  LazyLake: {fileID: 908365932}
-  StartMap: {fileID: 171978813}
-  TundraLake: {fileID: 1420307281}
-  ToggleGroup: {fileID: 1078810746}
-  TeleportText: {fileID: 395441556}
+  player: {fileID: 487192795}
+  lazyLake: {fileID: 908365932}
+  startMap: {fileID: 171978813}
+  tundraLake: {fileID: 1420307281}
+  toggleGroup: {fileID: 1078810746}
+  teleportText: {fileID: 395441556}
 --- !u!114 &290310387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10598,9 +10598,9 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
-  fisherslake: 0
-  tundracastle: 0
+  lazyLake: 0
+  fishersLake: 0
+  tundraCastle: 0
 --- !u!114 &290310388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10616,7 +10616,7 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
+  lazyLake: 0
 --- !u!4 &290389453 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 977136844864435615, guid: 790cbaa43a4b19c4a964617119f8d796, type: 3}
@@ -15922,7 +15922,7 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
+  lazyLake: 0
 --- !u!114 &437664766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15939,9 +15939,9 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
-  fisherslake: 0
-  tundracastle: 0
+  lazyLake: 0
+  fishersLake: 0
+  tundraCastle: 0
 --- !u!114 &437664767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15954,16 +15954,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2629116109a8d464a9ebd80e6afc4c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Canvas: {fileID: 1708412540}
-  PlayerCanvas: {fileID: 213663179}
-  togglemanager: {fileID: 437664766}
+  canvas: {fileID: 1708412540}
+  playerCanvas: {fileID: 213663179}
+  toggleManager: {fileID: 437664766}
   mapdiscover: {fileID: 437664765}
-  Player: {fileID: 487192795}
-  LazyLake: {fileID: 908365932}
-  StartMap: {fileID: 171978813}
-  TundraLake: {fileID: 1420307281}
-  ToggleGroup: {fileID: 1078810746}
-  TeleportText: {fileID: 395441556}
+  player: {fileID: 487192795}
+  lazyLake: {fileID: 908365932}
+  startMap: {fileID: 171978813}
+  tundraLake: {fileID: 1420307281}
+  toggleGroup: {fileID: 1078810746}
+  teleportText: {fileID: 395441556}
 --- !u!135 &437664768
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -17381,14 +17381,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ae66b930e196e4baed624c6ce1cc56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealtBar: {fileID: 1472833998}
-  TextHealth: {fileID: 1009887041}
-  ManaBar: {fileID: 625770833}
-  TextMana: {fileID: 1293536292}
-  Health: 100
+  healtBar: {fileID: 1472833998}
+  textHealth: {fileID: 1009887041}
+  manaBar: {fileID: 625770833}
+  textMana: {fileID: 1293536292}
+  health: 100
   mana: 0
   animationn: 0
-  Panel: {fileID: 1050806354}
+  panel: {fileID: 1050806354}
   dead: 0
   layerToCheck:
     serializedVersion: 2
@@ -17409,9 +17409,9 @@ MonoBehaviour:
   book: {fileID: 4433255413829591616, guid: ec003cfbd0cdfe740943af98bc42ebe1, type: 3}
   bookPoint: {fileID: 1522641183}
   parent: {fileID: 487192796}
-  Animation1: {fileID: 8378648546881499446, guid: 867c572a5be680d42a042d2349f10143, type: 3}
-  Animation2: {fileID: 7478731271839673279, guid: 4d3c8045dd8857a4b8d34c2361c61045, type: 3}
-  Animation3: {fileID: 7986504087968017091, guid: 12a56ee4630040c4eb17ae9707ed4cef, type: 3}
+  animation1: {fileID: 8378648546881499446, guid: 867c572a5be680d42a042d2349f10143, type: 3}
+  animation2: {fileID: 7478731271839673279, guid: 4d3c8045dd8857a4b8d34c2361c61045, type: 3}
+  animation3: {fileID: 7986504087968017091, guid: 12a56ee4630040c4eb17ae9707ed4cef, type: 3}
   playerEffect: 0
 --- !u!4 &487328825 stripped
 Transform:
@@ -26480,10 +26480,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9950f763ff7061742940b6bf28ab58d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Items: []
-  ItemContent: {fileID: 0}
-  InventoryItem: {fileID: 3350403549708735728, guid: b9eb70fe38db8c04589cd1d5ab117351, type: 3}
-  InventoryItems: []
+  items: []
+  itemContent: {fileID: 0}
+  inventoryItem: {fileID: 3350403549708735728, guid: b9eb70fe38db8c04589cd1d5ab117351, type: 3}
+  inventoryItems: []
 --- !u!4 &725864601
 Transform:
   m_ObjectHideFlags: 0
@@ -27104,7 +27104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736508510}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25669873, y: 0.17152333, z: -0.04634622, w: 0.9500198}
+  m_LocalRotation: {x: 0.25669873, y: 0.17152336, z: -0.04634623, w: 0.9500198}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -31635,7 +31635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &908365933
 Transform:
   m_ObjectHideFlags: 0
@@ -33055,7 +33055,7 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
+  lazyLake: 0
 --- !u!114 &972093532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33072,9 +33072,9 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
-  fisherslake: 0
-  tundracastle: 0
+  lazyLake: 0
+  fishersLake: 0
+  tundraCastle: 0
 --- !u!114 &972093533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33087,16 +33087,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2629116109a8d464a9ebd80e6afc4c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Canvas: {fileID: 1708412540}
-  PlayerCanvas: {fileID: 213663179}
-  togglemanager: {fileID: 972093532}
+  canvas: {fileID: 1708412540}
+  playerCanvas: {fileID: 213663179}
+  toggleManager: {fileID: 972093532}
   mapdiscover: {fileID: 972093531}
-  Player: {fileID: 487192795}
-  LazyLake: {fileID: 908365932}
-  StartMap: {fileID: 171978813}
-  TundraLake: {fileID: 1420307281}
-  ToggleGroup: {fileID: 1078810746}
-  TeleportText: {fileID: 395441556}
+  player: {fileID: 487192795}
+  lazyLake: {fileID: 908365932}
+  startMap: {fileID: 171978813}
+  tundraLake: {fileID: 1420307281}
+  toggleGroup: {fileID: 1078810746}
+  teleportText: {fileID: 395441556}
 --- !u!135 &972093534
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -34700,7 +34700,7 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
+  lazyLake: 0
 --- !u!114 &1024884189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34717,9 +34717,9 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
-  fisherslake: 0
-  tundracastle: 0
+  lazyLake: 0
+  fishersLake: 0
+  tundraCastle: 0
 --- !u!114 &1024884190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34732,16 +34732,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2629116109a8d464a9ebd80e6afc4c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Canvas: {fileID: 1708412540}
-  PlayerCanvas: {fileID: 213663179}
-  togglemanager: {fileID: 1024884189}
+  canvas: {fileID: 1708412540}
+  playerCanvas: {fileID: 213663179}
+  toggleManager: {fileID: 1024884189}
   mapdiscover: {fileID: 1024884188}
-  Player: {fileID: 487192795}
-  LazyLake: {fileID: 908365932}
-  StartMap: {fileID: 171978813}
-  TundraLake: {fileID: 1420307281}
-  ToggleGroup: {fileID: 1078810746}
-  TeleportText: {fileID: 395441556}
+  player: {fileID: 487192795}
+  lazyLake: {fileID: 908365932}
+  startMap: {fileID: 171978813}
+  tundraLake: {fileID: 1420307281}
+  toggleGroup: {fileID: 1078810746}
+  teleportText: {fileID: 395441556}
 --- !u!135 &1024884191
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -49211,7 +49211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1419447143}
   - component: {fileID: 1419447145}
-  - component: {fileID: 1419447144}
+  - component: {fileID: 1419447146}
   m_Layer: 0
   m_Name: TriggerStory
   m_TagString: Untagged
@@ -49234,22 +49234,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1820881234}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1419447144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1419447142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5377180a20a5ac47a904167555924ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LazyLake: {fileID: 908365932}
-  StartMap: {fileID: 171978813}
-  Player: {fileID: 487192795}
-  info: {fileID: 2034096675}
 --- !u!135 &1419447145
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -49271,6 +49255,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1419447146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419447142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5377180a20a5ac47a904167555924ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lazyLake: {fileID: 908365932}
+  startMap: {fileID: 171978813}
+  player: {fileID: 487192795}
+  info: {fileID: 2034096675}
 --- !u!1 &1420307281
 GameObject:
   m_ObjectHideFlags: 0
@@ -49286,7 +49286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1420307282
 Transform:
   m_ObjectHideFlags: 0
@@ -52402,7 +52402,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1733824517}
     - target: {fileID: 5981507367165705792, guid: 2728afc64ab11fb4ab2be12bc9834fb7, type: 3}
+      propertyPath: itemContent
+      value: 
+      objectReference: {fileID: 1733824517}
+    - target: {fileID: 5981507367165705792, guid: 2728afc64ab11fb4ab2be12bc9834fb7, type: 3}
       propertyPath: Inventoryman
+      value: 
+      objectReference: {fileID: 725864599}
+    - target: {fileID: 5981507367165705792, guid: 2728afc64ab11fb4ab2be12bc9834fb7, type: 3}
+      propertyPath: inventoryman
       value: 
       objectReference: {fileID: 725864599}
     - target: {fileID: 6311671460559660901, guid: 2728afc64ab11fb4ab2be12bc9834fb7, type: 3}
@@ -52471,6 +52479,10 @@ PrefabInstance:
       objectReference: {fileID: 1245861733}
     - target: {fileID: 7172733516984980290, guid: 2728afc64ab11fb4ab2be12bc9834fb7, type: 3}
       propertyPath: PanelNormal
+      value: 
+      objectReference: {fileID: 1050806354}
+    - target: {fileID: 7172733516984980290, guid: 2728afc64ab11fb4ab2be12bc9834fb7, type: 3}
+      propertyPath: panelNormal
       value: 
       objectReference: {fileID: 1050806354}
     - target: {fileID: 7172733516984980290, guid: 2728afc64ab11fb4ab2be12bc9834fb7, type: 3}
@@ -53047,7 +53059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48fd8ac1293f29d4ca7bab3db385c51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bear: {fileID: 221272479}
+  bear: {fileID: 221272479}
   info: {fileID: 2034096675}
 --- !u!135 &1522338714
 SphereCollider:
@@ -54675,7 +54687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info: {fileID: 2034096675}
-  SkeletonArmy: {fileID: 1937977401}
+  skeletonArmy: {fileID: 1937977401}
 --- !u!135 &1574547391
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -56429,7 +56441,7 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
+  lazyLake: 0
 --- !u!114 &1633124050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56446,9 +56458,9 @@ MonoBehaviour:
   forest: 0
   graveyard: 0
   castle: 0
-  lazylake: 0
-  fisherslake: 0
-  tundracastle: 0
+  lazyLake: 0
+  fishersLake: 0
+  tundraCastle: 0
 --- !u!114 &1633124051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56461,16 +56473,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2629116109a8d464a9ebd80e6afc4c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Canvas: {fileID: 1708412540}
-  PlayerCanvas: {fileID: 213663179}
-  togglemanager: {fileID: 1633124050}
+  canvas: {fileID: 1708412540}
+  playerCanvas: {fileID: 213663179}
+  toggleManager: {fileID: 1633124050}
   mapdiscover: {fileID: 1633124049}
-  Player: {fileID: 487192795}
-  LazyLake: {fileID: 908365932}
-  StartMap: {fileID: 171978813}
-  TundraLake: {fileID: 1420307281}
-  ToggleGroup: {fileID: 1078810746}
-  TeleportText: {fileID: 395441556}
+  player: {fileID: 487192795}
+  lazyLake: {fileID: 908365932}
+  startMap: {fileID: 171978813}
+  tundraLake: {fileID: 1420307281}
+  toggleGroup: {fileID: 1078810746}
+  teleportText: {fileID: 395441556}
 --- !u!135 &1633124052
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -61116,7 +61128,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770432348}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.27301487, y: 0.1874145, z: -0.054316606, w: 0.94201297}
+  m_LocalRotation: {x: 0.2730149, y: 0.18741448, z: -0.05431661, w: 0.94201297}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -67088,7 +67100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906348857}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25669873, y: 0.17152333, z: -0.046346217, w: 0.9500198}
+  m_LocalRotation: {x: 0.25669873, y: 0.17152338, z: -0.04634623, w: 0.9500198}
   m_LocalPosition: {x: 862.97, y: 82.95, z: -202.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
