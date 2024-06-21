@@ -35,14 +35,14 @@ public class Skeleton : MonoBehaviour
     private void Update()
     {
         playerInChaseRange = Physics.CheckSphere(transform.position, chaseRange, playerLevel);
-        // playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLevel);
+         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLevel);
         
 
 
         if (!playerInChaseRange && !playerInAttackRange) Patroling();
         if (playerInChaseRange && !playerInAttackRange) Chasing();
-        // if (playerInChaseRange && playerInAttackRange && )) Death();
-        if (Input.GetKeyDown(KeyCode.Z)) Death();
+        if (playerInChaseRange && playerInAttackRange ) Attacking();
+       
     }
 
     private void Patroling()
