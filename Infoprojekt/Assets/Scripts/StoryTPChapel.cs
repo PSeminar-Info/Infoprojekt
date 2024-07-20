@@ -17,6 +17,6 @@ public class NewBehaviourScript : MonoBehaviour
         player.transform.position = new Vector3(-154, 15, -19);
         startMap.SetActive(false);
         player.SetActive(true);
-        info.text = "Gehe zum Villager am Haus";
+        info.text = "Laufe auf den Steg";
     }
 }

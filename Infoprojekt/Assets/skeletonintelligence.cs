@@ -10,7 +10,8 @@ public class Skeleton : MonoBehaviour
 
     public Transform player;
 
-    public LayerMask groundLevel, playerLevel;
+    public LayerMask groundLevel;
+    public LayerMask playerLevel;
 
     public Vector3 patrolPoint;
     public float patrolRange;
@@ -20,7 +21,8 @@ public class Skeleton : MonoBehaviour
 
 
     public float chaseRange, attackRange;
-    public bool playerInChaseRange, playerInAttackRange;
+    public bool playerInChaseRange = false;
+    public bool playerInAttackRange = false;
     private bool _alreadyAttacked;
     private bool _patrolPointSet;
 
@@ -33,12 +35,14 @@ public class Skeleton : MonoBehaviour
     private void Update()
     {
         playerInChaseRange = Physics.CheckSphere(transform.position, chaseRange, playerLevel);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLevel);
+         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLevel);
+        
 
 
         if (!playerInChaseRange && !playerInAttackRange) Patroling();
         if (playerInChaseRange && !playerInAttackRange) Chasing();
-        if (playerInChaseRange && playerInAttackRange) Attacking();
+        if (playerInChaseRange && playerInAttackRange ) Attacking();
+       
     }
 
     private void Patroling()
